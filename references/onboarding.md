@@ -69,6 +69,16 @@ rationale. On user confirmation, hand off to `references/system-lifecycle.md` to
 scaffold.
 Systems **emerge** — expect to add more over time, not all at once.
 
+## Research before system scaffolding
+
+It's normal — and often ideal — to do **general research before any system
+exists**. Early research (vehicle selection, site surveys, technology surveys,
+market analysis) lives in `project/shared/research/` and informs which systems
+should emerge. Don't rush to scaffold systems just to have a place for research;
+`shared/research/` exists precisely for this pre-system phase. Systems become
+worth scaffolding once a research stream has enough focus to own its own
+decisions, design, and tasks.
+
 ## Set up the audit cadence (Hermes)
 
 Offer to create the recurring `atlas-audit` cron job (see
@@ -80,3 +90,14 @@ works everywhere.
 Summarise: mission in a sentence, chosen domain, what was generated, and the
 recommended next step. Append a session-log entry
 (`references/agents/session-log.md`).
+
+**Save a Hermes memory pointer** so future sessions know this project exists
+even without the Atlas skill loaded (see `references/session-continuity.md` →
+"Hermes memory pointer"):
+```
+memory(
+  action="add",
+  target="memory",
+  content="Atlas project '<name>' at <abs-path>. Phase: plan. Key focus: <one line>."
+)
+```

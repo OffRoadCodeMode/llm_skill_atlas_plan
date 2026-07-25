@@ -21,6 +21,60 @@ design → build — never the product.
   system).
 - Log open questions raised into the relevant `open-questions.md`.
 
+## Research methodology
+
+### When to delegate vs do inline
+
+- **Inline** (use `web_search` + `web_extract` directly): quick lookups, single
+  questions, when the answer is likely 1-2 searches away.
+- **Delegate** (use `delegate_task`): multi-source research, comparative analyses,
+  anything requiring 5+ searches, or when the intermediate results would flood
+  the main context. Pass prior research file paths and project context in the
+  `context` field so the subagent doesn't duplicate work.
+- **Parallel batch** (use `delegate_task` with `tasks`): when 2-3 independent
+  research streams can run simultaneously.
+
+### Search strategy
+
+1. Start broad with `web_search` to map the landscape (3-5 results).
+2. Use `web_extract` on the most promising URLs for full content (not just
+   snippets). Note: some backends are search-only and cannot extract — fall back
+   to multiple targeted `web_search` queries with different phrasing.
+3. Cross-reference claims across at least 2 independent sources before rating
+   confidence `high`. Single-source or vendor-authored claims cap at `medium`.
+4. For pricing/availability data, search listing sites directly (e.g.
+   `site:donedeal.ie`, `site:carzone.ie`) alongside forums and guides.
+
+### Handling conflicting sources
+
+- Note both positions with dates in the research doc.
+- Set `contested: true` in frontmatter if the conflict is unresolved.
+- State which source is more authoritative and why (independent review vs vendor
+   blog, recent vs dated, peer-reviewed vs anecdotal).
+- Let `audit` (check 8) flag it for later resolution.
+
+### Structuring a research doc for scannability
+
+- Lead with a one-paragraph summary + recommendation (if any).
+- Use comparison tables for multi-option research.
+- Put known issues / failure modes in a dedicated section — these are often the
+  most valuable part for the user.
+- End with a `## Sources` section (required per sourcing rules above).
+- Keep it to 200-400 lines. If longer, split by sub-topic.
+
+## Cost research
+
+When researching a system that has material cost (hardware, materials, services),
+gather pricing data as a first-class output:
+
+- Realistic price ranges (low / mid / high) from multiple sources.
+- Note what's included vs excluded (installation, tax, shipping).
+- Flag prices that are indicative vs confirmed quotes.
+- Record in the research doc and also in the system's `costs.md` (or
+  `project/shared/costs.md` if cross-system).
+- Set `confidence: low` on estimates from single sources or non-local pricing
+  (e.g. US prices for an Irish project).
+
 ## Sourcing & citation
 
 - **Source list.** Every research doc must end with a `## Sources` section

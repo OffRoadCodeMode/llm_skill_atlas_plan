@@ -110,7 +110,7 @@ cronjob(
           alert if not); then reconcile indexes and DASHBOARD.md from OVERVIEW.md
           files, flag stale/broken links and unresolved blocking questions.
           Deliver a short summary.",
-  deliver="telegram",
+  deliver="telegram",          # adjust to user's configured gateway — see below
 )
 ```
 
@@ -118,6 +118,14 @@ cronjob(
   file tools and `AGENTS.md` resolve correctly.
 - **Pin provider/model** for unattended runs (an unpinned job fails closed on
   default change), or use `hermes setup --portal`. The gateway must be running.
+- **Delivery target** — set `deliver` to a gateway the user has configured
+  (e.g. `"telegram"`, `"discord"`, `"all"`). On CLI-only sessions there is no
+  live delivery channel — use `deliver="local"` to save results viewable via
+  `cronjob action='list'`, or omit `deliver` to save silently. Ask the user
+  which gateway they want during onboarding.
+- **Conversational audits** — if the user may want to follow up on audit findings
+  conversationally, set `attach_to_session=true` so the delivery is continuable
+  (the user can reply and the agent has the audit brief in context).
 - **Honesty:** this is interval polling, not real-time watching; it's still
   "audit on demand", just schedule-invoked. The incremental git-diff and
   conflict pre-flight assume shell/git access — verify against the Hermes tool

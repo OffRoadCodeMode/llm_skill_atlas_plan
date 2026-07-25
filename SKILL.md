@@ -4,7 +4,7 @@ description: Use when the user asks to plan, manage, or work on any project.
   Activates the Atlas planning framework: onboards projects, manages systems,
   logs sessions, captures decisions, and maintains a structured project wiki.
   Works for any domain (software, business, research, personal builds).
-version: 0.1.0
+version: 0.2.0
 tags: [planning, project-management, wiki, framework]
 ---
 
@@ -17,6 +17,16 @@ what must be done, not just what is known.
 
 This file is the **router**. It tells you (the agent) what to read and when. Load
 bundled files on demand; do not read everything up front.
+
+## How to load skill files in Hermes
+
+Use `skill_view(name='atlas', file_path='references/...')` to load reference
+files on demand. The `file_path` is relative to the skill directory. Never try
+to read all references upfront — that wastes context. Load only what the router
+table below says to load for the current task, and only when that task is active.
+
+Templates are read the same way:
+`skill_view(name='atlas', file_path='templates/mission.md')`.
 
 ---
 
@@ -105,6 +115,6 @@ active domain is chosen during onboarding and recorded in `project/DASHBOARD.md`
 ## Version
 
 This skill's version is in the `version:` field of this file's frontmatter
-(`0.1.0`). On onboarding, stamp it into the project (root `AGENTS.md` and
-`project/DASHBOARD.md` footer, e.g. `atlas: 0.1.0`).
+(`0.2.0`). On onboarding, stamp it into the project (root `AGENTS.md` and
+`project/DASHBOARD.md` footer, e.g. `atlas: 0.2.0`).
 See `references/governance.md` for versioning and maintenance rules.

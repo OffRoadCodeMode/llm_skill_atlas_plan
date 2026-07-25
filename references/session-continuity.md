@@ -27,6 +27,33 @@ several days of logs on start — it degrades signal-to-noise and invites drift.
 Only drill into a recent daily log if `CURRENT_STATE.md` is missing a detail you
 actually need.
 
+## Hermes memory pointer
+
+In addition to the project wiki, save a **compact pointer** to Hermes persistent
+memory so the agent knows the project exists even before loading this skill:
+
+```
+memory(
+  action="add",
+  target="memory",
+  content="Atlas project '<name>' at <abs-path>. Phase: <phase>. Key focus: <one line>. Active systems: <list>."
+)
+```
+
+Update this pointer when phase or focus meaningfully changes (not every session).
+Keep it to 1-2 lines — it's a signpost to the project, not a duplicate of
+`CURRENT_STATE.md`. Without this, a fresh session that doesn't mention Atlas has
+no idea the project exists.
+
+## Recalling past sessions
+
+If `CURRENT_STATE.md` is missing a detail about *why* a decision was made or
+*what* was discussed, use Hermes's `session_search` tool before reading daily
+logs — it's often faster and more targeted than scanning log files. Search by
+keyword (e.g. `session_search(query="electrics certification")`) to find the
+session where a topic was discussed. Daily logs remain the durable written
+record; session_search is the fast path to the conversation context.
+
 ## Weekly roll-up (compaction)
 
 To keep `CURRENT_STATE.md` (and loaded context) from growing unbounded, perform a
