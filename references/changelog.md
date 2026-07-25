@@ -4,6 +4,14 @@ All notable changes to the Atlas framework itself. Format: reverse chronological
 Bump the `version:` field in `SKILL.md` frontmatter (semver) for convention changes;
 a major bump signals breaking convention changes.
 
+## 0.3.1 — 2026-07-25
+
+- **governance.md**: Added "After pulling a skill update" section — agent reads
+  the changelog after each pull, assesses impact on the current project
+  (convention changes vs new guidance vs optional features), reports to the
+  user, and applies updates on confirmation or defers to "moving forward only".
+  Uses the stamped version in AGENTS.md as the "last reviewed" marker.
+
 ## 0.3.0 — 2026-07-25
 
 Complementary Hermes skills integration — Atlas now recommends and documents

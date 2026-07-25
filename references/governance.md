@@ -54,6 +54,34 @@ The workflow:
 **not** modify the skill on its own. Keeping a human in the loop matches
 *prove before scaling* and stops the framework drifting without oversight.
 
+## After pulling a skill update
+
+When the runtime skill is updated (via `git pull`), the agent should check
+whether any changes affect the current active project:
+
+1. **Read the changelog** (`references/changelog.md`) to see what changed since
+   the project's stamped version (recorded in root `AGENTS.md` and
+   `DASHBOARD.md` footer).
+2. **Assess impact** — for each changelog entry, determine:
+   - **Conventions changed** (file structure, naming, frontmatter, phases) —
+     these may require updates to existing project files.
+   - **New guidance** (agent behaviours, methodology, complementary skills) —
+     these apply going forward but don't require backfilling existing content.
+   - **New optional features** (templates, tools, integrations) — these are
+     available if wanted but not required.
+3. **Report to the user** — summarise what changed, what (if anything) would
+   need updating in the current project, and ask:
+   - "Apply these changes to the current project now?" (for convention changes)
+   - "Use new guidance/features from here on?" (for additive changes)
+4. **On user confirmation**, apply any project updates (e.g. add `budget.xlsx`
+   to the directory, add a Sources section to existing research docs, update
+   the stamped version in `AGENTS.md` and `DASHBOARD.md`).
+5. **If the user says "just moving forward"**, note it and don't backfill.
+   Update the stamped version so the next pull only reports new changes.
+
+This check runs once per pull, not per session — the stamped version in
+`AGENTS.md` is the marker for "last reviewed".
+
 ## Creating a custom domain pack
 
 A custom domain pack tailors Atlas to a specific kind of project (e.g.
