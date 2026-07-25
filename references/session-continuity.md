@@ -7,7 +7,7 @@ Two files, different cadences:
 2. **`sessions/CURRENT_STATE.md`** — rolling "where are we now" overview, updated
    when state meaningfully changes.
 
-The `session-log` agent owns both (see `agents/session-log.md`).
+The `session-log` agent owns both (see `references/agents/session-log.md`).
 
 ## Resume (cold start)
 

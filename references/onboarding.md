@@ -25,7 +25,7 @@ Guided interview — **one question at a time**, conversationally. Cover:
 - **Constraints** — budget, deadlines, compliance, tech/material limits, team.
 - **Current state** — greenfield or existing? What already exists?
 - **Domain** — "what kind of project is this?" Load the matching pack from
-  `domains/`; fall back to `general/` if no match.
+  `references/domains/`; fall back to `general/` if no match.
 
 Gather enough context to *recommend* systems — **do not create system folders
 yet**. Write `mission.md` and the shared scaffold first.
@@ -36,7 +36,7 @@ Create in the **working directory** from the skill's `templates/`:
 
 ```
 INDEX.md                      ← templates: master MOC
-AGENTS.md                     ← root rules; record `atlas: <VERSION>`
+AGENTS.md                     ← root rules; record `atlas: <version>`
 project/INDEX.md
 project/DASHBOARD.md          ← templates/dashboard.md (seed headings; Domain: <domain>)
 project/mission.md            ← templates/mission.md (fill from interview)
@@ -57,21 +57,24 @@ sessions/week-01/YYYY-MM-DD.md     ← templates/session-log.md; first entry
 
 Also create the project's own `.gitignore` (ignore `.obsidian/`, `.DS_Store`).
 
-**Stamp the version.** Record the skill `VERSION` in the root `AGENTS.md` and the
-`DASHBOARD.md` footer (`atlas: <VERSION>`).
+**Stamp the version.** Record the skill version (from `SKILL.md` frontmatter) in
+the root `AGENTS.md` and the `DASHBOARD.md` footer (`atlas: <version>`).
 
 ## Recommending the first system(s)
 
 When enough context exists (full mode), propose the first system folder(s) and the
-rationale. On user confirmation, hand off to `system-lifecycle.md` to scaffold.
+rationale. On user confirmation, hand off to `references/system-lifecycle.md` to
+scaffold.
 Systems **emerge** — expect to add more over time, not all at once.
 
 ## Set up the audit cadence (Hermes)
 
-Offer to create the recurring `atlas-audit` cron job (see `agents/audit.md` →
-"Scheduled audit"). It's optional; manual `audit` works everywhere.
+Offer to create the recurring `atlas-audit` cron job (see
+`references/agents/audit.md` → "Scheduled audit"). It's optional; manual `audit`
+works everywhere.
 
 ## Finish
 
 Summarise: mission in a sentence, chosen domain, what was generated, and the
-recommended next step. Append a session-log entry (`agents/session-log.md`).
+recommended next step. Append a session-log entry
+(`references/agents/session-log.md`).

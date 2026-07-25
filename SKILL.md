@@ -1,24 +1,22 @@
 ---
 name: atlas
 description: Use when the user asks to plan, manage, or work on any project.
-  Activates the Atlas planning framework — onboards projects, manages systems,
+  Activates the Atlas planning framework: onboards projects, manages systems,
   logs sessions, captures decisions, and maintains a structured project wiki.
   Works for any domain (software, business, research, personal builds).
-metadata:
-  hermes:
-    tags: [planning, project-management, wiki, framework]
 version: 0.1.0
+tags: [planning, project-management, wiki, framework]
 ---
 
-# Atlas — Planning Framework
+# Atlas: Planning Framework
 
 Atlas is a reusable, domain-agnostic planning framework. It turns a plain folder
 into a **goal-directed planning wiki**: mission-anchored, organised by
-`system × phase`, and maintained by agents. It is *forward-looking* — it drives
+`system x phase`, and maintained by agents. It is *forward-looking*: it drives
 what must be done, not just what is known.
 
 This file is the **router**. It tells you (the agent) what to read and when. Load
-bundled files on demand — do not read everything up front.
+bundled files on demand; do not read everything up front.
 
 ---
 
@@ -27,12 +25,12 @@ bundled files on demand — do not read everything up front.
 ```
 You are operating under the Atlas planning framework (installed skill).
 Read these skill files in order before doing anything else:
-  1. SKILL.md          (this file — what Atlas is + router)
-  2. conventions.md    (how files are structured)
-  3. onboarding.md     (how to onboard this project)
+  1. SKILL.md                        (this file: what Atlas is + router)
+  2. references/conventions.md       (how files are structured)
+  3. references/onboarding.md        (how to onboard this project)
 Then check the working directory for an existing project/ folder:
-  - If NO  → begin onboarding: generate the project structure here.
-  - If YES → read project/DASHBOARD.md, sessions/CURRENT_STATE.md,
+  - If NO  -> begin onboarding: generate the project structure here.
+  - If YES -> read project/DASHBOARD.md, sessions/CURRENT_STATE.md,
              and project/mission.md to resume where we left off.
 Do not create system folders until onboarding says to.
 ```
@@ -48,37 +46,37 @@ planning repo). Never write project content into the skill folder.
 
 Speak and act in these verbs, whatever the interface:
 
-- **Onboard** — establish `mission.md` and the initial systems. → `onboarding.md`
-- **Advance** — move a system through a phase gate, with evidence. → `domains/<domain>/phases.md`
-- **Decide** — capture a Decision Record or resolve a blocking open question. → `agents/decision-record.md`
-- **Plan** — break work into tasks / milestones for a system. → `templates/system/TASKS.md`
-- **Audit** — integrity + gate + mission-alignment check. → `agents/audit.md`
-- **Resume** — cold-start orientation at the top of a session. → `session-continuity.md`
+- **Onboard**: establish `mission.md` and the initial systems. See `references/onboarding.md`
+- **Advance**: move a system through a phase gate, with evidence. See `references/domains/<domain>/phases.md`
+- **Decide**: capture a Decision Record or resolve a blocking open question. See `references/agents/decision-record.md`
+- **Plan**: break work into tasks / milestones for a system. See `templates/system/TASKS.md`
+- **Audit**: integrity + gate + mission-alignment check. See `references/agents/audit.md`
+- **Resume**: cold-start orientation at the top of a session. See `references/session-continuity.md`
 
-Research/ingest lives *inside* Onboard and the research phase — a means to unblock
-requirements → design → build, never the product.
+Research/ingest lives *inside* Onboard and the research phase: a means to unblock
+requirements -> design -> build, never the product.
 
 ---
 
-## Router — read the right file for the task
+## Router: read the right file for the task
 
-| The user wants to… | Read |
-|--------------------|------|
-| Start a new project / no `project/` exists | `onboarding.md` |
-| Resume after any gap | `session-continuity.md`, then `project/DASHBOARD.md`, `sessions/CURRENT_STATE.md`, `project/mission.md` |
-| Understand file/naming/link/git rules | `conventions.md` |
-| Create, evolve, split, or retire a system | `system-lifecycle.md` |
-| Track how systems relate (APIs, streams, power, adjacency) | `system-lifecycle.md` → "Relating systems"; `project/shared/system-map.md` |
-| Know the phases + exit gates for this project | `domains/<active-domain>/phases.md` |
-| Log what happened this session | `agents/session-log.md` |
-| Capture a significant decision | `agents/decision-record.md` |
-| Check integrity / advance a phase / reconcile drift | `agents/audit.md` |
-| Maintain indexes, suggest new systems, delegate | `agents/orchestrator.md` |
-| Modify Atlas itself | `GOVERNANCE.md` |
+| The user wants to... | Read |
+|----------------------|------|
+| Start a new project / no `project/` exists | `references/onboarding.md` |
+| Resume after any gap | `references/session-continuity.md`, then `project/DASHBOARD.md`, `sessions/CURRENT_STATE.md`, `project/mission.md` |
+| Understand file/naming/link/git rules | `references/conventions.md` |
+| Create, evolve, split, or retire a system | `references/system-lifecycle.md` |
+| Track how systems relate (APIs, streams, power, adjacency) | `references/system-lifecycle.md` (section "Relating systems"); `project/shared/system-map.md` |
+| Know the phases + exit gates for this project | `references/domains/<active-domain>/phases.md` |
+| Log what happened this session | `references/agents/session-log.md` |
+| Capture a significant decision | `references/agents/decision-record.md` |
+| Check integrity / advance a phase / reconcile drift | `references/agents/audit.md` |
+| Maintain indexes, suggest new systems, delegate | `references/agents/orchestrator.md` |
+| Modify Atlas itself | `references/governance.md` |
 
-Domain-specific agents/templates live under `domains/<domain>/`. The active domain
-is chosen during onboarding and recorded in `project/DASHBOARD.md` (and root
-`AGENTS.md`). If unset or no match, use `general/`.
+Domain-specific agents/templates live under `references/domains/<domain>/`. The
+active domain is chosen during onboarding and recorded in `project/DASHBOARD.md`
+(and root `AGENTS.md`). If unset or no match, use `general/`.
 
 ---
 
@@ -89,7 +87,7 @@ is chosen during onboarding and recorded in `project/DASHBOARD.md` (and root
 2. **Systems emerge, they're not declared upfront.** Gather context, then
    *recommend* systems; the user confirms.
 3. **Gates need evidence.** A system advances a phase only when every exit
-   criterion is satisfied by a named artifact (see `domains/<domain>/phases.md`).
+   criterion is satisfied by a named artifact (see `references/domains/<domain>/phases.md`).
 4. **Audit on demand, honestly.** Atlas does not passively self-heal; it checks
    and repairs when invoked (manually or by cron).
 5. **Portable markdown.** Standard relative links (not `[[wikilinks]]`), Mermaid
@@ -99,13 +97,14 @@ is chosen during onboarding and recorded in `project/DASHBOARD.md` (and root
 
 ## Presentation (chat interfaces)
 
-- Summarise file contents — don't dump raw markdown.
+- Summarise file contents; don't dump raw markdown.
 - For status/dashboard queries, return a formatted summary.
 - For audits, report what was found and what was fixed/proposed.
-- Onboard conversationally — one question at a time.
+- Onboard conversationally: one question at a time.
 
 ## Version
 
-This skill's version is in `VERSION`. On onboarding, stamp it into the project
-(root `AGENTS.md` and `project/DASHBOARD.md` footer, e.g. `atlas: 0.1.0`).
-See `GOVERNANCE.md` for versioning and maintenance rules.
+This skill's version is in the `version:` field of this file's frontmatter
+(`0.1.0`). On onboarding, stamp it into the project (root `AGENTS.md` and
+`project/DASHBOARD.md` footer, e.g. `atlas: 0.1.0`).
+See `references/governance.md` for versioning and maintenance rules.

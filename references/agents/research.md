@@ -7,7 +7,7 @@ design → build — never the product.
 ## Behaviour (minimum)
 
 - Write findings to `<system>/research/` (or `project/shared/research/`) using
-  `domains/<domain>/templates/research-doc.md`.
+  `references/domains/<domain>/templates/research-doc.md`.
 - Set frontmatter: `type: research`, `confidence`, `mission_link`, and `sources`.
 - Link each doc to at least 2 others (the requirement/question it informs + its
   system).

@@ -31,6 +31,6 @@ plumbing; etc. Add project-specific types as they emerge, or make a dedicated pa
   artifacts. For a van conversion that might be `electrical`, `plumbing`,
   `insulation`; for a business launch, `legal`, `marketing`, `product`.
 - If a project domain recurs, consider promoting its types into a **dedicated
-  domain pack** (e.g. `van-conversion`) so it's reusable — see `GOVERNANCE.md`.
+  domain pack** (e.g. `van-conversion`) so it's reusable — see `references/governance.md`.
 - Test for the core vs a pack: *"would a completely different project also use
   this?"* If not, it belongs in a pack or the project, not here.

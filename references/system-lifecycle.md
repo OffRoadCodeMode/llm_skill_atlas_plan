@@ -20,7 +20,7 @@ systems "just in case".
 
 Copy `templates/system/` into `project/systems/<name>/`, keeping **only the
 subfolders relevant to that system type** (per the active domain pack's
-`system-types.md`). Always include `INDEX.md`, `AGENTS.md`, `OVERVIEW.md`,
+`references/domains/<domain>/system-types.md`). Always include `INDEX.md`, `AGENTS.md`, `OVERVIEW.md`,
 `CHANGELOG.md`. Add `research/`, `design/` (with `decisions/`, `diagrams/`),
 `open-questions.md`, `DECISIONS.md`, `TASKS.md`, `risks.md`, `costs.md` as needed.
 
@@ -50,8 +50,8 @@ one as its own artifact both systems link to only when an edge needs it.
 ## Evolving a system
 
 - **Advance a phase** — only when the current phase's exit criteria are met by
-  named artifacts (see `domains/<domain>/phases.md`); `audit` verifies the gate,
-  `scope-check` confirms mission alignment. Record the transition in the system
+  named artifacts (see `references/domains/<domain>/phases.md`); `audit` verifies
+  the gate, `scope-check` confirms mission alignment. Record the transition in the system
   `CHANGELOG.md`.
 - **Add artifacts** — research docs, DRs, diagrams, requirements — in the relevant
   subfolder, linked (min 2 links) and (if claim-bearing) with frontmatter.

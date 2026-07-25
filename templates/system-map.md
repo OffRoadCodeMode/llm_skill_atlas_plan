@@ -29,7 +29,7 @@ graph LR
 ## Conventions
 
 - **Type** is defined by the active domain pack — see
-  `domains/<domain>/system-types.md` → Relationship types. Software:
+  `references/domains/<domain>/system-types.md` → Relationship types. Software:
   `api | event-stream | shared-data | library | depends-on`. General / physical:
   `power | physical-adjacency | structural | data | depends-on | informs`.
 - **Direction:** `→` one-way dependency, `↔` mutual.

@@ -6,7 +6,7 @@
 [What this system owns.]
 
 ## Conventions
-See Atlas `conventions.md`. System-specific rules (if any) go here.
+See Atlas `references/conventions.md`. System-specific rules (if any) go here.
 
 ## What to do here
 [Typical work: research, decisions, design, tasks for this system.]

@@ -51,7 +51,7 @@ length:
 3. Start the new `sessions/week-YY/` folder clean.
 
 Trigger is size / turn-of-week; can piggyback the cron audit. See
-`session-continuity.md`.
+`references/session-continuity.md`.
 
 ## Cold start (Resume)
 

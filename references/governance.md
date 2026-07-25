@@ -9,8 +9,8 @@ as it evolves.
    project-specific content in the project's `project/` folder or its `AGENTS.md`.
 2. **Modifications must be justified** — a change to the skill should apply
    broadly, not just to the project in front of you.
-3. **Log notable changes** — record what changed and why in `CHANGELOG.md`; bump
-   `VERSION` for convention changes.
+3. **Log notable changes** — record what changed and why in `references/changelog.md`;
+   bump the `version:` field in `SKILL.md` frontmatter for convention changes.
 4. **Project-specific needs stay in the project** — if only one project wants a
    convention, it lives in that project's content, never in the skill.
 5. **Domain packs are shareable** — a custom pack (e.g. `van-conversion`) helps
@@ -18,8 +18,8 @@ as it evolves.
 
 ## Versioning
 
-The skill's `VERSION` (semver; first release `0.1.0`) is the framework version,
-tracked in git like any other file. Each project **stamps the version it was
+The skill's version (semver; first release `0.1.0`) lives in the `SKILL.md`
+frontmatter `version:` field. Each project **stamps the version it was
 onboarded under** into its own metadata — a line in the root `AGENTS.md` and the
 `project/DASHBOARD.md` footer, e.g. `atlas: 0.1.0`. This means:
 
@@ -44,8 +44,8 @@ The workflow:
 1. You (or Hermes, at your direction) notice friction — a template field that's
    always deleted, a confusing convention, a missing agent behaviour.
 2. Edit the relevant skill file directly, commit with the `atlas:` prefix, and
-   note anything significant in `CHANGELOG.md` (bump `VERSION` for convention
-   changes).
+   note anything significant in `references/changelog.md` (bump the `version:` field
+   in `SKILL.md` frontmatter for convention changes).
 3. On the next session the change is live — the agent reads the installed skill.
 
 **Hermes's role is advisory.** It may *surface* recurring friction

@@ -7,7 +7,7 @@ How Atlas structures files. Read this before generating or editing project conte
 ```
 my-project-planning/
 ├── INDEX.md                  # Master index — root of the project tree
-├── AGENTS.md                 # Root rules; references Atlas; records skill VERSION used
+├── AGENTS.md                 # Root rules; references Atlas; records skill version used
 ├── project/
 │   ├── INDEX.md
 │   ├── DASHBOARD.md          # Quick-scan status: phase per system, risks, costs, next steps
@@ -57,7 +57,7 @@ parent's. Keep it small (<20 lines). Template:
 [What this folder is for]
 
 ## Conventions
-[Naming/format/structure — or "see Atlas conventions.md"]
+[Naming/format/structure — or "see Atlas references/conventions.md"]
 
 ## What to do here / What NOT to do here
 [Typical tasks / guardrails]

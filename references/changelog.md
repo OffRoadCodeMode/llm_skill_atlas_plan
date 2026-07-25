@@ -1,16 +1,17 @@
 # Changelog — Atlas
 
 All notable changes to the Atlas framework itself. Format: reverse chronological.
-Bump `VERSION` (semver) for convention changes; a major bump signals breaking
-convention changes.
+Bump the `version:` field in `SKILL.md` frontmatter (semver) for convention changes;
+a major bump signals breaking convention changes.
 
 ## 0.1.0 — 2026-07-25
 
 Initial release. Minimal-but-complete framework (*prove before scaling*).
 
 - Router `SKILL.md` with activation prompt and planning-verb vocabulary.
-- Core guides: `conventions.md`, `onboarding.md`, `system-lifecycle.md`,
-  `session-continuity.md`, `GOVERNANCE.md`.
+- Core guides: `references/conventions.md`, `references/onboarding.md`,
+  `references/system-lifecycle.md`, `references/session-continuity.md`,
+  `references/governance.md`.
 - Generic agents: `orchestrator`, `session-log`, `decision-record`, `audit`
   (fully specified); `research`, `diagram`, `scope-check` (stubs, grow as needed).
 - Domain packs: `software` (SDLC phases, system types, templates, traceability +

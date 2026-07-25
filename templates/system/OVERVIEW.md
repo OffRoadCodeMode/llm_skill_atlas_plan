@@ -1,7 +1,7 @@
 # System: <Name>
 
 ## Type
-[defined by active domain pack — see domains/<domain>/system-types.md]
+[defined by active domain pack — see references/domains/<domain>/system-types.md]
 
 ## Purpose
 [1–3 sentences on what this system does.]
@@ -20,7 +20,7 @@ Direction is `→` (one-way) or `↔` (mutual). Link a contract artifact when on
 
 ## Current Phase
 [defined by active domain pack]
-<!-- See domains/<domain>/phases.md for phase definitions and exit criteria -->
+<!-- See references/domains/<domain>/phases.md for phase definitions and exit criteria -->
 
 ## Status
 Active | Pending | Not started | Retired

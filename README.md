@@ -35,9 +35,9 @@ git clone <this-repo> ~/.hermes/skills/atlas
 1. Open (or create) the planning repo you want to work in; it can be empty.
 2. Ask Hermes to plan your project (the skill loads on matching intent), or point
    your IDE's LLM at the skill folder.
-3. Atlas reads `SKILL.md` → `conventions.md` → `onboarding.md`, then **onboards**
-   (no `project/` yet) or **resumes** (reads `DASHBOARD.md`, `CURRENT_STATE.md`,
-   `mission.md`).
+3. Atlas reads `SKILL.md` → `references/conventions.md` → `references/onboarding.md`,
+   then **onboards** (no `project/` yet) or **resumes** (reads `DASHBOARD.md`,
+   `CURRENT_STATE.md`, `mission.md`).
 
 Atlas **generates** the `project/` and `sessions/` structure at runtime from the
 templates in this skill. Your planning repo contains only that generated content,
@@ -112,16 +112,16 @@ Notes on the output:
 
 ```
 SKILL.md              Machine entry point (router + activation prompt)
-conventions.md        INDEX/AGENTS/frontmatter/links/git rules
-onboarding.md         Quick-start and full onboarding flows
-system-lifecycle.md   How systems are created, evolved, split, retired
-session-continuity.md Session logging, cold-start, weekly roll-up
-GOVERNANCE.md         Rules for modifying Atlas itself
-VERSION / CHANGELOG   Framework version + change log
-domains/              Pluggable domain packs (software, general)
-agents/               Generic agents (orchestrator, session-log, decision-record, audit, …)
+references/           All support files (guides, agents, domain packs, changelog)
+  conventions.md      INDEX/AGENTS/frontmatter/links/git rules
+  onboarding.md       Quick-start and full onboarding flows
+  system-lifecycle.md How systems are created, evolved, split, retired
+  session-continuity.md Session logging, cold-start, weekly roll-up
+  governance.md       Rules for modifying Atlas itself
+  changelog.md        Framework change log
+  agents/             Generic agents (orchestrator, session-log, decision-record, audit, ...)
+  domains/            Pluggable domain packs (software, general)
 templates/            Generic document + system-folder templates
-devin/                Optional IDE-specific bindings (placeholder)
 ```
 
 ## Status
@@ -129,3 +129,7 @@ devin/                Optional IDE-specific bindings (placeholder)
 `v0.1.0`, first release. Built minimal-but-complete (principle: *prove before
 scaling*). The three critical agents (`session-log`, `decision-record`, `audit`)
 are fully specified; others are lighter and grow as pain is felt.
+
+## License
+
+MIT. See [LICENSE](LICENSE).

@@ -2,7 +2,7 @@
 
 > Last updated: YYYY-MM-DD
 > Domain: <software | general | custom>
-> atlas: <VERSION>
+> atlas: <version>
 
 <!--
 Partly derived, partly owned:
