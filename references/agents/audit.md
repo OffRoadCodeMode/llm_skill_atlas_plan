@@ -64,6 +64,89 @@ risk when "git is the backstop" meets an unattended writer.
     `parent:` field must point to a real parent system; parent `OVERVIEW.md` must
     list all sub-systems in its Sub-systems section; system map `subgraph` clusters
     must match the parent/child relationships in `OVERVIEW.md` files.
+16. **Decision conflicts** — scan all Decision Records across every system's
+    `design/decisions/` directory for contradictory claims on the same topic.
+    Decisions conflict when two DRs assert mutually incompatible positions with
+    no `supersedes` relationship between them (e.g. "use 12V system" and "use
+    24V system" are both active, or two DRs choose different base vehicles).
+    **This check runs last because it may write a conflict file.**
+
+    ### How to detect conflicts
+
+    For each DR, extract the core claim (the Decision section). Group DRs by
+    subject matter using title keywords, tags, and system proximity. Flag groups
+    where two or more `status: fresh` (not `superseded`) DRs make different
+    choices on the same topic. Do NOT flag:
+    - DRs that explicitly supersede another (the superseding DR replaces the old)
+    - DRs that are about different aspects of the same system (e.g. battery
+      chemistry vs battery voltage are different decisions)
+    - DRs in different systems that affect independent concerns (e.g. electrical
+      system voltage and workshop wall colour)
+
+    ### If a conflict is found
+
+    1. **Create a conflict file** at `sessions/conflicts/CONFLICT-XXX.md` with:
+
+       ```markdown
+       ---
+       title: CONFLICT-XXX — <short description>
+       created: YYYY-MM-DD
+       status: open
+       relates_to:
+         - [system-a/design/decisions/DR-001.md](...)
+         - [system-b/design/decisions/DR-002.md](...)
+       ---
+
+       # CONFLICT-XXX — <short description>
+
+       ## Conflicting decisions
+       - **DR-001** — [decision summary]
+       - **DR-002** — [decision summary]
+
+       ## Why they conflict
+       [One sentence/paragraph explaining the incompatibility.]
+
+       ## Resolution
+       *Pending user input.*
+       ```
+
+       Number sequentially: `CONFLICT-001`, `CONFLICT-002`.
+
+    2. **Alert via all open gateways.** Use `cronjob(action="run", job_id="<audit-id>")` 
+       if running inside a scheduled audit, or deliver the finding directly. The
+       alert must include:
+       - The conflict title and file path
+       - Which DRs are in conflict (with paths)
+       - A one-line summary of why they conflict
+       - A request for the user to review and advise on resolution
+
+       **Delivery targets:** send to *all* gateways the user has configured
+       (Telegram, Discord, etc.). If running inside a cron job, the job's
+       `deliver` setting already handles this — use `"all"` to fan out to every
+       connected gateway.
+
+    3. **Log the audit finding** as a high-severity item in the main audit report.
+
+    ### Conflict lifecycle
+
+    - **Created:** audit detects the conflict, writes the file, alerts the user.
+    - **Resolved:** the user advises which DR to supersede or how to reconcile.
+      The agent updates the relevant DR's `status: superseded` or edits the
+      conflict to `status: resolved` with a resolution note.
+    - **Stale:** an open conflict whose related DRs have all been superseded
+      (auto-closes: `status: resolved` + note "DRs no longer active").
+
+    On every audit run, re-check open conflicts: if the conflicting DRs are no
+    longer both `status: fresh`, auto-resolve the conflict file.
+
+    ### Gateways notice
+
+    When conflict alerts are delivered to a gateway (Telegram, Discord, etc.),
+    they appear in the user's normal feed for that platform. The user can reply
+    with instructions. If the gateway supports continuable sessions
+    (`attach_to_session`), the response can be picked up directly; otherwise the
+    agent notes the instruction on the next session start (via the session-continuity
+    conflict check).
 
 ## Reconcile
 

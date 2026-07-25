@@ -26,7 +26,7 @@ Copy `templates/system/` into `project/systems/<name>/`, keeping **only the
 subfolders relevant to that system type** (per the active domain pack's
 `references/domains/<domain>/system-types.md`). Always include `INDEX.md`, `AGENTS.md`, `OVERVIEW.md`,
 `CHANGELOG.md`. Add `research/`, `design/` (with `decisions/`, `diagrams/`),
-`open-questions.md`, `DECISIONS.md`, `TASKS.md`, `risks.md`, `costs.md` as needed.
+`open-questions.md`, `TASKS.md`, `risks.md`, `costs.md` as needed.
 
 > **Domain overrides.** A domain pack may override the generic template. The
 > `software` pack, for example, adds a `features/` subfolder for `feature-spec.md`.

@@ -18,6 +18,10 @@ kept current:
 2. `sessions/CURRENT_STATE.md` — the narrative of where we left off and why.
 3. `project/mission.md` — re-anchor on the goal.
 
+Then **check for outstanding decision conflicts** — scan `sessions/conflicts/` for
+any `CONFLICT-*.md` files. If any exist with `status: open`, summarise them and
+ask the user to resolve before continuing. Conflicts block safe advancement.
+
 Then read the root `INDEX.md` for structure and the relevant `AGENTS.md`.
 
 ## Context budget — avoid front-loading history
@@ -78,10 +82,13 @@ When wrapping up:
 3. Update `DASHBOARD.md` if any system phase/status changed.
 4. Update INDEX.md files if content was added/changed.
 5. **Capture any decisions made this session.** Review the conversation for
-   choices that shaped the project direction — if any qualify as a Decision
-   Record (see `references/agents/decision-record.md`), create one. Smaller
-   choices go in the system's `DECISIONS.md` or `project/shared/DECISIONS.md`.
-6. **Save the Hermes memory pointer** if phase or focus changed (see "Hermes
+   choices that shaped the project direction — if any were made, create a
+   Decision Record in the relevant system's `design/decisions/` folder
+   (see `references/agents/decision-record.md`).
+6. **Check for decision conflicts.** If this session created or modified DRs
+   that contradict an existing DR in another system, flag them — the next
+   audit run will formalise any conflict.
+7. **Save the Hermes memory pointer** if phase or focus changed (see "Hermes
    memory pointer" above).
 
 ## Mid-session decision capture

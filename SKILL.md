@@ -4,7 +4,7 @@ description: Use when the user asks to plan, manage, or work on any project.
   Activates the Atlas planning framework: onboards projects, manages systems,
   logs sessions, captures decisions, and maintains a structured project wiki.
   Works for any domain (software, business, research, personal builds).
-version: 0.5.0
+version: 0.6.0
 tags: [planning, project-management, wiki, framework]
 ---
 
@@ -58,7 +58,7 @@ Speak and act in these verbs, whatever the interface:
 
 - **Onboard**: establish `mission.md` and the initial systems. See `references/onboarding.md`
 - **Advance**: move a system through a phase gate, with evidence. See `references/domains/<domain>/phases.md`
-- **Decide**: capture a Decision Record or resolve a blocking open question — **immediately**, not later. If you hear "let's go with X" or a choice is made, capture it on the spot while context is fresh. See `references/agents/decision-record.md`
+- **Decide**: capture a Decision Record when a choice is made — **immediately**, not later. Every decision is a DR file in the system's `design/decisions/` folder. See `references/agents/decision-record.md`
 - **Diagram**: create a visual diagram when the conversation involves spatial layouts, physical dimensions, system relationships, or structural planning — don't wait to be asked. See `references/agents/diagram.md`
 - **Plan**: break work into tasks / milestones for a system. See `templates/system/TASKS.md`
 - **Audit**: integrity + gate + mission-alignment check. See `references/agents/audit.md`

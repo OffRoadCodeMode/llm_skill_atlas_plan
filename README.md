@@ -18,7 +18,7 @@ particular viewer.
 
 ## Install
 
-Atlas is a **Hermes skill** (but could be used in any LLM context). Install it once and share it across all your
+Atlas is a **Hermes skill** (but could be used in any LLM context with some tweaks). Install it once and share it across all your
 projects. Do **not** copy it into each project.
 
 ```bash
@@ -28,7 +28,7 @@ git clone <this-repo> ~/.hermes/skills/atlas
 ```
 
 **IDE (secondary):** clone anywhere and tell your LLM:
-*"Read the Atlas skill folder at `<path>` and follow it."*
+*"Read the Atlas skill folder at* *`<path>`* *and follow it."*
 
 ## Use
 
@@ -63,7 +63,6 @@ my-project-planning/
 │   │   │   ├── AGENTS.md
 │   │   │   ├── CHANGELOG.md
 │   │   │   ├── open-questions.md
-│   │   │   ├── DECISIONS.md       # Small decisions (one line each)
 │   │   │   ├── risks.md           # Optional register (rolls up to the dashboard)
 │   │   │   ├── costs.md           # Optional register (rolls up to the dashboard)
 │   │   │   ├── research/
@@ -83,13 +82,12 @@ my-project-planning/
 │   └── shared/                    # Cross-system content
 │       ├── glossary.md
 │       ├── open-questions.md
-│       ├── DECISIONS.md
 │       ├── risks.md               # Project-wide risk register
 │       ├── costs.md               # Project-wide cost register / budget
-│       ├── system-map.md          # How systems relate: Mermaid graph + register
-│       └── decisions/             # Project-wide Decision Records (shared/DR-XXX)
+│       └── system-map.md          # How systems relate: Mermaid graph + register
 └── sessions/
     ├── CURRENT_STATE.md           # Rolling "where are we now" for cold starts
+    ├── conflicts/                 # Auto-generated decision conflict reports (CONFLICT-XXX.md)
     └── week-01/
         └── 2026-07-25.md          # Incremental daily log
 ```

@@ -46,14 +46,13 @@ project/systems/INDEX.md
 project/shared/INDEX.md
 project/shared/glossary.md
 project/shared/open-questions.md   ← templates/open-questions.md
-project/shared/DECISIONS.md        ← templates/decisions.md
 project/shared/risks.md            ← templates/risks.md
 project/shared/costs.md            ← templates/costs.md
 project/shared/system-map.md       ← templates/system-map.md (starts empty; fills as systems relate)
-project/shared/decisions/          ← (empty; shared DRs land here)
 project/shared/research/           ← (empty)
 sessions/INDEX.md
 sessions/CURRENT_STATE.md          ← seed with onboarding summary
+sessions/conflicts/                ← (empty; conflict reports land here)
 sessions/week-01/YYYY-MM-DD.md     ← templates/session-log.md; first entry
 ```
 

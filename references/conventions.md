@@ -28,15 +28,14 @@ my-project-planning/
 │       ├── research/
 │       ├── glossary.md
 │       ├── open-questions.md  # Cross-system open questions
-│       ├── DECISIONS.md       # Cross-system small-decision log
 │       ├── risks.md           # Project-wide risk register
 │       ├── costs.md           # Project-wide cost register / budget
 │       ├── budget.xlsx        # Living cost spreadsheet (optional, if xlsx skill available)
-│       ├── system-map.md      # Inter-system relationship map (graph + register)
-│       └── decisions/         # Project-wide Decision Records (shared/DR-XXX)
+│       └── system-map.md      # Inter-system relationship map (graph + register)
 ├── sessions/
 │   ├── INDEX.md
 │   ├── CURRENT_STATE.md
+│   ├── conflicts/              # Auto-generated decision conflict reports (CONFLICT-XXX.md)
 │   └── week-01/
 │       └── YYYY-MM-DD.md
 └── dev/                       # Scratch/thinking (optional)
@@ -133,7 +132,7 @@ Leaf/navigational files (INDEX, session logs) don't need frontmatter.
 
 - Decision Records: `DR-XXX`, numbered **per system** (each system starts at
   `DR-001`). Qualify across systems: `ai-runtime/DR-003`; sub-systems:
-  `van/electrical/DR-001`; project-wide: `shared/DR-003`.
+  `van/electrical/DR-001`.
 - Requirements: `REQ-XXX`. Open questions: `OQ-XXX`. Tasks: `TASK-XXX`.
   Risks: `R-XXX`. All numbered per register/system.
 - Superseded artifacts move to an `_archive/` subfolder; keep the link, mark

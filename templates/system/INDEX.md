@@ -8,7 +8,6 @@
 - [Overview](OVERVIEW.md)
 - [Changelog](CHANGELOG.md)
 - [Open questions](open-questions.md)
-- [Decisions log](DECISIONS.md)
 
 ## Subfolders (as in use)
 - [Research](research/)
