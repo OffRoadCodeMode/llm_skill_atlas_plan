@@ -27,10 +27,25 @@ subfolders relevant to that system type** (per the active domain pack's
 > **Domain overrides.** A domain pack may override the generic template. The
 > `software` pack, for example, adds a `features/` subfolder for `feature-spec.md`.
 
-Fill `OVERVIEW.md` (type, purpose, boundaries, dependencies, current phase). Set
+Fill `OVERVIEW.md` (type, purpose, boundaries, relationships, current phase). Set
 the initial phase to the domain pack's first phase. Add the system to
 `project/systems/INDEX.md` and let `audit` add its `DASHBOARD.md` row from
 `OVERVIEW.md`. Commit: `system: scaffold <name> system`.
+
+## Relating systems (the system map)
+
+When a system connects to another (calls its API, shares power/space, feeds it
+data), record the edge in **both** places:
+
+- **`project/shared/system-map.md`** — the source-of-truth graph + relationship
+  register. Add/label the edge (type from the domain pack's Relationship types,
+  direction `→`/`↔`).
+- **Each system's `OVERVIEW.md` → Relationships** — the local view.
+
+`audit` (check 15) reconciles the two, flags dangling/asymmetric edges, and warns
+if a system in a multi-system project has no relationships (a possible missed link).
+Interface contracts (API/event schemas, power-budget calcs) are optional — create
+one as its own artifact both systems link to only when an edge needs it.
 
 ## Evolving a system
 

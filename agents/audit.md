@@ -53,6 +53,11 @@ risk when "git is the backstop" meets an unattended writer.
 14. **Costs** — estimates with `confidence: low` or no assumptions; DASHBOARD
     budget/drivers out of sync with the cost registers; estimates not refreshed
     after a related decision changed.
+15. **System relationships** — edges in an `OVERVIEW.md` pointing to a non-existent
+    system (dangling); edges in one system not reconciled in the other
+    (asymmetric); `project/shared/system-map.md` out of sync with per-system
+    Relationships; in a multi-system project, a system with no relationships at all
+    (a possible missed link).
 
 ## Reconcile
 

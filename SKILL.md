@@ -68,6 +68,7 @@ requirements → design → build, never the product.
 | Resume after any gap | `session-continuity.md`, then `project/DASHBOARD.md`, `sessions/CURRENT_STATE.md`, `project/mission.md` |
 | Understand file/naming/link/git rules | `conventions.md` |
 | Create, evolve, split, or retire a system | `system-lifecycle.md` |
+| Track how systems relate (APIs, streams, power, adjacency) | `system-lifecycle.md` → "Relating systems"; `project/shared/system-map.md` |
 | Know the phases + exit gates for this project | `domains/<active-domain>/phases.md` |
 | Log what happened this session | `agents/session-log.md` |
 | Capture a significant decision | `agents/decision-record.md` |

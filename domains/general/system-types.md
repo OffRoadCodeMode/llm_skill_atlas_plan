@@ -8,6 +8,23 @@ name it and (optionally) record a reusable type here.
 |------|-------|
 | _(none predefined)_ | Add types as they emerge for your project domain. |
 
+## Relationship types (for the system map)
+
+Used in `system-map.md` and each `OVERVIEW.md` → Relationships to describe *how*
+two systems connect. Generic + physical-project types:
+
+| Type | Meaning |
+|------|---------|
+| **depends-on** | One system needs another to function or be built first |
+| **physical-adjacency** | They share or constrain the same physical space |
+| **power** | One draws from or feeds another's power/energy budget |
+| **structural** | One bears load for / is mounted on another |
+| **data** | They share information/records |
+| **informs** | Output of one feeds decisions in another |
+
+(For a van conversion: electrical `power` lighting; cabinets `physical-adjacency`
+plumbing; etc. Add project-specific types as they emerge, or make a dedicated pack.)
+
 ## Guidance
 
 - A "system" is any coherent area with its own boundaries, decisions, and

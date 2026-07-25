@@ -15,6 +15,19 @@ repos, etc.). A system can carry more than one type.
 | **infrastructure** | IaC, networking, environments | design (+diagrams), tasks, costs, risks |
 | **platform** | shared internal libraries/services | design, features, tasks |
 
+## Relationship types (for the system map)
+
+Used in `system-map.md` and each `OVERVIEW.md` → Relationships to describe *how*
+two systems connect (see `system-lifecycle.md`):
+
+| Type | Meaning |
+|------|---------|
+| **api** | One system calls another's API (REST/gRPC/etc.) |
+| **event-stream** | Communicate asynchronously via a message/event bus |
+| **shared-data** | Share a database, schema, or data store |
+| **library** | One depends on another as a shared internal library/package |
+| **depends-on** | Generic build/runtime dependency not covered above |
+
 ## Adding a type
 
 Add a row here (commit `domain: add system type '<name>' to software pack`) when a

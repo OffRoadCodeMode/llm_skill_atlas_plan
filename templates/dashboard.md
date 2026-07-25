@@ -26,6 +26,9 @@ Partly derived, partly owned:
 - Budget: [amount / range] · Committed: [x] · Confidence: [low/med/high]
 - Top drivers: [item] ~[$], [item] ~[$]
 
+## System Map
+> How systems connect (graph + register): see [shared/system-map.md](shared/system-map.md).
+
 ## Next Milestones
 - [Milestone] | target: [date] | system: [which]
 

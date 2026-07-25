@@ -20,5 +20,10 @@ Initial release. Minimal-but-complete framework (*prove before scaling*).
   costs, session-log, dashboard).
 - Costs & risks are core canon: optional/emergent registers at project level and
   optionally per-system, rolled up to the dashboard by `audit`.
+- Inter-system relationships are core canon: `project/shared/system-map.md`
+  (Mermaid graph + relationship register) is the source of truth, mirrored by a
+  `Relationships` section in each `OVERVIEW.md` and reconciled by `audit`
+  (check 15). Relationship types are domain-pack-defined; interface contracts are
+  optional and deferred until an edge needs one.
 - Audit hardening: conflict pre-flight halt, git-derived freshness, git-diff
   incremental reconciliation, context-budget cold start + weekly roll-up.

@@ -23,6 +23,7 @@ my-project-planning/
 │       ├── DECISIONS.md       # Cross-system small-decision log
 │       ├── risks.md           # Project-wide risk register
 │       ├── costs.md           # Project-wide cost register / budget
+│       ├── system-map.md      # Inter-system relationship map (graph + register)
 │       └── decisions/         # Project-wide Decision Records (shared/DR-XXX)
 ├── sessions/
 │   ├── INDEX.md

@@ -43,6 +43,71 @@ Atlas **generates** the `project/` and `sessions/` structure at runtime from the
 templates in this skill. Your planning repo contains only that generated content,
 never a copy of Atlas.
 
+## What it outputs
+
+Atlas writes plain markdown into your planning repo. A software project a little
+way into planning might look like this (systems **emerge** over time, so early on
+you will have fewer):
+
+```
+my-project-planning/
+├── INDEX.md                      # Master map of content
+├── AGENTS.md                     # Root rules (records the Atlas version used)
+├── project/
+│   ├── DASHBOARD.md              # Quick-scan status: phase per system, risks, costs, next steps
+│   ├── mission.md                # The anchor: everything traces back here
+│   ├── systems/
+│   │   ├── INDEX.md
+│   │   ├── your-system-1/
+│   │   │   ├── OVERVIEW.md        # Type, purpose, boundaries, current phase
+│   │   │   ├── AGENTS.md
+│   │   │   ├── CHANGELOG.md
+│   │   │   ├── open-questions.md
+│   │   │   ├── DECISIONS.md       # Small decisions (one line each)
+│   │   │   ├── risks.md           # Optional register (rolls up to the dashboard)
+│   │   │   ├── costs.md           # Optional register (rolls up to the dashboard)
+│   │   │   ├── research/
+│   │   │   │   └── orchestration-patterns.md
+│   │   │   ├── design/
+│   │   │   │   ├── decisions/
+│   │   │   │   │   └── DR-001.md   # A Decision Record with context + consequences
+│   │   │   │   └── diagrams/
+│   │   │   │       └── architecture.md   # Mermaid diagram
+│   │   │   └── TASKS.md
+│   │   └── your-system-2/         # A second system, lighter so far
+│   │       ├── OVERVIEW.md
+│   │       ├── AGENTS.md
+│   │       ├── open-questions.md
+│   │       └── research/
+│   │           └── approach-options.md
+│   └── shared/                    # Cross-system content
+│       ├── glossary.md
+│       ├── open-questions.md
+│       ├── DECISIONS.md
+│       ├── risks.md               # Project-wide risk register
+│       ├── costs.md               # Project-wide cost register / budget
+│       ├── system-map.md          # How systems relate: Mermaid graph + register
+│       └── decisions/             # Project-wide Decision Records (shared/DR-XXX)
+└── sessions/
+    ├── CURRENT_STATE.md           # Rolling "where are we now" for cold starts
+    └── week-01/
+        └── 2026-07-25.md          # Incremental daily log
+```
+
+Notes on the output:
+
+- **Systems are folders that emerge**, each tracking its own phase and decisions.
+  A non-software project would have different systems (e.g. `electrical`,
+  `plumbing` for a van conversion) driven by its **domain pack**.
+- **Only what's needed exists.** Subfolders like `research/`, `design/`, and
+  registers like `risks.md`/`costs.md` appear when a system actually needs them.
+- **Systems can relate.** `shared/system-map.md` holds a Mermaid graph + register
+  of how systems connect (APIs, event streams, shared data; or power, physical
+  adjacency for a physical build), and each system mirrors its own edges. So you
+  can answer "if I change X, what's affected?"
+- **Everything cross-links** with standard relative markdown links, so it browses
+  cleanly in GitHub, VS Code, Obsidian, or any markdown viewer.
+
 ## What's in the skill
 
 ```

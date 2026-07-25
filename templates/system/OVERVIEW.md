@@ -9,8 +9,14 @@
 ## Boundaries
 [What this system owns vs what it delegates to other systems.]
 
-## Dependencies
-[Which other systems this one depends on.]
+## Relationships
+How this system connects to others. Reconciled with `project/shared/system-map.md`
+by `audit`. One row per related system. Type is defined by the active domain pack;
+Direction is `→` (one-way) or `↔` (mutual). Link a contract artifact when one exists.
+
+| Related system | Type | Direction | Contract / notes |
+|-----------------|------|-----------|------------------|
+| [system] | [pack-defined] | → or ↔ | [contract link or note] |
 
 ## Current Phase
 [defined by active domain pack]

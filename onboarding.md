@@ -47,6 +47,7 @@ project/shared/open-questions.md   ← templates/open-questions.md
 project/shared/DECISIONS.md        ← templates/decisions.md
 project/shared/risks.md            ← templates/risks.md
 project/shared/costs.md            ← templates/costs.md
+project/shared/system-map.md       ← templates/system-map.md (starts empty; fills as systems relate)
 project/shared/decisions/          ← (empty; shared DRs land here)
 project/shared/research/           ← (empty)
 sessions/INDEX.md
