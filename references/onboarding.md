@@ -79,6 +79,25 @@ should emerge. Don't rush to scaffold systems just to have a place for research;
 worth scaffolding once a research stream has enough focus to own its own
 decisions, design, and tasks.
 
+## Check complementary skills (Hermes)
+
+Atlas works standalone, but these Hermes skills enhance it when available (see
+the "Complementary Hermes skills" table in `SKILL.md`):
+
+| Skill | What it adds |
+|-------|-------------|
+| **obsidian** | Read, search, and edit notes directly in an Obsidian vault |
+| **xlsx** | Living cost spreadsheet with formulas alongside `costs.md` |
+| **youtube-content** | Turn YouTube tutorials/reviews into cited research docs |
+| **excalidraw** | Spatial diagrams (floor plans, layouts, schematics) |
+| **pdf** | Create/fill PDFs for certification forms, permits, insurance docs |
+
+Check which are installed (`skill_view(name='<skill>')` or ask the user). For
+any that are missing, briefly explain what it does and ask if the user wants to
+install it. Do not block onboarding if they decline; the skills are optional
+enhancements, not dependencies. Record which complementary skills are available
+in the root `AGENTS.md` so future sessions know.
+
 ## Set up the audit cadence (Hermes)
 
 Offer to create the recurring `atlas-audit` cron job (see

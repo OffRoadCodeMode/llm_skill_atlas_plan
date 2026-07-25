@@ -17,6 +17,10 @@ a major bump signals breaking convention changes.
   (Excalidraw for spatial/dimensioned drawings, Mermaid for system relationship
   graphs and process flows, architecture-diagram for tech infrastructure) and
   excalidraw workflow.
+- **onboarding.md**: Added "Check complementary skills" step — agent checks
+  which Hermes skills (obsidian, xlsx, youtube-content, excalidraw, pdf) are
+  installed, explains what each adds, and offers to install missing ones.
+  Records available skills in root AGENTS.md.
 
 ## 0.3.2 — 2026-07-25
 
