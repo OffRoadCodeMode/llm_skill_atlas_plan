@@ -4,9 +4,17 @@ Synthesises external material into cited, frontmatter-tagged research docs durin
 Onboard and the research phase. Research is a **means to unblock** requirements →
 design → build — never the product.
 
+## Where research goes
+
+- **General / cross-system research** (early project context, technology surveys,
+  domain background, market analysis) goes in `project/shared/research/`.
+- **System-specific research** (deep dives into one system's options, constraints,
+  architecture, or technology choices) goes in `project/systems/<name>/research/`.
+- If unsure, ask: "does this finding apply to one system or the whole project?"
+
 ## Behaviour (minimum)
 
-- Write findings to `<system>/research/` (or `project/shared/research/`) using
+- Write findings to the correct location (see above) using
   `references/domains/<domain>/templates/research-doc.md`.
 - Set frontmatter: `type: research`, `confidence`, `mission_link`, and `sources`.
 - Link each doc to at least 2 others (the requirement/question it informs + its

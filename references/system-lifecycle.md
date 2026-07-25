@@ -55,6 +55,8 @@ one as its own artifact both systems link to only when an edge needs it.
   `CHANGELOG.md`.
 - **Add artifacts** — research docs, DRs, diagrams, requirements — in the relevant
   subfolder, linked (min 2 links) and (if claim-bearing) with frontmatter.
+  System-specific research goes in `<system>/research/`; cross-system or
+  general research goes in `project/shared/research/`.
 - **Track risk/cost** — add `risks.md`/`costs.md` when the system has material
   risk or cost; these roll up to the project registers and dashboard.
 
