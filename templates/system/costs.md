@@ -10,7 +10,7 @@ domain pack.
 ## Estimates
 | Item | Category | Estimate | Cadence | Confidence | Notes / assumptions |
 |------|----------|----------|---------|-----------|---------------------|
-| [item] | [infra/…] | [$] | one-off/monthly | low/med/high | [assumptions] |
+| [item] | [infra/…] | [$] | one-off / monthly / annual | low/med/high | [assumptions] |
 
 ## Assumptions
 - [key assumption the estimates depend on]

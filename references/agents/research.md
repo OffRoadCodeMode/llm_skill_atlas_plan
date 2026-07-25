@@ -80,6 +80,10 @@ gather pricing data as a first-class output:
 
 - Realistic price ranges (low / mid / high) from multiple sources.
 - Note what's included vs excluded (installation, tax, shipping).
+- **Distinguish one-off vs recurring costs.** Some costs are upfront (hardware
+  purchase, installation, permits); others are recurring (subscriptions, hosting,
+  maintenance, fuel, insurance). Tag each item with its cadence so the budget
+  spreadsheet can separate capital outlay from ongoing commitments.
 - Flag prices that are indicative vs confirmed quotes.
 - Record in the research doc and also in the system's `costs.md` (or
   `project/shared/costs.md` if cross-system).

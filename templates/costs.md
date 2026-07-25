@@ -11,7 +11,7 @@ compliance; van conversion: parts / materials / tools / labour).
 ## Estimates
 | Item | Category | Estimate | Cadence | Confidence | Notes / assumptions |
 |------|----------|----------|---------|-----------|---------------------|
-| [item] | [category] | [$] | one-off/monthly | low/med/high | [assumptions] |
+| [item] | [category] | [$] | one-off / monthly / annual | low/med/high | [assumptions] |
 
 ## Assumptions
 - [key assumption the estimates depend on]
