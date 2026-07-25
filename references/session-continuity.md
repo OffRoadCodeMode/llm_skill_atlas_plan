@@ -77,5 +77,18 @@ When wrapping up:
 2. Update `CURRENT_STATE.md` if state changed.
 3. Update `DASHBOARD.md` if any system phase/status changed.
 4. Update INDEX.md files if content was added/changed.
+5. **Capture any decisions made this session.** Review the conversation for
+   choices that shaped the project direction — if any qualify as a Decision
+   Record (see `references/agents/decision-record.md`), create one. Smaller
+   choices go in the system's `DECISIONS.md` or `project/shared/DECISIONS.md`.
+6. **Save the Hermes memory pointer** if phase or focus changed (see "Hermes
+   memory pointer" above).
 
-Most work was captured incrementally; this is just a final pass.
+## Mid-session decision capture
+
+Don't wait for end-of-session to capture decisions. When a significant choice is
+made during a conversation, create the Decision Record immediately — this is
+faster, the context is fresh, and it prevents "I meant to capture that" drift.
+The router table in `SKILL.md` lists "Decide" as a first-class verb for this
+reason: as soon as you hear "let's go with X" or "we decided Y", pause and
+capture it.

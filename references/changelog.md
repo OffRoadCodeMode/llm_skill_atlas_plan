@@ -4,6 +4,16 @@ All notable changes to the Atlas framework itself. Format: reverse chronological
 Bump the `version:` field in `SKILL.md` frontmatter (semver) for convention changes;
 a major bump signals breaking convention changes.
 
+## 0.3.2 — 2026-07-25
+
+- **session-continuity.md**: Added end-of-session step 5 (capture decisions) and
+  step 6 (save Hermes memory pointer). Added "Mid-session decision capture"
+  section — don't wait for end-of-session, capture as soon as a choice is made.
+- **SKILL.md**: Updated "Decide" verb in operation vocabulary to emphasise
+  immediate capture ("not later"), not deferred. Added "Staying on-rails"
+  section — re-read conventions.md before new task types and re-read router-table
+  files when changing verbs, to prevent drift in long sessions.
+
 ## 0.3.1 — 2026-07-25
 
 - **governance.md**: Added "After pulling a skill update" section — agent reads

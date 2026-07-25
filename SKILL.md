@@ -4,7 +4,7 @@ description: Use when the user asks to plan, manage, or work on any project.
   Activates the Atlas planning framework: onboards projects, manages systems,
   logs sessions, captures decisions, and maintains a structured project wiki.
   Works for any domain (software, business, research, personal builds).
-version: 0.3.1
+version: 0.3.2
 tags: [planning, project-management, wiki, framework]
 ---
 
@@ -58,7 +58,7 @@ Speak and act in these verbs, whatever the interface:
 
 - **Onboard**: establish `mission.md` and the initial systems. See `references/onboarding.md`
 - **Advance**: move a system through a phase gate, with evidence. See `references/domains/<domain>/phases.md`
-- **Decide**: capture a Decision Record or resolve a blocking open question. See `references/agents/decision-record.md`
+- **Decide**: capture a Decision Record or resolve a blocking open question — **immediately**, not later. If you hear "let's go with X" or a choice is made, capture it on the spot while context is fresh. See `references/agents/decision-record.md`
 - **Plan**: break work into tasks / milestones for a system. See `templates/system/TASKS.md`
 - **Audit**: integrity + gate + mission-alignment check. See `references/agents/audit.md`
 - **Resume**: cold-start orientation at the top of a session. See `references/session-continuity.md`
@@ -105,6 +105,22 @@ active domain is chosen during onboarding and recorded in `project/DASHBOARD.md`
 6. **Single active writer.** Git is the reconciliation backstop.
 7. **Delegate to sub-agents** to keep the main context clean.
 
+## Staying on-rails (preventing drift in long sessions)
+
+In long sessions, the activation prompt and conventions fade from the agent's
+attention as the context window fills. To prevent drift:
+
+- **Re-read `references/conventions.md` before starting a new task type**
+  (e.g. switching from research to design, or before scaffolding a new system).
+  The conventions are short; the refresh keeps frontmatter, linking, and naming
+  rules intact.
+- **Re-read the relevant router-table file** when changing verbs (e.g. moving
+  from Onboard to Advance, or from Plan to Audit). Each verb has its own spec;
+  loading it fresh ensures the agent follows the current process, not a
+  half-remembered one.
+- **Audit catches drift after the fact**, but re-anchoring prevents it from
+  accumulating in the first place. Prevention is cheaper than repair.
+
 ## Presentation (chat interfaces)
 
 - Summarise file contents; don't dump raw markdown.
@@ -130,6 +146,6 @@ Domain packs may recommend additional skills specific to the domain.
 ## Version
 
 This skill's version is in the `version:` field of this file's frontmatter
-(`0.3.1`). On onboarding, stamp it into the project (root `AGENTS.md` and
-`project/DASHBOARD.md` footer, e.g. `atlas: 0.3.1`).
+(`0.3.2`). On onboarding, stamp it into the project (root `AGENTS.md` and
+`project/DASHBOARD.md` footer, e.g. `atlas: 0.3.2`).
 See `references/governance.md` for versioning and maintenance rules.
