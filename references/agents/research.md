@@ -44,6 +44,17 @@ design → build — never the product.
    confidence `high`. Single-source or vendor-authored claims cap at `medium`.
 4. For pricing/availability data, search listing sites directly (e.g.
    `site:donedeal.ie`, `site:carzone.ie`) alongside forums and guides.
+5. **YouTube as a research source.** For practical/build domains (van conversions,
+   construction, electronics, DIY), YouTube is often the richest source — build
+   tutorials, product reviews, owner walkthroughs, failure reports. Use the
+   `youtube-content` skill (`skill_view(name='youtube-content')`) to fetch
+   transcripts and summarise them into cited research-doc material. Cite as
+   `[YouTube: <channel name>, <video title>, <URL>]` in the Sources section.
+   Video sources are particularly valuable for:
+   - Step-by-step installation guides (what the process actually looks like)
+   - Known issues and failure modes (owner experience > spec sheets)
+   - Product comparisons with visual demonstrations
+   - Region-specific practical advice (e.g. Irish camper conversion channels)
 
 ### Handling conflicting sources
 
@@ -74,6 +85,36 @@ gather pricing data as a first-class output:
   `project/shared/costs.md` if cross-system).
 - Set `confidence: low` on estimates from single sources or non-local pricing
   (e.g. US prices for an Irish project).
+
+## Cost tracking — markdown + spreadsheet
+
+Atlas uses two layers for cost tracking. They serve different purposes and stay
+in sync via the audit:
+
+1. **`costs.md` (per system + project-wide)** — the durable record. Markdown
+   tables of line items with confidence levels and assumptions. This is what
+   audit rolls up into the dashboard. It's version-controlled, diffable, and
+   always readable in any editor.
+
+2. **`project/shared/budget.xlsx`** — the living spreadsheet. When the `xlsx`
+   skill is available, maintain a spreadsheet with formulas for running totals,
+   contingency calculations, per-system breakdowns, and "what-if" scenarios.
+   The spreadsheet is the working tool; the markdown is the canonical record.
+
+### Sync strategy
+
+- **Markdown is canonical.** If they disagree, the markdown `costs.md` wins —
+  the spreadsheet is a derived view.
+- **Update flow:** when research produces new pricing, update `costs.md` first,
+  then update the spreadsheet (or let audit propose the sync).
+- **Audit check:** the audit can compare `costs.md` totals against the
+  spreadsheet and flag drift.
+- **Per-system sheets:** the spreadsheet can have one sheet per system plus a
+  summary sheet that pulls from each. This avoids the "multiple files syncing"
+  problem — it's one file with tabs.
+- **Don't duplicate line items.** Each cost lives in one system's `costs.md`.
+  The project-wide `costs.md` rolls up (references the system registers, doesn't
+  copy them). The spreadsheet does the same — one row per item, tagged by system.
 
 ## Sourcing & citation
 

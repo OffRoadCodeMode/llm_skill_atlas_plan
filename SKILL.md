@@ -4,7 +4,7 @@ description: Use when the user asks to plan, manage, or work on any project.
   Activates the Atlas planning framework: onboards projects, manages systems,
   logs sessions, captures decisions, and maintains a structured project wiki.
   Works for any domain (software, business, research, personal builds).
-version: 0.2.0
+version: 0.3.0
 tags: [planning, project-management, wiki, framework]
 ---
 
@@ -112,9 +112,24 @@ active domain is chosen during onboarding and recorded in `project/DASHBOARD.md`
 - For audits, report what was found and what was fixed/proposed.
 - Onboard conversationally: one question at a time.
 
+## Complementary Hermes skills
+
+Atlas is self-contained, but these Hermes skills enhance project workflows when
+available. Load them with `skill_view(name='...')` when the task calls for it.
+
+| Skill | When to use | Atlas integration |
+|-------|-------------|-------------------|
+| **obsidian** | Reading, searching, creating, or editing notes in an Obsidian vault | Atlas project wikis are Obsidian-optimised (standard relative links, Mermaid, YAML frontmatter). If the user runs Obsidian, use this skill to interact with the vault directly. |
+| **xlsx** | Creating or maintaining cost spreadsheets, budget trackers, comparison tables | Use alongside Atlas cost registers — an `.xlsx` for living budgets/formulas, `costs.md` for the durable record (see `references/agents/research.md` → "Cost research" and `templates/costs.md`). |
+| **youtube-content** | Extracting knowledge from YouTube tutorials, reviews, build guides | Research often involves video sources (build tutorials, product reviews, owner walkthroughs). Use this to turn transcripts into cited research-doc material (see `references/agents/research.md` → "Research methodology"). |
+| **pdf** | Creating, merging, splitting, or filling PDF documents | Useful for certification forms, vehicle registration paperwork, insurance docs, NSAI standards — any formal document in the project. |
+
+These are recommendations, not dependencies — Atlas works fully without them.
+Domain packs may recommend additional skills specific to the domain.
+
 ## Version
 
 This skill's version is in the `version:` field of this file's frontmatter
-(`0.2.0`). On onboarding, stamp it into the project (root `AGENTS.md` and
-`project/DASHBOARD.md` footer, e.g. `atlas: 0.2.0`).
+(`0.3.0`). On onboarding, stamp it into the project (root `AGENTS.md` and
+`project/DASHBOARD.md` footer, e.g. `atlas: 0.3.0`).
 See `references/governance.md` for versioning and maintenance rules.

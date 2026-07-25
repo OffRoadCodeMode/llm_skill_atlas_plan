@@ -24,7 +24,7 @@ projects. Do **not** copy it into each project.
 ```bash
 # Hermes
 git clone <this-repo> ~/.hermes/skills/atlas
-# (or: npx create-atlas, which clones here and checks for updates)
+# (or just ask Hermes to install the skill from this repo URL)
 ```
 
 **IDE (secondary):** clone anywhere and tell your LLM:

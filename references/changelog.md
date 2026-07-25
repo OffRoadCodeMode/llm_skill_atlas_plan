@@ -4,6 +4,26 @@ All notable changes to the Atlas framework itself. Format: reverse chronological
 Bump the `version:` field in `SKILL.md` frontmatter (semver) for convention changes;
 a major bump signals breaking convention changes.
 
+## 0.3.0 — 2026-07-25
+
+Complementary Hermes skills integration — Atlas now recommends and documents
+how to use obsidian, xlsx, youtube-content, and pdf skills alongside the
+framework.
+
+- **SKILL.md**: Added "Complementary Hermes skills" section with a table mapping
+  each skill to its Atlas integration point.
+- **research.md**: Added YouTube as a research source (step 5 in search
+  strategy) — use the `youtube-content` skill to fetch transcripts and cite them
+  in research docs. Particularly valuable for practical/build domains.
+- **research.md**: Added "Cost tracking — markdown + spreadsheet" section
+  defining the two-layer model: `costs.md` as canonical markdown record,
+  `budget.xlsx` as living spreadsheet with formulas. Includes sync strategy
+  (markdown is canonical, spreadsheet is derived view) and per-system sheet
+  approach to avoid multi-file sync problems.
+- **conventions.md**: Added `budget.xlsx` to the directory layout (optional).
+  Added Obsidian section documenting that Atlas wikis are Obsidian-optimised and
+  how to use the `obsidian` skill for vault interaction.
+
 ## 0.2.0 — 2026-07-25
 
 Hermes integration improvements — surfaced from real usage test-driving the

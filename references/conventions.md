@@ -23,6 +23,7 @@ my-project-planning/
 │       ├── DECISIONS.md       # Cross-system small-decision log
 │       ├── risks.md           # Project-wide risk register
 │       ├── costs.md           # Project-wide cost register / budget
+│       ├── budget.xlsx        # Living cost spreadsheet (optional, if xlsx skill available)
 │       ├── system-map.md      # Inter-system relationship map (graph + register)
 │       └── decisions/         # Project-wide Decision Records (shared/DR-XXX)
 ├── sessions/
@@ -35,6 +36,15 @@ my-project-planning/
 
 The framework itself (this skill) is **not** copied in. Projects hold generated
 content only.
+
+## Obsidian
+
+Atlas project wikis are designed to shine in Obsidian: standard relative links
+(not `[[wikilinks]]`) render as graph edges, Mermaid blocks render natively, and
+YAML frontmatter is parsed. If the user runs Obsidian, point the vault at the
+project root. When the `obsidian` Hermes skill is available, use it to read,
+search, create, and edit notes directly in the vault — it understands Obsidian's
+structure, tags, and frontmatter.
 
 ## INDEX.md
 
