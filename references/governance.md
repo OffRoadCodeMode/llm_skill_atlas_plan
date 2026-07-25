@@ -15,6 +15,7 @@ as it evolves.
    convention, it lives in that project's content, never in the skill.
 5. **Domain packs are shareable** — a custom pack (e.g. `van-conversion`) helps
    whoever plans a similar project; prefer adding a pack over bending the core.
+   See "Creating a custom domain pack" below.
 
 ## Versioning
 
@@ -52,3 +53,46 @@ The workflow:
 ("you keep deleting this field — want to drop it from the template?"), but it does
 **not** modify the skill on its own. Keeping a human in the loop matches
 *prove before scaling* and stops the framework drifting without oversight.
+
+## Creating a custom domain pack
+
+A custom domain pack tailors Atlas to a specific kind of project (e.g.
+`van-conversion`, `event-planning`, `academic-research`). The core framework
+works for any project, but a pack adds domain-specific phases, system types,
+relationship types, templates, and agents.
+
+### When to create one
+
+**Not during onboarding.** Start with the closest shipped pack (`software/` or
+`general/`). A custom pack is worth creating only when:
+
+1. The project clearly does not fit either shipped pack.
+2. The LLM has enough context (past onboarding, at least one system emerged) to
+define meaningful system types and phases for the domain.
+3. The user agrees it is worth the effort.
+
+This follows the *prove before scaling* principle: use the generic pack first,
+feel the friction, then invest in a custom pack when the need is clear.
+
+### How to create one
+
+1. **Copy** `references/domains/general/` to `references/domains/<name>/` as a
+   starting point.
+2. **Customize** `phases.md` (domain-specific phases + exit criteria),
+   `system-types.md` (system types + relationship types for this domain), and
+   add `templates/` or `agents/` subfolders as needed.
+3. **Commit** with the `domain:` prefix, e.g. `domain: add van-conversion pack`.
+4. **Note** the new pack in `references/changelog.md`.
+
+### Contributing a pack back upstream
+
+If your custom pack could help others planning similar projects, submit a PR to
+the Atlas repo:
+
+1. Fork the repo and create a branch (e.g. `domain/van-conversion`).
+2. Add your pack under `references/domains/<name>/`.
+3. Update `references/changelog.md` with a one-liner.
+4. Open a PR with the `domain:` prefix in the title.
+
+Packs should be **self-contained** (own phases, types, templates) and **not
+modify the core framework**. The maintainers will review for fit and consistency.

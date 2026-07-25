@@ -21,6 +21,25 @@ design → build — never the product.
   system).
 - Log open questions raised into the relevant `open-questions.md`.
 
+## Sourcing & citation
+
+- **Source list.** Every research doc must end with a `## Sources` section
+  listing all URLs consulted, with a one-line description of what each source
+  contributed. This is for the user's later reference and further reading.
+- **Cite key findings, not every sentence.** Inline citations (e.g.
+  `[source-name, URL]` or `^[research/sources/foo.md]`) go on the **key
+  findings** and **opinions taken from external sources**, not on generic
+  background knowledge. The reader should be able to trace any non-obvious
+  claim back to its source.
+- **State certainty/trust.** When the research adopts an opinion or
+  recommendation from an online source, state how much trust to place in it.
+  Use the frontmatter `confidence` field (high / medium / low) and add an
+  inline note where the opinion appears, e.g.:
+  > "Service X is recommended for low-latency inference (medium confidence:
+  > single vendor blog, not independently benchmarked)."
+  Factors that lower confidence: single source, vendor-authored, no
+  independent verification, dated material, anecdotal evidence.
+
 ## Provenance & source drift (only when ingesting external sources)
 
 - Raw sources are **immutable** — save them under `research/sources/`; corrections

@@ -130,6 +130,12 @@ templates/            Generic document + system-folder templates
 scaling*). The three critical agents (`session-log`, `decision-record`, `audit`)
 are fully specified; others are lighter and grow as pain is felt.
 
+## Contributing
+
+Domain packs are the main extension point. If you build a pack that could help
+others planning similar projects, submit a PR to add it under
+`references/domains/<name>/`. See `references/governance.md` for the process.
+
 ## License
 
 MIT. See [LICENSE](LICENSE).

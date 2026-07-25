@@ -25,7 +25,9 @@ Guided interview — **one question at a time**, conversationally. Cover:
 - **Constraints** — budget, deadlines, compliance, tech/material limits, team.
 - **Current state** — greenfield or existing? What already exists?
 - **Domain** — "what kind of project is this?" Load the matching pack from
-  `references/domains/`; fall back to `general/` if no match.
+  `references/domains/`; fall back to `general/` if no match. If no shipped pack
+  fits well, use `general/` for now. A custom pack can be created later once
+  enough project context exists (see `references/governance.md`).
 
 Gather enough context to *recommend* systems — **do not create system folders
 yet**. Write `mission.md` and the shared scaffold first.

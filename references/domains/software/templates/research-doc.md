@@ -31,6 +31,10 @@ claims read as settled fact.]
 ## Recommendation
 [If any — the option this points toward, and the confidence level.]
 
+## Sources
+- [URL] — [one-line description of what this source contributed]
+- [URL] — [one-line description]
+
 ## Links
 - Informs: [requirement / DR / decision]
 - Belongs to: [system]

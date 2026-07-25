@@ -29,6 +29,10 @@ explicitly.]
 ## Recommendation
 [If any, with confidence level.]
 
+## Sources
+- [URL] — [one-line description of what this source contributed]
+- [URL] — [one-line description]
+
 ## Links
 - Informs: [decision / next step]
 - Belongs to: [system]
