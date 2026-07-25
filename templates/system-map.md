@@ -16,6 +16,19 @@ graph LR
   system-1 -.->|shares data| system-3
 ```
 
+> Use `subgraph` clusters to group sub-systems under their parent:
+> ```mermaid
+> graph LR
+>   subgraph van["van"]
+>     electrical["electrical"]
+>     climate["climate"]
+>     insulation["insulation"]
+>   end
+>   workshop["workshop"]
+>   workshop -.->|informs| van
+>   electrical -.->|power| climate
+> ```
+
 > Solid arrow = one-way dependency (`→`); dashed / double = mutual (`↔`). Label
 > each edge with its type.
 

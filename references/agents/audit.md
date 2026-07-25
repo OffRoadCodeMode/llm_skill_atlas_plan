@@ -26,13 +26,16 @@ risk when "git is the backstop" meets an unattended writer.
 1. **Broken links** — relative markdown links pointing to files that don't exist.
    *(highest severity)*
 2. **Orphans** — artifacts with zero inbound links (violates the min-2-links rule).
-3. **Index / dashboard completeness** — every system appears in `DASHBOARD.md`;
-   every artifact appears in its folder `INDEX.md`; dashboard system rows are
-   derivable from `OVERVIEW.md` files.
+3. **Index / dashboard completeness** — every system (including sub-systems)
+   appears in `DASHBOARD.md`; every artifact appears in its folder `INDEX.md`;
+   dashboard system rows are derivable from `OVERVIEW.md` files. Sub-systems
+   name their parent in the dashboard `Parent` column. Walk `project/systems/`
+   recursively, descending into any `systems/` subfolder.
 4. **Frontmatter validation** — required fields present on claim-bearing artifacts;
    DRs/requirements have IDs; `confidence` set on research/DRs.
-5. **Phase-gate satisfaction** — for each system, check the current phase's exit
-   criteria against real evidence; report gates met / unmet / blocked.
+5. **Phase-gate satisfaction** — for each system (including sub-systems), check
+   the current phase's exit criteria against real evidence; report gates met /
+   unmet / blocked. Sub-system phases are checked independently of their parent.
 6. **Blocking open questions** — unresolved questions tagged as gating a phase.
 7. **Mission alignment** — artifacts with missing `mission_link` or direction that
    drifted from `mission.md` (hand off to `scope-check`).
@@ -47,7 +50,7 @@ risk when "git is the backstop" meets an unattended writer.
 11. **Source drift** — for ingested sources with `sha256`, recompute and flag
     mismatches.
 12. **Size / structure** — artifacts too large to scan (candidates for splitting
-    into a new system).
+    into a new system or sub-system).
 13. **Risks** — high-severity risks with no owner or mitigation; risks stuck `open`
     past a phase gate; `DASHBOARD.md` Top Risks out of sync with the risk registers.
 14. **Costs** — estimates with `confidence: low` or no assumptions; DASHBOARD
@@ -57,13 +60,18 @@ risk when "git is the backstop" meets an unattended writer.
     system (dangling); edges in one system not reconciled in the other
     (asymmetric); `project/shared/system-map.md` out of sync with per-system
     Relationships; in a multi-system project, a system with no relationships at all
-    (a possible missed link).
+    (a possible missed link). **Hierarchy consistency**: sub-system `OVERVIEW.md`
+    `parent:` field must point to a real parent system; parent `OVERVIEW.md` must
+    list all sub-systems in its Sub-systems section; system map `subgraph` clusters
+    must match the parent/child relationships in `OVERVIEW.md` files.
 
 ## Reconcile
 
-After checks, the audit may **regenerate**: folder `INDEX.md` files, the
-`DASHBOARD.md` system rows (from `OVERVIEW.md`), and the Top Risks / Costs roll-ups
-(from the risk/cost registers).
+After checks, the audit may **regenerate**: folder `INDEX.md` files (walking
+`project/systems/` recursively, including sub-system folders), the
+`DASHBOARD.md` system rows (from `OVERVIEW.md`, with each sub-system's `Parent`
+column set from its `parent:` field), and the Top Risks / Costs roll-ups (from
+the risk/cost registers).
 
 ## Review before write
 
@@ -72,6 +80,25 @@ After checks, the audit may **regenerate**: folder `INDEX.md` files, the
 - **Unattended runs (cron) OR reconciliations touching 10+ artifacts** must be
   **staged as proposals and delivered for review**, not silently applied. This
   keeps the single-writer rule intact.
+
+## Conservatism guardrails
+
+The audit's job is to **find and fix mechanical problems**, not to refactor or
+improve the project. When in doubt, report, do not rewrite.
+
+- **Never refactor content.** Do not reorganize files, merge/split systems,
+  rewrite prose, or "improve" structure. These are user decisions.
+- **Never delete artifacts.** Flag orphans, stale content, or contradictions;
+  do not remove them. The user decides what to retire.
+- **Auto-fix only mechanical issues:** broken links (repoint to correct path),
+  missing INDEX/dashboard rows (regenerate), stale `updated:` dates (correct
+  from git). Everything else is a report item.
+- **Subjective checks are report-only.** Mission alignment (check 7), freshness
+  (check 9), quality signals (check 10), and size/structure (check 12) surface
+  findings and suggest actions, but the agent does not act on them
+  autonomously.
+- **One fix per problem.** If a link is broken, fix the link. Do not also
+  restructure the file it lives in.
 
 ## Incremental reconciliation (efficiency)
 
@@ -107,9 +134,11 @@ cronjob(
   workdir="<absolute-path-to-planning-repo>",   # REQUIRED — cron runs detached
   skills=["atlas"],
   prompt="Run the Atlas audit: FIRST verify the repo is conflict-free (halt and
-          alert if not); then reconcile indexes and DASHBOARD.md from OVERVIEW.md
-          files, flag stale/broken links and unresolved blocking questions.
-          Deliver a short summary.",
+          alert if not); then run the checklist from references/agents/audit.md.
+          Auto-fix only mechanical issues (broken links, missing INDEX/dashboard
+          rows, stale updated: dates). Everything else is report-only: do NOT
+          refactor, restructure, rewrite, or delete content. Deliver a short
+          summary of findings and any fixes applied.",
   deliver="telegram",          # adjust to user's configured gateway — see below
 )
 ```

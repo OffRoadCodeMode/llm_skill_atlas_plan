@@ -4,7 +4,7 @@ description: Use when the user asks to plan, manage, or work on any project.
   Activates the Atlas planning framework: onboards projects, manages systems,
   logs sessions, captures decisions, and maintains a structured project wiki.
   Works for any domain (software, business, research, personal builds).
-version: 0.4.0
+version: 0.5.0
 tags: [planning, project-management, wiki, framework]
 ---
 
@@ -76,7 +76,7 @@ requirements -> design -> build, never the product.
 | Start a new project / no `project/` exists | `references/onboarding.md` |
 | Resume after any gap | `references/session-continuity.md`, then `project/DASHBOARD.md`, `sessions/CURRENT_STATE.md`, `project/mission.md` |
 | Understand file/naming/link/git rules | `references/conventions.md` |
-| Create, evolve, split, or retire a system | `references/system-lifecycle.md` |
+| Create, evolve, split, or retire a system (or sub-system) | `references/system-lifecycle.md` |
 | Track how systems relate (APIs, streams, power, adjacency) | `references/system-lifecycle.md` (section "Relating systems"); `project/shared/system-map.md` |
 | Know the phases + exit gates for this project | `references/domains/<active-domain>/phases.md` |
 | Log what happened this session | `references/agents/session-log.md` |
@@ -97,7 +97,9 @@ active domain is chosen during onboarding and recorded in `project/DASHBOARD.md`
 1. **Everything traces to `mission.md`.** If an artifact can't say why it serves
    the mission, flag it (scope-check).
 2. **Systems emerge, they're not declared upfront.** Gather context, then
-   *recommend* systems; the user confirms.
+   *recommend* systems; the user confirms. Systems can be hierarchical — a
+   system may contain sub-systems, each with its own phase and artifacts. See
+   `references/system-lifecycle.md` → "Hierarchical systems".
 3. **Gates need evidence.** A system advances a phase only when every exit
    criterion is satisfied by a named artifact (see `references/domains/<domain>/phases.md`).
 4. **Audit on demand, honestly.** Atlas does not passively self-heal; it checks
@@ -149,6 +151,6 @@ Domain packs may recommend additional skills specific to the domain.
 ## Version
 
 This skill's version is in the `version:` field of this file's frontmatter
-(`0.4.0`). On onboarding, stamp it into the project (root `AGENTS.md` and
-`project/DASHBOARD.md` footer, e.g. `atlas: 0.4.0`).
+(`0.5.0`). On onboarding, stamp it into the project (root `AGENTS.md` and
+`project/DASHBOARD.md` footer, e.g. `atlas: 0.5.0`).
 See `references/governance.md` for versioning and maintenance rules.

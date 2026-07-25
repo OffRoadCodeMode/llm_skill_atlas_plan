@@ -9,7 +9,9 @@ across interfaces; only the trigger differs (Hermes natural language, IDE comman
   INDEX/AGENTS files (delegates the full check to `audit`).
 - **Index maintenance** — regenerate `INDEX.md` files when invoked.
 - **System suggestions** — review project context and **recommend** new systems
-  (the user confirms); hand off to `references/system-lifecycle.md` to scaffold.
+  or sub-systems (the user confirms); hand off to
+  `references/system-lifecycle.md` to scaffold. A component of an existing system
+  that grows its own research, decisions, or phase is a sub-system candidate.
 - **Mission alignment** — route drift concerns to `scope-check`.
 - **Session continuity** — ensure `session-log` keeps the daily log and
   `CURRENT_STATE.md` current.

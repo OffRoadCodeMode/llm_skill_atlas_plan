@@ -67,7 +67,11 @@ the root `AGENTS.md` and the `DASHBOARD.md` footer (`atlas: <version>`).
 When enough context exists (full mode), propose the first system folder(s) and the
 rationale. On user confirmation, hand off to `references/system-lifecycle.md` to
 scaffold.
-Systems **emerge** — expect to add more over time, not all at once.
+Systems **emerge** — expect to add more over time, not all at once. Systems can
+also be **hierarchical**: a system may later gain sub-systems (e.g. a `van` system
+may spawn `electrical`, `climate`, `insulation` sub-systems). Don't try to predict
+the full hierarchy during onboarding; let it emerge as the project develops (see
+`references/system-lifecycle.md` → "Hierarchical systems").
 
 ## Research before system scaffolding
 

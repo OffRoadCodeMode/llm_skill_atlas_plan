@@ -4,6 +4,38 @@ All notable changes to the Atlas framework itself. Format: reverse chronological
 Bump the `version:` field in `SKILL.md` frontmatter (semver) for convention changes;
 a major bump signals breaking convention changes.
 
+## 0.5.0 — 2026-07-25
+
+Hierarchical systems — a system may contain sub-systems, each with the same
+structure (OVERVIEW, research, design, decisions) and its own independent phase.
+
+- **system-lifecycle.md**: Added "Hierarchical systems" section — when to create
+  a sub-system (distinct research, own decisions, own phase progression, size),
+  how to scaffold (nested `systems/` folder, `parent:` field in OVERVIEW), what
+  stays at parent level, depth guidance (2-3 levels). Updated splitting section
+  with two options: extract as peer or extract as sub-system.
+- **conventions.md**: Updated directory layout to show nested system structure.
+  Updated INDEX.md section to mention sub-system children. Updated cross-linking
+  and naming sections with sub-system path qualification (e.g. `van/electrical/DR-001`).
+- **OVERVIEW.md template**: Added `Parent` field and `Sub-systems` section.
+- **system-map.md template**: Added `subgraph` cluster guidance and example for
+  grouping sub-systems under their parent in the Mermaid diagram.
+- **audit.md**: Updated checks 3, 5, 12, and 15 to handle nested systems
+  recursively. Check 15 adds hierarchy consistency (parent field, parent
+  Sub-systems section, subgraph clusters match OVERVIEW). Reconcile walks
+  recursively; sub-systems name their parent in the dashboard Parent column. Added
+  "Conservatism guardrails" section — audit finds and fixes mechanical problems
+  only, never refactors/restructures/rewrites/deletes content. Subjective checks
+  are report-only. Tightened cron prompt to reinforce report-only conservatism.
+- **SKILL.md**: Updated core principle 2 to mention hierarchical systems. Router
+  table updated. Bumped to 0.5.0.
+- **dashboard.md template**: Added `Parent` column to the Systems table so
+  sub-systems name their parent (blank = top-level).
+- **orchestrator.md**: "System suggestions" now recommends sub-systems as well as
+  top-level systems.
+- **onboarding.md**: Added note that hierarchy emerges later, not during
+  onboarding.
+
 ## 0.4.0 — 2026-07-25
 
 - **SKILL.md**: Added "Diagram" verb to operation vocabulary — creates visual

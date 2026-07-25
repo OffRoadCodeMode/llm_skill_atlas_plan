@@ -1,5 +1,8 @@
 # System: <Name>
 
+## Parent
+none | <parent-system-name>
+
 ## Type
 [defined by active domain pack — see references/domains/<domain>/system-types.md]
 
@@ -7,7 +10,15 @@
 [1–3 sentences on what this system does.]
 
 ## Boundaries
-[What this system owns vs what it delegates to other systems.]
+[What this system owns vs what it delegates to other systems or sub-systems.]
+
+## Sub-systems
+[If this system has child systems, list them here with a one-line description.
+Remove this section if no sub-systems exist.]
+
+| Sub-system | Purpose | Phase |
+|------------|---------|-------|
+| [name] | [one-liner] | [current phase] |
 
 ## Relationships
 How this system connects to others. Reconciled with `project/shared/system-map.md`
