@@ -1,0 +1,8 @@
+# Editor / viewer-specific
+.obsidian/
+.vscode/
+*.swp
+.DS_Store
+
+# Node (if using the create-atlas helper)
+node_modules/

@@ -1,0 +1,54 @@
+# Session continuity — logging & resuming
+
+Two files, different cadences:
+
+1. **`sessions/week-XX/YYYY-MM-DD.md`** — incremental daily log, appended
+   *as significant exchanges happen* (not verbatim, not per-message).
+2. **`sessions/CURRENT_STATE.md`** — rolling "where are we now" overview, updated
+   when state meaningfully changes.
+
+The `session-log` agent owns both (see `agents/session-log.md`).
+
+## Resume (cold start)
+
+**Read only these three by default** — they are the resume backbone and must be
+kept current:
+
+1. `project/DASHBOARD.md` — fastest "where is everything" snapshot.
+2. `sessions/CURRENT_STATE.md` — the narrative of where we left off and why.
+3. `project/mission.md` — re-anchor on the goal.
+
+Then read the root `INDEX.md` for structure and the relevant `AGENTS.md`.
+
+## Context budget — avoid front-loading history
+
+Raw daily logs are **reference material, not default context**. Do **not** load
+several days of logs on start — it degrades signal-to-noise and invites drift.
+Only drill into a recent daily log if `CURRENT_STATE.md` is missing a detail you
+actually need.
+
+## Weekly roll-up (compaction)
+
+To keep `CURRENT_STATE.md` (and loaded context) from growing unbounded, perform a
+**roll-up** when a week's logs accumulate or `CURRENT_STATE.md` grows past a
+comfortable scan length:
+
+1. **Compact** the closing week's salient context — decisions, direction shifts,
+   unresolved threads — into `CURRENT_STATE.md` (complete but compact).
+2. **Archive, don't delete** — leave the week's daily logs in `sessions/week-XX/`
+   as immutable history; they are not loaded on cold start.
+3. **Start clean** — begin the new `sessions/week-YY/` folder.
+
+Trigger is size / turn-of-week (not a fixed clock time); a natural cadence is
+weekly. The roll-up can piggyback on the cron audit.
+
+## End of session (light touch)
+
+When wrapping up:
+
+1. Append a final daily-log entry with a "next steps" summary.
+2. Update `CURRENT_STATE.md` if state changed.
+3. Update `DASHBOARD.md` if any system phase/status changed.
+4. Update INDEX.md files if content was added/changed.
+
+Most work was captured incrementally; this is just a final pass.
