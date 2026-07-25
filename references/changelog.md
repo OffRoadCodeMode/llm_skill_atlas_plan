@@ -4,6 +4,20 @@ All notable changes to the Atlas framework itself. Format: reverse chronological
 Bump the `version:` field in `SKILL.md` frontmatter (semver) for convention changes;
 a major bump signals breaking convention changes.
 
+## 0.4.0 — 2026-07-25
+
+- **SKILL.md**: Added "Diagram" verb to operation vocabulary — creates visual
+  diagrams proactively when conversations involve spatial layouts, dimensions,
+  system relationships, or structural planning. Added diagram router entry.
+  Added excalidraw to the complementary Hermes skills table.
+- **diagram.md**: Expanded from stub to full agent spec. Defines 5 proactive
+  triggers for suggesting diagrams (spatial layout emerges, system map hits 3+
+  systems, DRs with dimensions, research with dimensioned results, phase
+  transitions involving physical construction). Includes tool selection priority
+  (Excalidraw for spatial/dimensioned drawings, Mermaid for system relationship
+  graphs and process flows, architecture-diagram for tech infrastructure) and
+  excalidraw workflow.
+
 ## 0.3.2 — 2026-07-25
 
 - **session-continuity.md**: Added end-of-session step 5 (capture decisions) and

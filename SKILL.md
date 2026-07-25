@@ -4,7 +4,7 @@ description: Use when the user asks to plan, manage, or work on any project.
   Activates the Atlas planning framework: onboards projects, manages systems,
   logs sessions, captures decisions, and maintains a structured project wiki.
   Works for any domain (software, business, research, personal builds).
-version: 0.3.2
+version: 0.4.0
 tags: [planning, project-management, wiki, framework]
 ---
 
@@ -59,6 +59,7 @@ Speak and act in these verbs, whatever the interface:
 - **Onboard**: establish `mission.md` and the initial systems. See `references/onboarding.md`
 - **Advance**: move a system through a phase gate, with evidence. See `references/domains/<domain>/phases.md`
 - **Decide**: capture a Decision Record or resolve a blocking open question — **immediately**, not later. If you hear "let's go with X" or a choice is made, capture it on the spot while context is fresh. See `references/agents/decision-record.md`
+- **Diagram**: create a visual diagram when the conversation involves spatial layouts, physical dimensions, system relationships, or structural planning — don't wait to be asked. See `references/agents/diagram.md`
 - **Plan**: break work into tasks / milestones for a system. See `templates/system/TASKS.md`
 - **Audit**: integrity + gate + mission-alignment check. See `references/agents/audit.md`
 - **Resume**: cold-start orientation at the top of a session. See `references/session-continuity.md`
@@ -80,6 +81,7 @@ requirements -> design -> build, never the product.
 | Know the phases + exit gates for this project | `references/domains/<active-domain>/phases.md` |
 | Log what happened this session | `references/agents/session-log.md` |
 | Capture a significant decision | `references/agents/decision-record.md` |
+| Create a diagram (layout, schematic, plan, system map) | `references/agents/diagram.md` |
 | Check integrity / advance a phase / reconcile drift | `references/agents/audit.md` |
 | Maintain indexes, suggest new systems, delegate | `references/agents/orchestrator.md` |
 | Modify Atlas itself | `references/governance.md` |
@@ -138,6 +140,7 @@ available. Load them with `skill_view(name='...')` when the task calls for it.
 | **obsidian** | Reading, searching, creating, or editing notes in an Obsidian vault | Atlas project wikis are Obsidian-optimised (standard relative links, Mermaid, YAML frontmatter). If the user runs Obsidian, use this skill to interact with the vault directly. |
 | **xlsx** | Creating or maintaining cost spreadsheets, budget trackers, comparison tables | Use alongside Atlas cost registers — an `.xlsx` for living budgets/formulas, `costs.md` for the durable record (see `references/agents/research.md` → "Cost research" and `templates/costs.md`). |
 | **youtube-content** | Extracting knowledge from YouTube tutorials, reviews, build guides | Research often involves video sources (build tutorials, product reviews, owner walkthroughs). Use this to turn transcripts into cited research-doc material (see `references/agents/research.md` → "Research methodology"). |
+| **excalidraw** | Creating layout diagrams, floor plans, schematics, physical drawings | Useful when research or design involves spatial decisions (e.g. workshop layout, interior plan, physical dimensions). Creates .excalidraw files viewable at excalidraw.com. See `references/agents/diagram.md` for when to suggest diagrams. |
 | **pdf** | Creating, merging, splitting, or filling PDF documents | Useful for certification forms, vehicle registration paperwork, insurance docs, NSAI standards — any formal document in the project. |
 
 These are recommendations, not dependencies — Atlas works fully without them.
@@ -146,6 +149,6 @@ Domain packs may recommend additional skills specific to the domain.
 ## Version
 
 This skill's version is in the `version:` field of this file's frontmatter
-(`0.3.2`). On onboarding, stamp it into the project (root `AGENTS.md` and
-`project/DASHBOARD.md` footer, e.g. `atlas: 0.3.2`).
+(`0.4.0`). On onboarding, stamp it into the project (root `AGENTS.md` and
+`project/DASHBOARD.md` footer, e.g. `atlas: 0.4.0`).
 See `references/governance.md` for versioning and maintenance rules.
