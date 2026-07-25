@@ -1,10 +1,10 @@
-# Atlas — a planning framework, delivered as a Hermes skill
+# Atlas: a planning framework, delivered as a Hermes skill
 
 **Atlas** turns a plain folder into a **goal-directed planning wiki**: it onboards
 a project, defines its mission, lets *systems* emerge as you understand the work,
 moves them through phase gates with evidence, captures decisions, logs sessions
-for continuity, and audits itself for integrity. It works for **any project** —
-software, a business launch, a research paper, a van conversion — via swappable
+for continuity, and audits itself for integrity. It works for **any project**
+(software, a business launch, a research paper, a van conversion) via swappable
 **domain packs**.
 
 Output is **portable markdown**: standard relative links, Mermaid diagrams, YAML
@@ -18,13 +18,13 @@ particular viewer.
 
 ## Install
 
-Atlas is a **Hermes skill** (But could be used in any LLM context) — install it once and share it across all your
+Atlas is a **Hermes skill** (but could be used in any LLM context). Install it once and share it across all your
 projects. Do **not** copy it into each project.
 
 ```bash
 # Hermes
 git clone <this-repo> ~/.hermes/skills/atlas
-# (or: npx create-atlas — clones here and checks for updates)
+# (or: npx create-atlas, which clones here and checks for updates)
 ```
 
 **IDE (secondary):** clone anywhere and tell your LLM:
@@ -32,7 +32,7 @@ git clone <this-repo> ~/.hermes/skills/atlas
 
 ## Use
 
-1. Open (or create) the planning repo you want to work in — it can be empty.
+1. Open (or create) the planning repo you want to work in; it can be empty.
 2. Ask Hermes to plan your project (the skill loads on matching intent), or point
    your IDE's LLM at the skill folder.
 3. Atlas reads `SKILL.md` → `conventions.md` → `onboarding.md`, then **onboards**
@@ -40,7 +40,7 @@ git clone <this-repo> ~/.hermes/skills/atlas
    `mission.md`).
 
 Atlas **generates** the `project/` and `sessions/` structure at runtime from the
-templates in this skill. Your planning repo contains only that generated content —
+templates in this skill. Your planning repo contains only that generated content,
 never a copy of Atlas.
 
 ## What's in the skill
@@ -61,12 +61,6 @@ devin/                Optional IDE-specific bindings (placeholder)
 
 ## Status
 
-`v0.1.0` — first release. Built minimal-but-complete (principle: *prove before
+`v0.1.0`, first release. Built minimal-but-complete (principle: *prove before
 scaling*). The three critical agents (`session-log`, `decision-record`, `audit`)
 are fully specified; others are lighter and grow as pain is felt.
-
-## Maintenance
-
-Atlas is plain markdown under git and is maintained **manually** — edit a file,
-commit with the `atlas:` prefix, bump `VERSION`/`CHANGELOG` for convention
-changes. There is no autonomous self-editing. See `GOVERNANCE.md`.
