@@ -153,6 +153,22 @@ the shared index. When a question is resolved, tick it in the per-system file
 and remove it from the shared index (or move to Resolved with a link). `audit`
 (check 6) reconciles the shared index against the per-system files.
 
+## Risks — per-system and shared index
+
+Each system may have its own `risks.md` for risks within that system's scope.
+The shared `project/shared/risks.md` serves two roles:
+
+1. **Project-wide risks** that don't belong to any single system.
+2. **Index of per-system risks** — links to high-severity or blocking risks from
+   each system's `risks.md`, so the full project risk picture is visible in one
+   place. The dashboard's Top Risks roll up from both.
+
+When a new risk is identified in a system, log it in the system's `risks.md`.
+If it is high-severity or blocking, also add a link line to the shared index.
+When a risk is closed, update the per-system file and remove it from the shared
+index (or move to Closed with a link). `audit` (check 13) reconciles the shared
+index against the per-system files.
+
 ## Git conventions
 
 - **Commit prefixes:** `docs:` (documentation), `dr:` (Decision Records),

@@ -23,6 +23,12 @@ risk when "git is the backstop" meets an unattended writer.
 
 ## Checklist (ordered, severity-grouped)
 
+Checks are grouped into **tiers** for efficient scheduling (see "Tiered
+execution" below). Tier 1 runs every audit; tiers 2 and 3 run only when relevant
+files changed since the last audit (determined from the incremental git diff).
+
+### Tier 1 — every run (cheap, mechanical)
+
 1. **Broken links** — relative markdown links pointing to files that don't exist.
    *(highest severity)*
 2. **Orphans** — artifacts with zero inbound links (violates the min-2-links rule).
@@ -41,25 +47,32 @@ risk when "git is the backstop" meets an unattended writer.
    against the actual per-system `open-questions.md` files: flag per-system OQs
    that are blocking but missing from the shared index, and index entries pointing
    to questions that have been resolved or no longer exist (stale index lines).
-7. **Mission alignment** — artifacts with missing `mission_link` or direction that
-   drifted from `mission.md` (hand off to `scope-check`).
-8. **Contradictions** — artifacts marked `contested`/`contradicts`, or same-topic
-   artifacts asserting conflicting claims.
 9. **Freshness** — artifacts `status: stale`/`superseded`, and content older than a
    dependency change or phase transition. **Judge freshness from git history
    (last-commit date), not the frontmatter `updated:` string** — agents forget to
    bump it. Where they disagree, auto-correct `updated:` from git (low-risk fix).
+13. **Risks** — high-severity risks with no owner or mitigation; risks stuck `open`
+    past a phase gate; `DASHBOARD.md` Top Risks out of sync with the risk registers.
+    Also reconcile the shared `project/shared/risks.md` per-system index against
+    the actual per-system `risks.md` files: flag high-severity/blocking per-system
+    risks missing from the shared index, and index entries pointing to risks that
+    have been closed or no longer exist (stale index lines).
+14. **Costs** — estimates with `confidence: low` or no assumptions; DASHBOARD
+    budget/drivers out of sync with the cost registers; estimates not refreshed
+    after a related decision changed.
+
+### Tier 2 — when DRs, OVERVIEWs, or system-map changed (moderate cost)
+
+7. **Mission alignment** — artifacts with missing `mission_link` or direction that
+   drifted from `mission.md` (hand off to `scope-check`).
+8. **Contradictions** — artifacts marked `contested`/`contradicts`, or same-topic
+   artifacts asserting conflicting claims.
 10. **Quality signals** — `confidence: low` artifacts, and single-source claims
     with no confidence set.
 11. **Source drift** — for ingested sources with `sha256`, recompute and flag
     mismatches.
 12. **Size / structure** — artifacts too large to scan (candidates for splitting
     into a new system or sub-system).
-13. **Risks** — high-severity risks with no owner or mitigation; risks stuck `open`
-    past a phase gate; `DASHBOARD.md` Top Risks out of sync with the risk registers.
-14. **Costs** — estimates with `confidence: low` or no assumptions; DASHBOARD
-    budget/drivers out of sync with the cost registers; estimates not refreshed
-    after a related decision changed.
 15. **System relationships** — edges in an `OVERVIEW.md` pointing to a non-existent
     system (dangling); edges in one system not reconciled in the other
     (asymmetric); `project/shared/system-map.md` out of sync with per-system
@@ -68,6 +81,9 @@ risk when "git is the backstop" meets an unattended writer.
     `parent:` field must point to a real parent system; parent `OVERVIEW.md` must
     list all sub-systems in its Sub-systems section; system map `subgraph` clusters
     must match the parent/child relationships in `OVERVIEW.md` files.
+
+### Tier 3 — when DRs changed (expensive, may write)
+
 16. **Decision conflicts** — scan all Decision Records across every system's
     `design/decisions/` directory for contradictory claims on the same topic.
     Decisions conflict when two DRs assert mutually incompatible positions with
@@ -152,6 +168,29 @@ risk when "git is the backstop" meets an unattended writer.
     agent notes the instruction on the next session start (via the session-continuity
     conflict check).
 
+## Tiered execution
+
+The incremental git diff (`git diff --name-only <last-audit-sha>..HEAD`) tells
+us what changed. Use it to decide which tiers to run:
+
+- **Tier 1 (always)**: checks 1-6, 9, 13-14. These are cheap scans and
+  mechanical fixes. Run every audit, even if nothing changed (catches drift,
+  broken links from manual edits, etc.).
+- **Tier 2 (when relevant files changed)**: checks 7-8, 10-12, 15. Run these
+  only when the diff includes `OVERVIEW.md`, `system-map.md`, research docs,
+  or any file with frontmatter. If the diff is empty or only touches session
+  logs, skip tier 2.
+- **Tier 3 (when DRs changed)**: check 16. Run only when the diff includes files
+  in any `design/decisions/` directory. This is the most expensive check (reads
+  every DR across all systems) and the only one that writes conflict files.
+
+**Full pass**: if the state file (`sessions/.atlas-audit-state`) is missing or
+corrupt, run all three tiers. Also run a full pass on explicit user request
+("audit the wiki") or at phase transitions.
+
+This keeps most hourly cron runs lightweight (tier 1 only) while still catching
+the expensive problems when they are relevant.
+
 ## Reconcile
 
 After checks, the audit may **regenerate**: folder `INDEX.md` files (walking
@@ -203,10 +242,11 @@ read-and-compare pass (correct, just more tokens).
 
 ## When to run
 
-- On the Hermes cron schedule (see below).
-- Before ending a work session.
-- At every phase transition.
-- On demand ("audit the wiki").
+- On the Hermes cron schedule (see below) — tier 1 always; tiers 2-3 if
+  relevant files changed.
+- Before ending a work session — full pass (all tiers).
+- At every phase transition — full pass (all tiers).
+- On demand ("audit the wiki") — full pass (all tiers).
 
 ## Scheduled audit (Hermes cron)
 
@@ -221,11 +261,15 @@ cronjob(
   workdir="<absolute-path-to-planning-repo>",   # REQUIRED — cron runs detached
   skills=["atlas"],
   prompt="Run the Atlas audit: FIRST verify the repo is conflict-free (halt and
-          alert if not); then run the checklist from references/agents/audit.md.
-          Auto-fix only mechanical issues (broken links, missing INDEX/dashboard
-          rows, stale updated: dates). Everything else is report-only: do NOT
-          refactor, restructure, rewrite, or delete content. Deliver a short
-          summary of findings and any fixes applied.",
+          alert if not). Then run the incremental git diff to determine which
+          tiers to execute (see references/agents/audit.md 'Tiered execution').
+          Tier 1 (checks 1-6, 9, 13-14) always runs. Tier 2 (checks 7-8, 10-12,
+          15) runs only if OVERVIEWs, system-map, or research docs changed.
+          Tier 3 (check 16) runs only if DRs changed. Auto-fix only mechanical
+          issues (broken links, missing INDEX/dashboard rows, stale updated:
+          dates). Everything else is report-only: do NOT refactor, restructure,
+          rewrite, or delete content. Deliver a short summary of findings, which
+          tiers ran, and any fixes applied.",
   deliver="telegram",          # adjust to user's configured gateway — see below
 )
 ```

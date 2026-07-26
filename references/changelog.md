@@ -6,18 +6,27 @@ a major bump signals breaking convention changes.
 
 ## 0.6.1 — 2026-07-26
 
-Open questions shared index — the shared `open-questions.md` now serves as a
-cross-system index of per-system open questions, not just a standalone file.
+Open questions shared index, risks shared index, and tiered audit execution.
 
 - **open-questions.md template**: Rewritten to show both formats: per-system
   file (owns questions in its scope) and shared file (cross-system questions +
   index links to blocking/significant per-system OQs).
-- **conventions.md**: New "Open Questions — per-system and shared index" section
-  explaining the relationship. Updated directory layout comment.
-- **audit.md**: Check 6 expanded to reconcile the shared index against per-system
-  files (flags blocking OQs missing from index, stale index lines).
-- **system-lifecycle.md**: "Add artifacts" bullet now mentions logging new OQs
-  to both the per-system file and the shared index.
+- **risks.md templates**: Shared template rewritten to show project-wide risks
+  + per-system index (links to high-severity/blocking per-system risks). Per-system
+  template updated to mention linking into the shared index.
+- **conventions.md**: New "Open Questions" and "Risks" sections explaining the
+  per-system and shared index relationship. Updated directory layout comment.
+- **audit.md**: Check 6 expanded to reconcile shared OQ index against per-system
+  files. Check 13 expanded to reconcile shared risks index against per-system
+  files. Checklist restructured into three tiers: tier 1 (always, cheap
+  mechanical checks), tier 2 (when OVERVIEWs/system-map/research changed),
+  tier 3 (when DRs changed, expensive conflict detection). Cron prompt updated
+  to reference tiered execution. New "Tiered execution" section explains how
+  the incremental git diff determines which tiers to run.
+- **system-lifecycle.md**: "Add artifacts" bullet mentions logging new OQs to
+  both per-system file and shared index. "Track risk/cost" bullet mentions
+  linking high-severity risks into shared index.
+- **SKILL.md**: Bumped to 0.6.1.
 
 ## 0.6.0 — 2026-07-25
 

@@ -67,7 +67,9 @@ one as its own artifact both systems link to only when an edge needs it.
   significant, also add a link line to `project/shared/open-questions.md` (the
   cross-system index). See `references/conventions.md` → "Open Questions".
 - **Track risk/cost** — add `risks.md`/`costs.md` when the system has material
-  risk or cost; these roll up to the project registers and dashboard.
+  risk or cost. High-severity or blocking risks should also be linked in
+  `project/shared/risks.md` (the per-system index). See `references/conventions.md`
+  → "Risks". These roll up to the project registers and dashboard.
 
 ## Hierarchical systems
 

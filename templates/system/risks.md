@@ -1,9 +1,14 @@
 # Risks — <System Name>
 
-Optional per-system risk register. Rolls up to `project/shared/risks.md` and the
-dashboard. `R-XXX` numbered per register. `Severity` derives from Likelihood ×
-Impact. `Status` ∈ open | mitigating | accepted | closed. Every active risk should
-name an Owner and a Mitigation (audit flags high-severity risks missing either).
+Optional per-system risk register. `R-XXX` numbered per register. `Severity`
+derives from Likelihood x Impact. `Status` in open | mitigating | accepted |
+closed. Every active risk should name an Owner and a Mitigation (audit flags
+high-severity risks missing either).
+
+High-severity or blocking risks should also be linked in
+`project/shared/risks.md` (the per-system index) so they are visible at the
+project level. `audit` (check 13) reconciles the shared index against the
+per-system files.
 
 ## Active
 | ID | Risk | Likelihood | Impact | Severity | Owner | Mitigation | Status |
