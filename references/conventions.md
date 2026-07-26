@@ -27,7 +27,7 @@ my-project-planning/
 │       ├── INDEX.md
 │       ├── research/
 │       ├── glossary.md
-│       ├── open-questions.md  # Cross-system open questions
+│       ├── open-questions.md  # Cross-system questions + index of per-system OQs
 │       ├── risks.md           # Project-wide risk register
 │       ├── costs.md           # Project-wide cost register / budget
 │       ├── budget.xlsx        # Living cost spreadsheet (optional, if xlsx skill available)
@@ -136,6 +136,22 @@ Leaf/navigational files (INDEX, session logs) don't need frontmatter.
   Risks: `R-XXX`. All numbered per register/system.
 - Superseded artifacts move to an `_archive/` subfolder; keep the link, mark
   `status: superseded`.
+
+## Open Questions — per-system and shared index
+
+Each system may have its own `open-questions.md` for questions within that
+system's scope. The shared `project/shared/open-questions.md` serves two roles:
+
+1. **Cross-system questions** that don't belong to any single system.
+2. **Index of per-system open questions** — links to blocking or significant
+   open questions from each system's `open-questions.md`, so the full project
+   picture is visible in one place.
+
+When a new question is raised in a system, log it in the system's
+`open-questions.md`. If it is blocking or significant, also add a link line to
+the shared index. When a question is resolved, tick it in the per-system file
+and remove it from the shared index (or move to Resolved with a link). `audit`
+(check 6) reconciles the shared index against the per-system files.
 
 ## Git conventions
 

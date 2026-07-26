@@ -36,7 +36,11 @@ risk when "git is the backstop" meets an unattended writer.
 5. **Phase-gate satisfaction** — for each system (including sub-systems), check
    the current phase's exit criteria against real evidence; report gates met /
    unmet / blocked. Sub-system phases are checked independently of their parent.
-6. **Blocking open questions** — unresolved questions tagged as gating a phase.
+6. **Open questions** — unresolved questions tagged as gating a phase (blocking).
+   Also reconcile the shared `project/shared/open-questions.md` per-system index
+   against the actual per-system `open-questions.md` files: flag per-system OQs
+   that are blocking but missing from the shared index, and index entries pointing
+   to questions that have been resolved or no longer exist (stale index lines).
 7. **Mission alignment** — artifacts with missing `mission_link` or direction that
    drifted from `mission.md` (hand off to `scope-check`).
 8. **Contradictions** — artifacts marked `contested`/`contradicts`, or same-topic

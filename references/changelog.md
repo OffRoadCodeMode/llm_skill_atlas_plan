@@ -4,6 +4,21 @@ All notable changes to the Atlas framework itself. Format: reverse chronological
 Bump the `version:` field in `SKILL.md` frontmatter (semver) for convention changes;
 a major bump signals breaking convention changes.
 
+## 0.6.1 — 2026-07-26
+
+Open questions shared index — the shared `open-questions.md` now serves as a
+cross-system index of per-system open questions, not just a standalone file.
+
+- **open-questions.md template**: Rewritten to show both formats: per-system
+  file (owns questions in its scope) and shared file (cross-system questions +
+  index links to blocking/significant per-system OQs).
+- **conventions.md**: New "Open Questions — per-system and shared index" section
+  explaining the relationship. Updated directory layout comment.
+- **audit.md**: Check 6 expanded to reconcile the shared index against per-system
+  files (flags blocking OQs missing from index, stale index lines).
+- **system-lifecycle.md**: "Add artifacts" bullet now mentions logging new OQs
+  to both the per-system file and the shared index.
+
 ## 0.6.0 — 2026-07-25
 
 Simplified decision model and added decision conflict detection.
