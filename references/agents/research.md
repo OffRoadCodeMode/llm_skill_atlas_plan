@@ -6,11 +6,19 @@ design → build — never the product.
 
 ## Where research goes
 
-- **General / cross-system research** (early project context, technology surveys,
-  domain background, market analysis) goes in `project/shared/research/`.
-- **System-specific research** (deep dives into one system's options, constraints,
-  architecture, or technology choices) goes in `project/systems/<name>/research/`.
-- If unsure, ask: "does this finding apply to one system or the whole project?"
+Research is a folder that can live in three places:
+
+- **Workstream research** (`<workstream>/research/`): research done as part of a
+  process you're completing (e.g. vehicle selection research inside a
+  `van-research` workstream). See `references/workstreams.md`.
+- **System-specific research** (`project/systems/<name>/research/`): deep dives
+  into one system's options, constraints, architecture, or technology choices.
+- **General / cross-cutting research** (`project/shared/research/`): early
+  project context, technology surveys, domain background, market analysis that
+  doesn't belong to any single system or workstream.
+
+If unsure, ask: "does this finding apply to one system, a specific process
+(workstream), or the whole project?"
 
 ## Behaviour (minimum)
 

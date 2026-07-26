@@ -34,34 +34,50 @@ files changed since the last audit (determined from the incremental git diff).
 2. **Orphans** — artifacts with zero inbound links (violates the min-2-links rule).
 3. **Index / dashboard completeness** — every system (including sub-systems)
    appears in `DASHBOARD.md`; every artifact appears in its folder `INDEX.md`;
-   dashboard system rows are derivable from `OVERVIEW.md` files. Sub-systems
-   name their parent in the dashboard `Parent` column. Walk `project/systems/`
-   recursively, descending into any `systems/` subfolder.
+   dashboard system rows are derivable from each system `INDEX.md` frontmatter
+   (`system_type`, `parent`, `status`, `phase`). Sub-systems name their parent
+   in the dashboard `Parent` column. Walk `project/systems/`
+   recursively, descending into any `systems/` subfolder. **Workstreams**: each
+   workstream appears in the dashboard Workstreams table; each workstream
+   artifact appears in its `INDEX.md`; `TASKS.md` and `NOTES.md` exist. Walk
+   `project/workstreams/` for project-level workstreams AND
+   `project/systems/**/workstreams/` recursively for nested workstreams.
+   Dashboard workstream rows include an **Owner** column (project | <system>).
 4. **Frontmatter validation** — required fields present on claim-bearing artifacts;
-   DRs/requirements have IDs; `confidence` set on research/DRs.
+   DRs/requirements have IDs; `confidence` set on research/DRs. **System INDEX**:
+   check `type: system` plus `system_type`, `parent`, `status`, `phase` are
+   present in each system `INDEX.md` (the dashboard derives its rows from these).
+   **Workstream
+   DRs**: check `type: decision` and standard DR fields are present in
+   `workstreams/<name>/decisions/DR-XXX.md` (and nested
+   `systems/<system>/workstreams/<name>/decisions/DR-XXX.md`). **Workstream
+   artifacts**: check `type: workstream` on INDEX, TASKS, NOTES files. For
+   nested workstreams, check optional `system:` field in INDEX.md frontmatter.
 5. **Phase-gate satisfaction** — for each system (including sub-systems), check
    the current phase's exit criteria against real evidence; report gates met /
    unmet / blocked. Sub-system phases are checked independently of their parent.
 6. **Open questions** — unresolved questions tagged as gating a phase (blocking).
-   Also reconcile the shared `project/shared/open-questions.md` per-system index
-   against the actual per-system `open-questions.md` files: flag per-system OQs
-   that are blocking but missing from the shared index, and index entries pointing
-   to questions that have been resolved or no longer exist (stale index lines).
+   Also reconcile the shared `project/shared/open-questions.md` per-system and
+   per-workstream index against the actual per-system and per-workstream
+   `open-questions.md` files: flag per-system/workstream OQs that are blocking
+   but missing from the shared index, and index entries pointing to questions
+   that have been resolved or no longer exist (stale index lines).
 9. **Freshness** — artifacts `status: stale`/`superseded`, and content older than a
    dependency change or phase transition. **Judge freshness from git history
    (last-commit date), not the frontmatter `updated:` string** — agents forget to
    bump it. Where they disagree, auto-correct `updated:` from git (low-risk fix).
 13. **Risks** — high-severity risks with no owner or mitigation; risks stuck `open`
     past a phase gate; `DASHBOARD.md` Top Risks out of sync with the risk registers.
-    Also reconcile the shared `project/shared/risks.md` per-system index against
-    the actual per-system `risks.md` files: flag high-severity/blocking per-system
-    risks missing from the shared index, and index entries pointing to risks that
-    have been closed or no longer exist (stale index lines).
+    Also reconcile the shared `project/shared/risks.md` per-system and per-workstream
+    index against the actual per-system and per-workstream `risks.md` files: flag
+    high-severity/blocking per-system/workstream risks missing from the shared
+    index, and index entries pointing to risks that have been closed or no longer
+    exist (stale index lines).
 14. **Costs** — estimates with `confidence: low` or no assumptions; DASHBOARD
     budget/drivers out of sync with the cost registers; estimates not refreshed
     after a related decision changed.
 
-### Tier 2 — when DRs, OVERVIEWs, system-map, or research docs changed (moderate cost)
+### Tier 2 — when DRs, system INDEX files, system-map, or research docs changed (moderate cost)
 
 7. **Mission alignment** — artifacts with missing `mission_link` or direction that
    drifted from `mission.md` (hand off to `scope-check`).
@@ -73,39 +89,52 @@ files changed since the last audit (determined from the incremental git diff).
     mismatches.
 12. **Size / structure** — artifacts too large to scan (candidates for splitting
     into a new system or sub-system).
-15. **System relationships** — edges in an `OVERVIEW.md` pointing to a non-existent
-    system (dangling); edges in one system not reconciled in the other
-    (asymmetric); `project/shared/system-map.md` out of sync with per-system
-    Relationships; in a multi-system project, a system with no relationships at all
-    (a possible missed link). **Hierarchy consistency**: sub-system `OVERVIEW.md`
-    `parent:` field must point to a real parent system; parent `OVERVIEW.md` must
-    list all sub-systems in its Sub-systems section. **Hierarchical maps**: walk
-    `project/systems/` recursively for per-system `system-map.md` files; reconcile
-    each per-system map against its parent's OVERVIEW Sub-systems section and
-    against the children's OVERVIEW Relationships. The top-level map must include
-    all top-level systems (including unrelated neighbours as disconnected nodes);
-    per-system maps must include all of that system's sub-systems. Flag maps that
-    are missing sub-systems, have stale sub-systems, or have edges not reflected
-    in the corresponding OVERVIEW Relationships tables.
-17. **Research placement** — research docs in the wrong folder. Check both
-    directions:
-    - **Shared research that should be per-system**: a doc in
-      `project/shared/research/` that is linked only from a single system's
-      artifacts, references only one system's scope, or covers a topic that
-      belongs to one system. Suggest moving to `<system>/research/`.
-    - **Per-system research that should be shared**: a doc in a system's
-      `research/` folder that is linked from multiple systems' artifacts or
-      covers cross-system concerns. Suggest moving to `project/shared/research/`.
+15. **System relationships** — edges in a system `INDEX.md` Relationships table
+    pointing to a non-existent system (dangling); edges in one system not
+    reconciled in the other (asymmetric); `project/shared/system-map.md` out of
+    sync with per-system Relationships; in a multi-system project, a system with
+    no relationships at all (a possible missed link). **Hierarchy consistency**:
+    sub-system `INDEX.md` `parent:` frontmatter must point to a real parent
+    system; parent `INDEX.md` must list all sub-systems in its Sub-systems
+    section. **Hierarchical maps**: walk `project/systems/` recursively for
+    per-system `system-map.md` files; reconcile each per-system map against its
+    parent's INDEX Sub-systems section and against the children's INDEX
+    Relationships. The top-level map must include all top-level systems
+    (including unrelated neighbours as disconnected nodes); per-system maps must
+    include all of that system's sub-systems. Flag maps that are missing
+    sub-systems, have stale sub-systems, or have edges not reflected in the
+    corresponding INDEX Relationships tables.
+17. **Research placement** — research docs in the wrong folder. Research lives
+    in three homes: `<workstream>/research/`, `<system>/research/`, and
+    `project/shared/research/` (general / cross-cutting). Check:
+    - **Shared research that should be system or workstream research**: a doc in
+      `project/shared/research/` that is linked only from a single system's or
+      workstream's artifacts and covers that scope. Suggest moving to
+      `<system>/research/` or `<workstream>/research/`.
+    - **Workstream research that should be system research**: a doc in a
+      workstream's `research/` folder that is linked only from a single system's
+      artifacts and covers that system's scope. Suggest moving to
+      `<system>/research/`.
+    - **System research that should be workstream research**: a doc in a system's
+      `research/` folder that covers a process topic (procurement, certification,
+      decision-making) rather than a build artifact. Suggest moving to the
+      relevant workstream's `research/` folder.
 
-    Signals: inbound link sources (which systems link to it), system names
+    Signals: inbound link sources (which systems/workstreams link to it), names
     mentioned in the doc title/body, and scope of the topic. This is a
     judgment-based check: report only, suggest the move, do not relocate.
+18. **Workstream → System spawning** — check for completed workstreams
+    (`status: complete`) whose research references building something physical
+    or a software artifact, but no system has been created to hold that build.
+    Report as a recommendation: "workstream X is complete and references building
+    Y — consider creating a system." The user decides; systems are never
+    auto-created.
 
 ### Tier 3 — when DRs changed (expensive, may write)
 
 16. **Decision conflicts** — scan all Decision Records across every system's
-    `design/decisions/` directory for contradictory claims on the same topic.
-    Decisions conflict when two DRs assert mutually incompatible positions with
+    `design/decisions/` directory AND every workstream's `decisions/` directory
+    for contradictory claims on the same topic. Decisions conflict when two DRs assert mutually incompatible positions with
     no `supersedes` relationship between them (e.g. "use 12V system" and "use
     24V system" are both active, or two DRs choose different base vehicles).
     **This check runs last because it may write a conflict file.**
@@ -204,13 +233,13 @@ on clone/cloud-sync. Store the last-audited commit SHA in a small state file
 - **Tier 1 (always)**: checks 1-6, 9, 13-14. These are cheap scans and
   mechanical fixes. Run every audit, even if nothing changed (catches drift,
   broken links from manual edits, etc.).
-- **Tier 2 (when relevant files changed)**: checks 7-8, 10-12, 15, 17. Run these
-  only when the diff includes `OVERVIEW.md`, `system-map.md`, research docs,
-  or any file with frontmatter. If the diff is empty or only touches session
+- **Tier 2 (when relevant files changed)**: checks 7-8, 10-12, 15, 17-18. Run these
+  only when the diff includes a system `INDEX.md`, `system-map.md`, research docs,
+  workstream files, or any file with frontmatter. If the diff is empty or only touches session
   logs, skip tier 2.
 - **Tier 3 (when DRs changed)**: check 16. Run only when the diff includes files
-  in any `design/decisions/` directory. This is the most expensive check (reads
-  every DR across all systems) and the only one that writes conflict files.
+  in any `design/decisions/` directory or any workstream `decisions/` directory. This is the most expensive check (reads
+  every DR across all systems and workstreams) and the only one that writes conflict files.
 
 **2. Which rows/indexes to reconcile:** only re-derive `INDEX.md`/`DASHBOARD.md`
 rows and roll-ups for artifacts that appear in the diff, not the whole tree.
@@ -225,11 +254,16 @@ the expensive problems when they are relevant.
 
 ## Reconcile
 
-After checks, the audit may **regenerate**: folder `INDEX.md` files (walking
-`project/systems/` recursively, including sub-system folders), the
-`DASHBOARD.md` system rows (from `OVERVIEW.md`, with each sub-system's `Parent`
-column set from its `parent:` field), and the Top Risks / Costs roll-ups (from
-the risk/cost registers).
+After checks, the audit may **regenerate**: the **Contents** section of system
+`INDEX.md` files and pure-MOC `INDEX.md` files (walking `project/systems/`
+recursively, including sub-system folders, and `project/workstreams/` plus
+`project/systems/**/workstreams/` recursively for all workstream folders) — the
+authored frontmatter and metadata sections of a system INDEX are left intact.
+Also the `DASHBOARD.md` system rows (from each system `INDEX.md` frontmatter,
+with each sub-system's `Parent` column set from its `parent:` frontmatter) and
+workstream rows (from workstream `INDEX.md` and `TASKS.md`, with `Owner` set
+from `system:` frontmatter or "project" if absent), and the Top Risks / Costs
+roll-ups (from the risk/cost registers).
 
 ## Review before write
 
@@ -282,12 +316,13 @@ cronjob(
           alert if not). Then run the incremental git diff to determine which
           tiers to execute (see references/agents/audit.md 'Tiered execution').
           Tier 1 (checks 1-6, 9, 13-14) always runs. Tier 2 (checks 7-8, 10-12,
-          15, 17) runs only if OVERVIEWs, system-map, or research docs changed.
-          Tier 3 (check 16) runs only if DRs changed. Auto-fix only mechanical
-          issues (broken links, missing INDEX/dashboard rows, stale updated:
-          dates). Everything else is report-only: do NOT refactor, restructure,
-          rewrite, or delete content. Deliver a short summary of findings, which
-          tiers ran, and any fixes applied.",
+          15, 17-18) runs only if system INDEX files, system-map, research docs,
+          workstream files, or files with frontmatter changed. Tier 3 (check 16) runs only
+          if DRs changed (system design/decisions/ or workstream decisions/).
+          Auto-fix only mechanical issues (broken links, missing INDEX/dashboard
+          rows, stale updated: dates). Everything else is report-only: do NOT
+          refactor, restructure, rewrite, or delete content. Deliver a short
+          summary of findings, which tiers ran, and any fixes applied.",
   deliver="telegram",          # adjust to user's configured gateway — see below
 )
 ```

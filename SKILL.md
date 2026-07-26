@@ -4,7 +4,7 @@ description: Use when the user asks to plan, manage, or work on any project.
   Activates the Atlas planning framework: onboards projects, manages systems,
   logs sessions, captures decisions, and maintains a structured project wiki.
   Works for any domain (software, business, research, personal builds).
-version: 0.6.1
+version: 0.8.0
 tags: [planning, project-management, wiki, framework]
 ---
 
@@ -12,8 +12,14 @@ tags: [planning, project-management, wiki, framework]
 
 Atlas is a reusable, domain-agnostic planning framework. It turns a plain folder
 into a **goal-directed planning wiki**: mission-anchored, organised by
-`system x phase`, and maintained by agents. It is *forward-looking*: it drives
-what must be done, not just what is known.
+`system x phase` and `workstream x task`, and maintained by agents. It is
+*forward-looking*: it drives what must be done, not just what is known.
+
+**Systems** are things you build (with phases, design, artifacts). **Workstreams**
+are processes you complete (with tasks, research, decisions, notes — no phase
+gates). Workstreams can be project-level or nested inside a system. Research
+lives in a workstream, a system, or `shared/research/`. See
+`references/workstreams.md`.
 
 This file is the **router**. It tells you (the agent) what to read and when. Load
 bundled files on demand; do not read everything up front.
@@ -58,11 +64,12 @@ Speak and act in these verbs, whatever the interface:
 
 - **Onboard**: establish `mission.md` and the initial systems. See `references/onboarding.md`
 - **Advance**: move a system through a phase gate, with evidence. See `references/domains/<domain>/phases.md`
-- **Decide**: capture a Decision Record when a choice is made — **immediately**, not later. Every decision is a DR file in the system's `design/decisions/` folder. See `references/agents/decision-record.md`
+- **Decide**: capture a Decision Record when a choice is made — **immediately**, not later. Every decision is a DR file in the system's `design/decisions/` folder or the workstream's `decisions/` folder. See `references/agents/decision-record.md`
 - **Diagram**: create a visual diagram when the conversation involves spatial layouts, physical dimensions, system relationships, or structural planning — don't wait to be asked. See `references/agents/diagram.md`
-- **Plan**: break work into tasks / milestones for a system. See `templates/system/TASKS.md`
+- **Plan**: break work into tasks / milestones for a system or workstream. See `templates/system/TASKS.md` or `templates/workstream/TASKS.md`
 - **Audit**: integrity + gate + mission-alignment check. See `references/agents/audit.md`
 - **Resume**: cold-start orientation at the top of a session. See `references/session-continuity.md`
+- **Workstream**: create, advance, or complete a workstream — a process you complete (not a thing you build). See `references/workstreams.md`
 
 Research/ingest lives *inside* Onboard and the research phase: a means to unblock
 requirements -> design -> build, never the product.
@@ -77,6 +84,7 @@ requirements -> design -> build, never the product.
 | Resume after any gap | `references/session-continuity.md`, then `project/DASHBOARD.md`, `sessions/CURRENT_STATE.md`, `project/mission.md` |
 | Understand file/naming/link/git rules | `references/conventions.md` |
 | Create, evolve, split, or retire a system (or sub-system) | `references/system-lifecycle.md` |
+| Create, advance, or complete a workstream | `references/workstreams.md` |
 | Track how systems relate (APIs, streams, power, adjacency) | `references/system-lifecycle.md` (section "Relating systems"); `project/shared/system-map.md` |
 | Know the phases + exit gates for this project | `references/domains/<active-domain>/phases.md` |
 | Log what happened this session | `references/agents/session-log.md` |
@@ -100,6 +108,9 @@ active domain is chosen during onboarding and recorded in `project/DASHBOARD.md`
    *recommend* systems; the user confirms. Systems can be hierarchical — a
    system may contain sub-systems, each with its own phase and artifacts. See
    `references/system-lifecycle.md` → "Hierarchical systems".
+   **Workstreams emerge similarly** — recommend them when a process needs
+   tracking but doesn't involve building an artifact. See
+   `references/workstreams.md`.
 3. **Gates need evidence.** A system advances a phase only when every exit
    criterion is satisfied by a named artifact (see `references/domains/<domain>/phases.md`).
 4. **Audit on demand, honestly.** Atlas does not passively self-heal; it checks
@@ -151,6 +162,6 @@ Domain packs may recommend additional skills specific to the domain.
 ## Version
 
 This skill's version is in the `version:` field of this file's frontmatter
-(`0.6.1`). On onboarding, stamp it into the project (root `AGENTS.md` and
-`project/DASHBOARD.md` footer, e.g. `atlas: 0.6.1`).
+(`0.8.0`). On onboarding, stamp it into the project (root `AGENTS.md` and
+`project/DASHBOARD.md` footer, e.g. `atlas: 0.8.0`).
 See `references/governance.md` for versioning and maintenance rules.

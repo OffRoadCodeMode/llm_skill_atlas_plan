@@ -7,6 +7,11 @@ for continuity, and audits itself for integrity. It works for **any project**
 (software, a business launch, a research paper, a van conversion) via swappable
 **domain packs**.
 
+**Systems** are things you build (with phases, design, artifacts). **Workstreams**
+are processes you complete (with tasks, research, decisions, notes, but no phase
+gates). Workstreams can be project-level or nested inside a system. See
+`references/workstreams.md`.
+
 Output is **portable markdown**: standard relative links, Mermaid diagrams, YAML
 frontmatter. It renders well everywhere and shines in Obsidian, but requires no
 particular viewer.
@@ -59,7 +64,7 @@ my-project-planning/
 │   ├── systems/
 │   │   ├── INDEX.md
 │   │   ├── your-system-1/
-│   │   │   ├── OVERVIEW.md        # Type, purpose, boundaries, current phase
+│   │   │   ├── INDEX.md           # System entry file: identity (type, purpose, phase) + contents
 │   │   │   ├── AGENTS.md
 │   │   │   ├── CHANGELOG.md
 │   │   │   ├── open-questions.md
@@ -72,15 +77,27 @@ my-project-planning/
 │   │   │   │   │   └── DR-001.md   # A Decision Record with context + consequences
 │   │   │   │   └── diagrams/
 │   │   │   │       └── architecture.md   # Mermaid diagram
-│   │   │   └── TASKS.md
+│   │   │   ├── TASKS.md
+│   │   │   └── workstreams/        # Optional: nested workstreams owned by this system
+│   │   │       └── cad-design/
+│   │   │           ├── INDEX.md
+│   │   │           └── TASKS.md
 │   │   └── your-system-2/         # A second system, lighter so far
-│   │       ├── OVERVIEW.md
+│   │       ├── INDEX.md
 │   │       ├── AGENTS.md
 │   │       ├── open-questions.md
 │   │       └── research/
 │   │           └── approach-options.md
+│   ├── workstreams/               # Project-level workstreams (processes to complete)
+│   │   ├── INDEX.md
+│   │   └── financing/
+│   │       ├── INDEX.md
+│   │       ├── TASKS.md
+│   │       └── decisions/
+│   │           └── DR-001.md
 │   └── shared/                    # Cross-system content
 │       ├── glossary.md
+│       ├── research/              # General / cross-cutting research
 │       ├── open-questions.md      # Cross-system questions + index of per-system OQs
 │       ├── risks.md               # Project-wide risks + index of per-system risks
 │       ├── costs.md               # Project-wide cost register / budget (rolls up per-system)
@@ -124,7 +141,7 @@ templates/            Generic document + system-folder templates
 
 ## Status
 
-`v0.6.0`. Built minimal-but-complete (principle: *prove before scaling*). The
+`v0.8.0`. Built minimal-but-complete (principle: *prove before scaling*). The
 critical agents (`session-log`, `decision-record`, `audit`, `diagram`) are fully
 specified; others are lighter and grow as pain is felt.
 

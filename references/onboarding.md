@@ -43,13 +43,14 @@ project/INDEX.md
 project/DASHBOARD.md          ← templates/dashboard.md (seed headings; Domain: <domain>)
 project/mission.md            ← templates/mission.md (fill from interview)
 project/systems/INDEX.md
+project/workstreams/INDEX.md
 project/shared/INDEX.md
 project/shared/glossary.md
+project/shared/research/           ← (empty folder; general research lands here)
 project/shared/open-questions.md   ← templates/open-questions.md
 project/shared/risks.md            ← templates/risks.md
 project/shared/costs.md            ← templates/costs.md
 project/shared/system-map.md       ← templates/system-map.md (starts empty; fills as systems relate)
-project/shared/research/           ← (empty)
 sessions/INDEX.md
 sessions/CURRENT_STATE.md          ← seed with onboarding summary
 sessions/conflicts/                ← (empty; conflict reports land here)
@@ -72,13 +73,23 @@ may spawn `electrical`, `climate`, `insulation` sub-systems). Don't try to predi
 the full hierarchy during onboarding; let it emerge as the project develops (see
 `references/system-lifecycle.md` → "Hierarchical systems").
 
+## Workstreams emerge as needed
+
+Workstreams (processes you complete — see `references/workstreams.md`) are not
+created during onboarding by default. They emerge as the project develops and
+processes are identified that need tracking (e.g. "secure financing", "research
+vehicle options", "choose a PM tool"). The agent recommends creating a workstream
+when a process warrants structured tracking; the user confirms. Don't force
+workstream creation during onboarding — let them emerge naturally, like systems.
+
 ## Research before system scaffolding
 
 It's normal — and often ideal — to do **general research before any system
 exists**. Early research (vehicle selection, site surveys, technology surveys,
-market analysis) lives in `project/shared/research/` and informs which systems
-should emerge. Don't rush to scaffold systems just to have a place for research;
-`shared/research/` exists precisely for this pre-system phase. Systems become
+market analysis) can live in `project/shared/research/` (for general /
+cross-cutting material) or in a **workstream's** `research/` folder if the
+research is part of a defined process (see `references/workstreams.md`). Don't
+rush to scaffold systems just to have a place for research. Systems become
 worth scaffolding once a research stream has enough focus to own its own
 decisions, design, and tasks.
 

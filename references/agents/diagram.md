@@ -63,7 +63,7 @@ Check what's available in the Hermes environment in this priority order:
 - Create the diagram using the selected tool's format.
 - Save it under the relevant system's `design/diagrams/` folder, or
   `project/shared/diagrams/` for cross-system diagrams.
-- Link the diagram from the relevant artifact (DR, design doc, OVERVIEW.md).
+- Link the diagram from the relevant artifact (DR, design doc, system INDEX.md).
 - If the user says no, don't insist. Note it and move on.
 - One diagram per file, with a short caption and links back to the artifact it
   illustrates (min 2 links).

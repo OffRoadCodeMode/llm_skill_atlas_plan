@@ -7,11 +7,26 @@ across interfaces; only the trigger differs (Hermes natural language, IDE comman
 
 - **Wiki integrity** — when invoked, detect broken links, stale docs, missing
   INDEX/AGENTS files (delegates the full check to `audit`).
-- **Index maintenance** — regenerate `INDEX.md` files when invoked.
+- **Index maintenance** — regenerate `INDEX.md` files when invoked, including
+  workstream INDEX files.
 - **System suggestions** — review project context and **recommend** new systems
   or sub-systems (the user confirms); hand off to
   `references/system-lifecycle.md` to scaffold. A component of an existing system
   that grows its own research, decisions, or phase is a sub-system candidate.
+- **Workstream suggestions** — when a process is identified that needs tracking
+  but doesn't involve building an artifact (e.g. "secure financing", "research
+  vehicle options", "choose a PM tool", "complete 3D CAD design"), **recommend**
+  creating a workstream (the user confirms); hand off to
+  `references/workstreams.md` to scaffold. State whether the workstream should
+  be **project-level** (`project/workstreams/`) or **system-level / nested**
+  (`project/systems/<system>/workstreams/`) based on whether the process is
+  owned by one system. Heuristic: if the "thing to do" clearly belongs to one
+  system, nest it; if it's project-wide or cross-system, keep it at project
+  level.
+- **Workstream → System detection** — when one or more workstreams complete and
+  their research references building something physical, **recommend** creating
+  a system. Cite which workstreams informed it. The user confirms. Systems are
+  never auto-created.
 - **Mission alignment** — route drift concerns to `scope-check`.
 - **Session continuity** — ensure `session-log` keeps the daily log and
   `CURRENT_STATE.md` current.
@@ -51,7 +66,8 @@ subagents respond in the right language.
 
 There is no automatic "change X, so update Y". The user knows what changed. The
 orchestrator may **suggest** what likely needs updating (e.g. "the ai-runtime
-design changed — regenerate its diagrams?"), but the user confirms.
+design changed — regenerate its diagrams?", "the financing workstream completed
+— consider creating a base-vehicle system?"), but the user confirms.
 
 ## Does NOT watch the filesystem
 

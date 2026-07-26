@@ -11,12 +11,12 @@ System maps show how systems relate. There are two levels:
 - **Per-system** (`<system>/system-map.md`): for systems with sub-systems, shows
   the parent's children and how they relate to each other. This is the local
   detail that would clutter the top-level map. Links back to the parent
-  `OVERVIEW.md`. Not every system needs one — only systems with sub-systems (or
+  `INDEX.md`. Not every system needs one — only systems with sub-systems (or
   with enough internal relationships to warrant a map).
 
-Each system's `OVERVIEW.md` Relationships table remains the local view for
+Each system's `INDEX.md` Relationships table remains the local view for
 that system. `audit` (check 15) reconciles across all levels: top-level map vs
-per-system maps vs OVERVIEW relationships.
+per-system maps vs per-system INDEX relationships.
 
 **System maps are Mermaid diagrams** — Mermaid renders natively in Obsidian,
 GitHub, and most markdown viewers, so the map is always visible without extra
@@ -93,6 +93,6 @@ mutual.
 - **Contracts are optional and emerge later.** When an edge needs a real contract
   (an API/event schema, a power-budget calc), create it as its own artifact that
   *both* systems link to; until then a note here suffices.
-- `audit` (check 15) flags dangling edges, asymmetric edges, map/OVERVIEW drift,
+- `audit` (check 15) flags dangling edges, asymmetric edges, map/INDEX drift,
   hierarchy inconsistencies (parent/child maps out of sync), and systems with no
   relationships in a multi-system project.

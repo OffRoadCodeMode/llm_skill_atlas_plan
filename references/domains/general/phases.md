@@ -2,7 +2,7 @@
 
 Fallback pack for non-software projects (business launch, research paper, van
 conversion, event, personal build). Each **system** tracks its own phase in its
-`OVERVIEW.md`; the `DASHBOARD.md` shows the aggregate.
+`INDEX.md` frontmatter (`phase:`); the `DASHBOARD.md` shows the aggregate.
 
 | Phase | Description | Exit criteria (the gate) |
 |-------|-------------|--------------------------|

@@ -10,8 +10,8 @@ name it and (optionally) record a reusable type here.
 
 ## Relationship types (for the system map)
 
-Used in `system-map.md` and each `OVERVIEW.md` → Relationships to describe *how*
-two systems connect. Generic + physical-project types:
+Used in `system-map.md` and each system `INDEX.md` → Relationships to describe
+*how* two systems connect. Generic + physical-project types:
 
 | Type | Meaning |
 |------|---------|

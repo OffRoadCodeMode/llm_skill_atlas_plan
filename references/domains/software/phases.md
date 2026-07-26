@@ -1,8 +1,9 @@
 # Software domain pack — phases & exit criteria
 
 Phases for software projects. Each **system** tracks its own phase in its
-`OVERVIEW.md`; the `DASHBOARD.md` shows the aggregate. Systems can be in different
-phases simultaneously. There is no single project-level phase.
+`INDEX.md` frontmatter (`phase:`); the `DASHBOARD.md` shows the aggregate.
+Systems can be in different phases simultaneously. There is no single
+project-level phase.
 
 | Phase | Description | Exit criteria (the gate) |
 |-------|-------------|--------------------------|

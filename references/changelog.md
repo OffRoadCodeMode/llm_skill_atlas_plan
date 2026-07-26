@@ -4,6 +4,83 @@ All notable changes to the Atlas framework itself. Format: reverse chronological
 Bump the `version:` field in `SKILL.md` frontmatter (semver) for convention changes;
 a major bump signals breaking convention changes.
 
+## 0.8.0 — 2026-07-26
+
+Merged `OVERVIEW.md` into `INDEX.md`: a system now has a single entry file.
+
+- **OVERVIEW.md removed.** A system's `INDEX.md` is now its single entry file,
+  combining hand-authored identity (frontmatter + Purpose, Boundaries, Origin,
+  Sub-systems, Relationships, External Links sections) with an auto-generated
+  **Contents** section. `templates/system/OVERVIEW.md` deleted;
+  `templates/system/INDEX.md` rewritten as the merged file.
+- **System frontmatter.** System `INDEX.md` carries `type: system`,
+  `system_type`, `parent`, `status`, `phase`. The dashboard's Systems table
+  derives its rows from this frontmatter (was: OVERVIEW sections). `parent:`
+  now lives unambiguously in frontmatter.
+- **conventions.md**: "INDEX.md — the single entry file" section rewritten
+  (three flavours: container MOC, system entry file, light workstream index).
+  Directory tree updated (system folders show `INDEX.md`, not `OVERVIEW.md`).
+  Frontmatter guidance documents system INDEX fields.
+- **audit.md**: checks 3, 4, 15, reconcile, tier-2 trigger, and cron prompt
+  updated to read/regenerate system `INDEX.md` frontmatter + Contents (only the
+  Contents section is regenerated; authored metadata is left intact). Check 4
+  now validates system INDEX frontmatter.
+- **system-lifecycle.md**: scaffolding, relating systems, hierarchy creation,
+  retiring, and the Workstreams-vs-Systems table updated (OVERVIEW → INDEX).
+- **workstreams.md**: "what workstreams DON'T have" and quick-reference table
+  reworded (systems have a rich INDEX; workstreams have a light INDEX).
+  Provenance line points to the system's INDEX "Origin / informed by" section.
+- **templates/system-map.md, templates/dashboard.md**: OVERVIEW references
+  updated to INDEX.
+- **Domain packs** (`software`, `general`): phases and system-types docs now
+  reference the system `INDEX.md` (phase in frontmatter; relationships in INDEX).
+- **README.md**: directory tree shows `INDEX.md` as the system entry file.
+  Status bumped to 0.8.0.
+- **SKILL.md**: version 0.8.0.
+
+## 0.7.0 — 2026-07-26
+
+Workstreams (project + system level), three-home research model, workstreams
+off the system map, audit and template updates.
+
+- **Workstreams at two levels**: project-level (`project/workstreams/`) and
+  system-level / nested (`project/systems/<system>/workstreams/`). Same
+  structure at both levels. `references/workstreams.md` adds "Where workstreams
+  live" section. `references/conventions.md` directory tree and workstream
+  structure updated. `references/system-lifecycle.md` notes systems can spawn
+  nested workstreams.
+- **Research three-home model**: research lives in `<workstream>/research/`,
+  `<system>/research/`, or `project/shared/research/` (general / cross-cutting).
+  `shared/research/` is **no longer deprecated**. `references/agents/research.md`,
+  `references/conventions.md`, `references/onboarding.md`, and
+  `references/workstreams.md` updated.
+- **Workstreams off the system map**: workstream nodes and dashed arrows removed
+  from `templates/system-map.md`. Provenance recorded in system `OVERVIEW.md`
+  ("Origin / informed by" line) instead. `references/conventions.md` system map
+  section updated. `references/agents/audit.md` check 15 updated (workstream
+  dependency bullets removed).
+- **Dashboard Workstreams table**: added **Owner** column (project | <system>).
+  `templates/dashboard.md` updated. Audit reconcile derives Owner from
+  `system:` frontmatter in workstream INDEX.md.
+- **Audit updates**: check 17 rewritten to three-way research placement (shared
+  vs system vs workstream), judgment-based, report-only. Checks 3/4 and
+  reconcile updated to walk `project/systems/**/workstreams/` recursively for
+  nested workstreams. Check 15 workstream dependency bullets removed.
+- **Workstream INDEX template**: optional `system: <name>` frontmatter for
+  nested workstreams. Optional `risks.md` added to artifacts list.
+- **Orchestrator**: workstream suggestions now state project- or system-level
+  with heuristic.
+- **OVERVIEW template**: optional "Origin / informed by" section for workstream
+  provenance.
+- **Naming/qualification**: nested workstream DRs qualified as
+  `system/workstream-name/DR-001` (e.g. `van/cad-design/DR-001`).
+- **Optional workstream files**: `open-questions.md` and `risks.md` reuse
+  existing `templates/system/` templates (no new template files).
+- **README.md**: Systems vs Workstreams concept line added. Directory tree
+  updated with `project/workstreams/`, nested `systems/<system>/workstreams/`,
+  and `shared/research/`. Status bumped to 0.7.0.
+- **SKILL.md**: Version 0.7.0 (already bumped).
+
 ## 0.6.1 — 2026-07-26
 
 Open questions shared index, risks shared index, hierarchical system maps,

@@ -18,6 +18,14 @@ kept current:
 2. `sessions/CURRENT_STATE.md` — the narrative of where we left off and why.
 3. `project/mission.md` — re-anchor on the goal.
 
+Then **check active workstreams** alongside `project/systems/` — both
+project-level (`project/workstreams/`) and nested
+(`project/systems/<system>/workstreams/`). Active workstreams may have
+in-progress tasks or unresolved open questions that need attention. The
+dashboard's Workstreams table provides the quick overview (its Owner column
+shows project vs system ownership); `CURRENT_STATE.md` should reference active
+workstreams and their current focus.
+
 Then **check for outstanding decision conflicts** — scan `sessions/conflicts/` for
 any `CONFLICT-*.md` files. If any exist with `status: open`, summarise them and
 ask the user to resolve before continuing. Conflicts block safe advancement.
@@ -40,7 +48,7 @@ memory so the agent knows the project exists even before loading this skill:
 memory(
   action="add",
   target="memory",
-  content="Atlas project '<name>' at <abs-path>. Phase: <phase>. Key focus: <one line>. Active systems: <list>."
+  content="Atlas project '<name>' at <abs-path>. Phase: <phase>. Key focus: <one line>. Active systems: <list>. Active workstreams: <list>."
 )
 ```
 
@@ -79,15 +87,17 @@ When wrapping up:
 
 1. Append a final daily-log entry with a "next steps" summary.
 2. Update `CURRENT_STATE.md` if state changed.
-3. Update `DASHBOARD.md` if any system phase/status changed.
-4. Update INDEX.md files if content was added/changed.
+3. Update `DASHBOARD.md` if any system phase/status changed or workstream
+   status changed.
+4. Update INDEX.md files if content was added/changed (including workstream
+   INDEX files).
 5. **Capture any decisions made this session.** Review the conversation for
    choices that shaped the project direction — if any were made, create a
-   Decision Record in the relevant system's `design/decisions/` folder
-   (see `references/agents/decision-record.md`).
+   Decision Record in the relevant system's `design/decisions/` folder or the
+   workstream's `decisions/` folder (see `references/agents/decision-record.md`).
 6. **Check for decision conflicts.** If this session created or modified DRs
-   that contradict an existing DR in another system, flag them — the next
-   audit run will formalise any conflict.
+   that contradict an existing DR in another system or workstream, flag them —
+   the next audit run will formalise any conflict.
 7. **Save the Hermes memory pointer** if phase or focus changed (see "Hermes
    memory pointer" above).
 

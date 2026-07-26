@@ -17,8 +17,8 @@ repos, etc.). A system can carry more than one type.
 
 ## Relationship types (for the system map)
 
-Used in `system-map.md` and each `OVERVIEW.md` → Relationships to describe *how*
-two systems connect (see `references/system-lifecycle.md`):
+Used in `system-map.md` and each system `INDEX.md` → Relationships to describe
+*how* two systems connect (see `references/system-lifecycle.md`):
 
 | Type | Meaning |
 |------|---------|

@@ -6,8 +6,10 @@
 
 <!--
 Partly derived, partly owned:
-- Systems table rows: REGENERATED from each system's OVERVIEW.md by audit. Never hand-author rows.
+- Systems table rows: REGENERATED from each system's INDEX.md frontmatter (system_type, parent, status, phase) by audit. Never hand-author rows.
   Sub-systems are listed under their parent (Parent column names the parent; blank = top-level).
+- Workstreams table rows: REGENERATED from each workstream's INDEX.md and TASKS.md by audit.
+  Task counts derived from TASKS.md checkboxes. Owner column: "project" or system name (from INDEX.md `system:` frontmatter).
 - Top Risks + Costs: ROLLED UP from the risk/cost registers by audit.
 - Next Milestones + Recent Decisions: dashboard-owned, maintained directly.
 -->
@@ -16,6 +18,12 @@ Partly derived, partly owned:
 
 | System | Parent | Type | Phase | Status | External Links |
 |--------|--------|------|-------|--------|----------------|
+| | | | | | |
+
+## Workstreams
+
+| Workstream | Owner | Status | Tasks (open/done) | Target date | Notes |
+|------------|-------|--------|---------------------|-------------|-------|
 | | | | | | |
 
 ## Top Risks
