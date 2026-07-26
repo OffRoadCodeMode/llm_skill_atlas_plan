@@ -61,7 +61,7 @@ files changed since the last audit (determined from the incremental git diff).
     budget/drivers out of sync with the cost registers; estimates not refreshed
     after a related decision changed.
 
-### Tier 2 — when DRs, OVERVIEWs, or system-map changed (moderate cost)
+### Tier 2 — when DRs, OVERVIEWs, system-map, or research docs changed (moderate cost)
 
 7. **Mission alignment** — artifacts with missing `mission_link` or direction that
    drifted from `mission.md` (hand off to `scope-check`).
@@ -87,6 +87,19 @@ files changed since the last audit (determined from the incremental git diff).
     per-system maps must include all of that system's sub-systems. Flag maps that
     are missing sub-systems, have stale sub-systems, or have edges not reflected
     in the corresponding OVERVIEW Relationships tables.
+17. **Research placement** — research docs in the wrong folder. Check both
+    directions:
+    - **Shared research that should be per-system**: a doc in
+      `project/shared/research/` that is linked only from a single system's
+      artifacts, references only one system's scope, or covers a topic that
+      belongs to one system. Suggest moving to `<system>/research/`.
+    - **Per-system research that should be shared**: a doc in a system's
+      `research/` folder that is linked from multiple systems' artifacts or
+      covers cross-system concerns. Suggest moving to `project/shared/research/`.
+
+    Signals: inbound link sources (which systems link to it), system names
+    mentioned in the doc title/body, and scope of the topic. This is a
+    judgment-based check: report only, suggest the move, do not relocate.
 
 ### Tier 3 — when DRs changed (expensive, may write)
 
@@ -191,7 +204,7 @@ on clone/cloud-sync. Store the last-audited commit SHA in a small state file
 - **Tier 1 (always)**: checks 1-6, 9, 13-14. These are cheap scans and
   mechanical fixes. Run every audit, even if nothing changed (catches drift,
   broken links from manual edits, etc.).
-- **Tier 2 (when relevant files changed)**: checks 7-8, 10-12, 15. Run these
+- **Tier 2 (when relevant files changed)**: checks 7-8, 10-12, 15, 17. Run these
   only when the diff includes `OVERVIEW.md`, `system-map.md`, research docs,
   or any file with frontmatter. If the diff is empty or only touches session
   logs, skip tier 2.
@@ -239,9 +252,9 @@ improve the project. When in doubt, report, do not rewrite.
   missing INDEX/dashboard rows (regenerate), stale `updated:` dates (correct
   from git). Everything else is a report item.
 - **Subjective checks are report-only.** Mission alignment (check 7), freshness
-  (check 9), quality signals (check 10), and size/structure (check 12) surface
-  findings and suggest actions, but the agent does not act on them
-  autonomously.
+  (check 9), quality signals (check 10), size/structure (check 12), and research
+  placement (check 17) surface findings and suggest actions, but the agent does
+  not act on them autonomously.
 - **One fix per problem.** If a link is broken, fix the link. Do not also
   restructure the file it lives in.
 
@@ -269,7 +282,7 @@ cronjob(
           alert if not). Then run the incremental git diff to determine which
           tiers to execute (see references/agents/audit.md 'Tiered execution').
           Tier 1 (checks 1-6, 9, 13-14) always runs. Tier 2 (checks 7-8, 10-12,
-          15) runs only if OVERVIEWs, system-map, or research docs changed.
+          15, 17) runs only if OVERVIEWs, system-map, or research docs changed.
           Tier 3 (check 16) runs only if DRs changed. Auto-fix only mechanical
           issues (broken links, missing INDEX/dashboard rows, stale updated:
           dates). Everything else is report-only: do NOT refactor, restructure,

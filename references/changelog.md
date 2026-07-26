@@ -30,11 +30,13 @@ and tiered audit execution.
   directory layout comment.
 - **audit.md**: Check 6 expanded to reconcile shared OQ index. Check 13 expanded
   to reconcile shared risks index. Check 15 expanded to walk per-system maps
-  recursively and reconcile hierarchy. Checklist restructured into three tiers:
-  tier 1 (always, cheap mechanical checks), tier 2 (when OVERVIEWs/system-map/
-  research changed), tier 3 (when DRs changed, expensive conflict detection).
-  Cron prompt updated. Merged "Tiered execution" and "Incremental reconciliation"
-  into one section.
+  recursively and reconcile hierarchy. New check 17 (research placement): flags
+  research docs in the wrong folder (shared research that should be per-system,
+  or vice versa). Report-only, suggests the move, does not relocate. Checklist
+  restructured into three tiers: tier 1 (always, cheap mechanical checks),
+  tier 2 (when OVERVIEWs/system-map/research changed), tier 3 (when DRs changed,
+  expensive conflict detection). Cron prompt updated. Merged "Tiered execution"
+  and "Incremental reconciliation" into one section.
 - **system-lifecycle.md**: "Relating systems" section updated for hierarchical
   maps. "Add artifacts" bullet mentions logging new OQs to both per-system file
   and shared index. "Track risk/cost" bullet mentions linking high-severity risks
