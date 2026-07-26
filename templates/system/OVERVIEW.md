@@ -21,13 +21,15 @@ Remove this section if no sub-systems exist.]
 | [name] | [one-liner] | [current phase] |
 
 ## Relationships
-How this system connects to others. Reconciled with `project/shared/system-map.md`
-by `audit`. One row per related system. Type is defined by the active domain pack;
-Direction is `→` (one-way) or `↔` (mutual). Link a contract artifact when one exists.
+How this system connects to others. Reconciled by `audit` with the relevant
+system map: `project/shared/system-map.md` for a top-level system, or the
+parent's `system-map.md` for a sub-system. One row per related system. Type is
+defined by the active domain pack; Direction is `->` (one-way) or `<->` (mutual).
+Link a contract artifact when one exists.
 
 | Related system | Type | Direction | Contract / notes |
 |-----------------|------|-----------|------------------|
-| [system] | [pack-defined] | → or ↔ | [contract link or note] |
+| [system] | [pack-defined] | -> or <-> | [contract link or note] |
 
 ## Current Phase
 [defined by active domain pack]

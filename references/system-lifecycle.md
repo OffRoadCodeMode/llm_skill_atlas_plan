@@ -43,15 +43,24 @@ and let `audit` add its `DASHBOARD.md` row from `OVERVIEW.md`. Commit:
 When a system connects to another (calls its API, shares power/space, feeds it
 data), record the edge in **both** places:
 
-- **`project/shared/system-map.md`** — the source-of-truth graph + relationship
+- **`project/shared/system-map.md`** — the top-level graph + relationship
   register. Add/label the edge (type from the domain pack's Relationship types,
-  direction `→`/`↔`).
-- **Each system's `OVERVIEW.md` → Relationships** — the local view.
+  direction `->`/`<->`). All top-level systems appear as nodes, including
+  unrelated neighbours (disconnected nodes).
+- **Each system's `OVERVIEW.md` -> Relationships** — the local view.
 
-`audit` (check 15) reconciles the two, flags dangling/asymmetric edges, and warns
-if a system in a multi-system project has no relationships (a possible missed link).
-Interface contracts (API/event schemas, power-budget calcs) are optional — create
-one as its own artifact both systems link to only when an edge needs it.
+For systems with sub-systems, a **per-system map** (`<system>/system-map.md`)
+shows the children and how they relate to each other. When a new sub-system is
+created, add it to the parent's `system-map.md` (if one exists) and mark the
+parent in the top-level map with `(has sub-systems)`. See
+`references/conventions.md` -> "System maps".
+
+`audit` (check 15) reconciles across all levels: top-level map, per-system maps,
+and OVERVIEW relationships. It flags dangling/asymmetric edges, maps missing
+sub-systems, stale entries, and warns if a system in a multi-system project has
+no relationships (a possible missed link). Interface contracts (API/event
+schemas, power-budget calcs) are optional — create one as its own artifact both
+systems link to only when an edge needs it.
 
 ## Evolving a system
 

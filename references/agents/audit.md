@@ -79,8 +79,14 @@ files changed since the last audit (determined from the incremental git diff).
     Relationships; in a multi-system project, a system with no relationships at all
     (a possible missed link). **Hierarchy consistency**: sub-system `OVERVIEW.md`
     `parent:` field must point to a real parent system; parent `OVERVIEW.md` must
-    list all sub-systems in its Sub-systems section; system map `subgraph` clusters
-    must match the parent/child relationships in `OVERVIEW.md` files.
+    list all sub-systems in its Sub-systems section. **Hierarchical maps**: walk
+    `project/systems/` recursively for per-system `system-map.md` files; reconcile
+    each per-system map against its parent's OVERVIEW Sub-systems section and
+    against the children's OVERVIEW Relationships. The top-level map must include
+    all top-level systems (including unrelated neighbours as disconnected nodes);
+    per-system maps must include all of that system's sub-systems. Flag maps that
+    are missing sub-systems, have stale sub-systems, or have edges not reflected
+    in the corresponding OVERVIEW Relationships tables.
 
 ### Tier 3 — when DRs changed (expensive, may write)
 
@@ -168,10 +174,19 @@ files changed since the last audit (determined from the incremental git diff).
     agent notes the instruction on the next session start (via the session-continuity
     conflict check).
 
-## Tiered execution
+## Tiered execution (efficiency)
 
-The incremental git diff (`git diff --name-only <last-audit-sha>..HEAD`) tells
-us what changed. Use it to decide which tiers to run:
+Compute the change set once from the incremental git diff:
+
+```
+git diff --name-only <last-audit-sha>..HEAD
+```
+
+One command, no per-file reads — and more correct than file mtimes, which reset
+on clone/cloud-sync. Store the last-audited commit SHA in a small state file
+(`sessions/.atlas-audit-state`). Use the diff for two things:
+
+**1. Which tiers to run:**
 
 - **Tier 1 (always)**: checks 1-6, 9, 13-14. These are cheap scans and
   mechanical fixes. Run every audit, even if nothing changed (catches drift,
@@ -184,9 +199,13 @@ us what changed. Use it to decide which tiers to run:
   in any `design/decisions/` directory. This is the most expensive check (reads
   every DR across all systems) and the only one that writes conflict files.
 
-**Full pass**: if the state file (`sessions/.atlas-audit-state`) is missing or
-corrupt, run all three tiers. Also run a full pass on explicit user request
-("audit the wiki") or at phase transitions.
+**2. Which rows/indexes to reconcile:** only re-derive `INDEX.md`/`DASHBOARD.md`
+rows and roll-ups for artifacts that appear in the diff, not the whole tree.
+
+**Full pass**: if the state file is missing or corrupt, run all three tiers and
+reconcile everything. Also run a full pass on explicit user request ("audit the
+wiki"), before ending a session, or at phase transitions. If git/shell isn't
+available, fall back to a full read-and-compare pass (correct, just more tokens).
 
 This keeps most hourly cron runs lightweight (tier 1 only) while still catching
 the expensive problems when they are relevant.
@@ -225,20 +244,6 @@ improve the project. When in doubt, report, do not rewrite.
   autonomously.
 - **One fix per problem.** If a link is broken, fix the link. Do not also
   restructure the file it lives in.
-
-## Incremental reconciliation (efficiency)
-
-Only re-derive rows/indexes for artifacts that **changed since the last audit**.
-Get the change set from:
-
-```
-git diff --name-only <last-audit-sha>..HEAD
-```
-
-One command, no per-file reads — and more correct than file mtimes, which reset on
-clone/cloud-sync. Store the last-audited commit SHA in a small state file
-(`sessions/.atlas-audit-state`). If git/shell isn't available, fall back to a full
-read-and-compare pass (correct, just more tokens).
 
 ## When to run
 

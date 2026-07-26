@@ -169,6 +169,25 @@ When a risk is closed, update the per-system file and remove it from the shared
 index (or move to Closed with a link). `audit` (check 13) reconciles the shared
 index against the per-system files.
 
+## System maps — hierarchical
+
+System maps show how systems relate. They follow a hierarchical structure:
+
+- **Top-level** (`project/shared/system-map.md`): shows all top-level systems as
+  nodes. Related systems have edges; unrelated neighbours appear as disconnected
+  nodes (their presence is informational). Systems with sub-systems are marked
+  with `(has sub-systems)` or a subgraph cluster.
+- **Per-system** (`<system>/system-map.md`): for systems with sub-systems, shows
+  the children and how they relate to each other. Not every system needs one —
+  only systems with sub-systems or enough internal relationships to warrant a
+  map.
+
+Each system's `OVERVIEW.md` Relationships table remains the local view.
+`audit` (check 15) reconciles across all levels: top-level map, per-system maps,
+and OVERVIEW relationships. When a new sub-system is created, add it to the
+parent's `system-map.md` (if one exists) and to the top-level map as a child of
+its parent.
+
 ## Git conventions
 
 - **Commit prefixes:** `docs:` (documentation), `dr:` (Decision Records),

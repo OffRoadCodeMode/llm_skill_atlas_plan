@@ -6,7 +6,8 @@ a major bump signals breaking convention changes.
 
 ## 0.6.1 — 2026-07-26
 
-Open questions shared index, risks shared index, and tiered audit execution.
+Open questions shared index, risks shared index, hierarchical system maps,
+and tiered audit execution.
 
 - **open-questions.md template**: Rewritten to show both formats: per-system
   file (owns questions in its scope) and shared file (cross-system questions +
@@ -14,18 +15,32 @@ Open questions shared index, risks shared index, and tiered audit execution.
 - **risks.md templates**: Shared template rewritten to show project-wide risks
   + per-system index (links to high-severity/blocking per-system risks). Per-system
   template updated to mention linking into the shared index.
-- **conventions.md**: New "Open Questions" and "Risks" sections explaining the
-  per-system and shared index relationship. Updated directory layout comment.
-- **audit.md**: Check 6 expanded to reconcile shared OQ index against per-system
-  files. Check 13 expanded to reconcile shared risks index against per-system
-  files. Checklist restructured into three tiers: tier 1 (always, cheap
-  mechanical checks), tier 2 (when OVERVIEWs/system-map/research changed),
-  tier 3 (when DRs changed, expensive conflict detection). Cron prompt updated
-  to reference tiered execution. New "Tiered execution" section explains how
-  the incremental git diff determines which tiers to run.
-- **system-lifecycle.md**: "Add artifacts" bullet mentions logging new OQs to
-  both per-system file and shared index. "Track risk/cost" bullet mentions
-  linking high-severity risks into shared index.
+- **system-map.md template**: Rewritten to cover both top-level (all top-level
+  systems as nodes, unrelated neighbours shown as disconnected) and per-system
+  maps (shows a parent's sub-systems and their relationships). Unrelated
+  neighbours appear as disconnected nodes. Parents marked with `(has sub-systems)`.
+  Added explicit Mermaid guidance (system maps are Mermaid diagrams; native arrow
+  syntax `-->`/`-.->`/`<-->`). Direction notation standardised on ASCII to match
+  Mermaid.
+- **OVERVIEW.md template**: Relationships reconcile note now covers hierarchical
+  maps (top-level system -> shared map; sub-system -> parent's map). Direction
+  notation aligned to ASCII (`->`/`<->`).
+- **conventions.md**: New "Open Questions", "Risks", and "System maps" sections
+  explaining the per-system and shared index/hierarchy relationships. Updated
+  directory layout comment.
+- **audit.md**: Check 6 expanded to reconcile shared OQ index. Check 13 expanded
+  to reconcile shared risks index. Check 15 expanded to walk per-system maps
+  recursively and reconcile hierarchy. Checklist restructured into three tiers:
+  tier 1 (always, cheap mechanical checks), tier 2 (when OVERVIEWs/system-map/
+  research changed), tier 3 (when DRs changed, expensive conflict detection).
+  Cron prompt updated. Merged "Tiered execution" and "Incremental reconciliation"
+  into one section.
+- **system-lifecycle.md**: "Relating systems" section updated for hierarchical
+  maps. "Add artifacts" bullet mentions logging new OQs to both per-system file
+  and shared index. "Track risk/cost" bullet mentions linking high-severity risks
+  into shared index.
+- **templates/system/INDEX.md**: Added system-map.md to optional artifacts.
+- **README.md**: Shared file labels updated to note index role.
 - **SKILL.md**: Bumped to 0.6.1.
 
 ## 0.6.0 — 2026-07-25

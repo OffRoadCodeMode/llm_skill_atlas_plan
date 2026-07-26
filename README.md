@@ -81,9 +81,9 @@ my-project-planning/
 │   │           └── approach-options.md
 │   └── shared/                    # Cross-system content
 │       ├── glossary.md
-│       ├── open-questions.md
-│       ├── risks.md               # Project-wide risk register
-│       ├── costs.md               # Project-wide cost register / budget
+│       ├── open-questions.md      # Cross-system questions + index of per-system OQs
+│       ├── risks.md               # Project-wide risks + index of per-system risks
+│       ├── costs.md               # Project-wide cost register / budget (rolls up per-system)
 │       └── system-map.md          # How systems relate: Mermaid graph + register
 └── sessions/
     ├── CURRENT_STATE.md           # Rolling "where are we now" for cold starts
