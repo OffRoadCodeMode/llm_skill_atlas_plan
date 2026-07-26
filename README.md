@@ -28,7 +28,7 @@ git clone <this-repo> ~/.hermes/skills/atlas
 ```
 
 **IDE (secondary):** clone anywhere and tell your LLM:
-*"Read the Atlas skill folder at* *`<path>`* *and follow it."*
+*"Read the Atlas skill folder at `<path>` and follow it."*
 
 ## Use
 
@@ -124,9 +124,9 @@ templates/            Generic document + system-folder templates
 
 ## Status
 
-`v0.1.0`, first release. Built minimal-but-complete (principle: *prove before
-scaling*). The three critical agents (`session-log`, `decision-record`, `audit`)
-are fully specified; others are lighter and grow as pain is felt.
+`v0.6.0`. Built minimal-but-complete (principle: *prove before scaling*). The
+critical agents (`session-log`, `decision-record`, `audit`, `diagram`) are fully
+specified; others are lighter and grow as pain is felt.
 
 ## Contributing
 

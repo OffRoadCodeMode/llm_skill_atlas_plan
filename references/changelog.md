@@ -4,6 +4,34 @@ All notable changes to the Atlas framework itself. Format: reverse chronological
 Bump the `version:` field in `SKILL.md` frontmatter (semver) for convention changes;
 a major bump signals breaking convention changes.
 
+## 0.6.0 — 2026-07-25
+
+Simplified decision model and added decision conflict detection.
+
+- **decision-record.md**: Removed two-tier system (DR + DECISIONS.md). Every
+  decision is now a DR file in `<system>/design/decisions/`. No project-wide
+  DRs; cross-system decisions go to the most-affected system. Simpler, less
+  friction, same format.
+- **audit.md**: Added check 16 (decision conflicts). Scans all DRs across
+  systems for contradictory claims on the same topic. Creates conflict files
+  at `sessions/conflicts/CONFLICT-XXX.md`, alerts via gateways, auto-resolves
+  when conflicting DRs are superseded. Includes detection criteria, conflict
+  file template, and lifecycle (created/resolved/stale).
+- **session-continuity.md**: Resume now checks for open conflict files before
+  continuing. End-of-session step 6 checks for decision conflicts created
+  during the session.
+- **Removed**: `templates/decisions.md`, `templates/system/DECISIONS.md`,
+  `project/shared/DECISIONS.md`, `project/shared/decisions/` from all
+  directory layouts and scaffolding lists.
+- **SKILL.md**: "Decide" verb updated to reflect single-tier DR model.
+  Bumped to 0.6.0.
+- **README.md**: Updated output tree (removed DECISIONS.md, added
+  sessions/conflicts/). Fixed IDE italic formatting. Updated status version.
+- **conventions.md**: Removed shared/DR-XXX from naming section. Added
+  sessions/conflicts/ to directory layout.
+- **onboarding.md**: Removed DECISIONS.md and shared/decisions/ from
+  generated structure. Added sessions/conflicts/.
+
 ## 0.5.0 — 2026-07-25
 
 Hierarchical systems — a system may contain sub-systems, each with the same

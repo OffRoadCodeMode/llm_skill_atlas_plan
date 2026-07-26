@@ -38,7 +38,6 @@ my-project-planning/
 │   ├── conflicts/              # Auto-generated decision conflict reports (CONFLICT-XXX.md)
 │   └── week-01/
 │       └── YYYY-MM-DD.md
-└── dev/                       # Scratch/thinking (optional)
 ```
 
 The framework itself (this skill) is **not** copied in. Projects hold generated
