@@ -39,17 +39,16 @@ several days of logs on start — it degrades signal-to-noise and invites drift.
 Only drill into a recent daily log if `CURRENT_STATE.md` is missing a detail you
 actually need.
 
-## Hermes memory pointer
+## Memory pointer
 
-In addition to the project wiki, save a **compact pointer** to Hermes persistent
-memory so the agent knows the project exists even before loading this skill:
+In addition to the project wiki, save a **compact pointer** so the agent knows
+the project exists even before loading this skill. Where to store it depends on
+the host — see your host file (`references/hosts/<host>.md` → "Memory pointer").
+Persistent memory if the host has it; otherwise the planning repo's root
+`AGENTS.md`:
 
 ```
-memory(
-  action="add",
-  target="memory",
-  content="Atlas project '<name>' at <abs-path>. Phase: <phase>. Key focus: <one line>. Active systems: <list>. Active workstreams: <list>."
-)
+Atlas project '<name>' at <abs-path>. Phase: <phase>. Key focus: <one line>. Active systems: <list>. Active workstreams: <list>.
 ```
 
 Update this pointer when phase or focus meaningfully changes (not every session).
@@ -60,11 +59,10 @@ no idea the project exists.
 ## Recalling past sessions
 
 If `CURRENT_STATE.md` is missing a detail about *why* a decision was made or
-*what* was discussed, use Hermes's `session_search` tool before reading daily
-logs — it's often faster and more targeted than scanning log files. Search by
-keyword (e.g. `session_search(query="electrics certification")`) to find the
-session where a topic was discussed. Daily logs remain the durable written
-record; session_search is the fast path to the conversation context.
+*what* was discussed, use the host's session/history search before reading
+daily logs, if it has one (see your host file → "Session search"). It's often
+faster and more targeted than scanning log files. Daily logs remain the durable
+written record; session search is the fast path to the conversation context.
 
 ## Weekly roll-up (compaction)
 
@@ -98,8 +96,8 @@ When wrapping up:
 6. **Check for decision conflicts.** If this session created or modified DRs
    that contradict an existing DR in another system or workstream, flag them —
    the next audit run will formalise any conflict.
-7. **Save the Hermes memory pointer** if phase or focus changed (see "Hermes
-   memory pointer" above).
+7. **Save the memory pointer** if phase or focus changed (see "Memory pointer"
+   above).
 
 ## Mid-session decision capture
 

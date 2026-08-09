@@ -16,6 +16,10 @@ as it evolves.
 5. **Domain packs are shareable** — a custom pack (e.g. `van-conversion`) helps
    whoever plans a similar project; prefer adding a pack over bending the core.
    See "Creating a custom domain pack" below.
+6. **Host specifics stay in host adapters** — never hardcode one environment's
+   tool names into the core files. If a behaviour depends on the host, describe
+   the *capability* in the core file and put the concrete tool call in
+   `references/hosts/<host>.md`. See "Creating a host adapter" below.
 
 ## Versioning
 
@@ -42,14 +46,14 @@ heavyweight vendored framework, not a single skill folder a human owns.
 
 The workflow:
 
-1. You (or Hermes, at your direction) notice friction — a template field that's
+1. You (or the agent, at your direction) notice friction — a template field that's
    always deleted, a confusing convention, a missing agent behaviour.
 2. Edit the relevant skill file directly, commit with the `atlas:` prefix, and
    note anything significant in `references/changelog.md` (bump the `version:` field
    in `SKILL.md` frontmatter for convention changes).
 3. On the next session the change is live — the agent reads the installed skill.
 
-**Hermes's role is advisory.** It may *surface* recurring friction
+**The agent's role is advisory.** It may *surface* recurring friction
 ("you keep deleting this field — want to drop it from the template?"), but it does
 **not** modify the skill on its own. Keeping a human in the loop matches
 *prove before scaling* and stops the framework drifting without oversight.
@@ -81,6 +85,41 @@ whether any changes affect the current active project:
 
 This check runs once per pull, not per session — the stamped version in
 `AGENTS.md` is the marker for "last reviewed".
+
+## Creating a host adapter
+
+A host adapter (`references/hosts/<host>.md`) teaches Atlas how one environment
+exposes the capabilities the framework depends on. Add one when you start using
+Atlas under an agent that isn't already covered.
+
+### The capability contract
+
+Every host file maps the same six capabilities. Keep the headings consistent so
+core files can point at them reliably:
+
+| Capability | What the adapter must answer |
+|---|---|
+| Loading skill files | Which tool reads `references/...` / `templates/...`, and what paths are relative to |
+| Memory pointer | Where the cross-session project signpost is stored |
+| Scheduled audits | How (or whether) a recurring job can run; delivery target |
+| Delegation / sub-agents | How to spawn sub-agents; whether parallel is supported |
+| Session search | Whether past conversations are searchable |
+| Companion skills | Which optional skills exist and how to load them |
+
+If the host lacks a capability, **say so explicitly** and name the fallback —
+`generic.md` is the model for this. Silence forces the agent to guess.
+
+### How to create one
+
+1. **Copy** `references/hosts/generic.md` to `references/hosts/<host>.md`.
+2. **Fill in** the capability map with that host's real tool names and syntax.
+   Verify flags/tool signatures against the host's own docs — do not guess.
+3. **Add a row** to the host table in `SKILL.md` → "Host environments".
+4. **Commit** with the `host:` prefix, e.g. `host: add claude-code adapter`, and
+   note it in `references/changelog.md`.
+
+Do **not** duplicate framework content into a host file (e.g. the canonical
+audit prompt lives in `references/agents/audit.md`; host files reference it).
 
 ## Creating a custom domain pack
 

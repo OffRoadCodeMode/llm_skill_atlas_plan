@@ -4,7 +4,7 @@ description: Use when the user asks to plan, manage, or work on any project.
   Activates the Atlas planning framework: onboards projects, manages systems,
   logs sessions, captures decisions, and maintains a structured project wiki.
   Works for any domain (software, business, research, personal builds).
-version: 0.8.0
+version: 0.9.0
 tags: [planning, project-management, wiki, framework]
 ---
 
@@ -24,15 +24,26 @@ lives in a workstream, a system, or `shared/research/`. See
 This file is the **router**. It tells you (the agent) what to read and when. Load
 bundled files on demand; do not read everything up front.
 
-## How to load skill files in Hermes
+## Host environments (identify yours first)
 
-Use `skill_view(name='atlas', file_path='references/...')` to load reference
-files on demand. The `file_path` is relative to the skill directory. Never try
-to read all references upfront — that wastes context. Load only what the router
-table below says to load for the current task, and only when that task is active.
+Atlas runs under any LLM agent with file access. At the start of a session,
+identify your host and load the matching host file — it maps Atlas's generic
+capabilities (loading skill files, memory pointer, scheduled audits, delegation,
+session search, companion skills) to your host's concrete tools:
 
-Templates are read the same way:
-`skill_view(name='atlas', file_path='templates/mission.md')`.
+| Host | Read |
+|------|------|
+| Hermes | `references/hosts/hermes.md` |
+| Devin CLI / Windsurf | `references/hosts/devin.md` |
+| Anything else / unsure | `references/hosts/generic.md` |
+
+Throughout the skill, "see your host file" means the file you loaded above.
+
+Load reference files on demand — paths like `references/conventions.md` are
+relative to this skill's install directory. Never read all references upfront;
+load only what the router table below says to load for the current task, and
+only when that task is active. Templates work the same way
+(`templates/mission.md`).
 
 ---
 
@@ -42,8 +53,10 @@ Templates are read the same way:
 You are operating under the Atlas planning framework (installed skill).
 Read these skill files in order before doing anything else:
   1. SKILL.md                        (this file: what Atlas is + router)
-  2. references/conventions.md       (how files are structured)
-  3. references/onboarding.md        (how to onboard this project)
+  2. references/hosts/<host>.md      (your environment's tool mappings;
+                                      hermes | devin | generic)
+  3. references/conventions.md       (how files are structured)
+  4. references/onboarding.md        (how to onboard this project)
 Then check the working directory for an existing project/ folder:
   - If NO  -> begin onboarding: generate the project structure here.
   - If YES -> read project/DASHBOARD.md, sessions/CURRENT_STATE.md,
@@ -52,9 +65,10 @@ Do not create system folders until onboarding says to.
 ```
 
 **Working directory vs skill directory.** You *read* instructions, templates, and
-agent specs from this installed skill (e.g. `~/.hermes/skills/atlas/`). You
-*write* generated project content into the user's **working directory** (their
-planning repo). Never write project content into the skill folder.
+agent specs from this installed skill's directory (wherever the host installed
+it — see your host file). You *write* generated project content into the user's
+**working directory** (their planning repo). Never write project content into
+the skill folder.
 
 ---
 
@@ -80,6 +94,7 @@ requirements -> design -> build, never the product.
 
 | The user wants to... | Read |
 |----------------------|------|
+| Use host-specific tools (memory, cron, delegation, session search) | `references/hosts/<host>.md` (loaded at session start) |
 | Start a new project / no `project/` exists | `references/onboarding.md` |
 | Resume after any gap | `references/session-continuity.md`, then `project/DASHBOARD.md`, `sessions/CURRENT_STATE.md`, `project/mission.md` |
 | Understand file/naming/link/git rules | `references/conventions.md` |
@@ -143,10 +158,11 @@ attention as the context window fills. To prevent drift:
 - For audits, report what was found and what was fixed/proposed.
 - Onboard conversationally: one question at a time.
 
-## Complementary Hermes skills
+## Complementary skills
 
-Atlas is self-contained, but these Hermes skills enhance project workflows when
-available. Load them with `skill_view(name='...')` when the task calls for it.
+Atlas is self-contained, but these companion skills enhance project workflows
+when available in the host environment. Which ones exist and how to load them
+depends on the host — see your host file (`references/hosts/<host>.md`).
 
 | Skill | When to use | Atlas integration |
 |-------|-------------|-------------------|
@@ -162,6 +178,6 @@ Domain packs may recommend additional skills specific to the domain.
 ## Version
 
 This skill's version is in the `version:` field of this file's frontmatter
-(`0.8.0`). On onboarding, stamp it into the project (root `AGENTS.md` and
-`project/DASHBOARD.md` footer, e.g. `atlas: 0.8.0`).
+(`0.9.0`). On onboarding, stamp it into the project (root `AGENTS.md` and
+`project/DASHBOARD.md` footer, e.g. `atlas: 0.9.0`).
 See `references/governance.md` for versioning and maintenance rules.

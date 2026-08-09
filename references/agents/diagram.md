@@ -35,7 +35,8 @@ Suggest creating a diagram when any of these triggers occur:
 
 ## Tool selection
 
-Check what's available in the Hermes environment in this priority order:
+Check what's available in the host environment (see your host file) in this
+priority order:
 
 1. **Excalidraw** (skill name: `excalidraw`) — best for spatial/technical
    drawings with dimensions, positions, or physical layouts. Creates
@@ -43,7 +44,7 @@ Check what's available in the Hermes environment in this priority order:
    plans, layouts, schematics, dimensioned drawings. **Not for system
    relationship graphs** (use Mermaid for those, since `system-map.md` already
    uses Mermaid and it renders inline in markdown/Obsidian).
-   `skill_view(name='excalidraw')` for full spec.
+   Load the skill via the host's skill mechanism for the full spec.
 
 2. **Mermaid** (built-in, no skill needed) — use for system relationship graphs
    (the system map), process flows, sequence diagrams, timelines, Gantt charts.
@@ -70,7 +71,7 @@ Check what's available in the Hermes environment in this priority order:
 
 ## Excalidraw workflow (when available)
 
-1. Load the skill: `skill_view(name='excalidraw')`
+1. Load the skill via the host's skill mechanism
 2. Design the layout in your mind — post positions, van outline, workbench,
    doors, dimensions, annotations
 3. Build the elements array step by step (background -> shapes -> text labels

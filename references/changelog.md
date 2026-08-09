@@ -4,6 +4,50 @@ All notable changes to the Atlas framework itself. Format: reverse chronological
 Bump the `version:` field in `SKILL.md` frontmatter (semver) for convention changes;
 a major bump signals breaking convention changes.
 
+## 0.9.0 — 2026-08-08
+
+Host-agnostic architecture: Atlas now runs under any LLM agent with file access.
+All host-specific (Hermes) tooling moved behind a **host adapter** layer. No
+planning-framework behaviour changed (file conventions, phases, templates, agent
+behaviours are identical).
+
+- **New: `references/hosts/`** — host adapter files mapping Atlas's generic
+  capabilities (loading skill files, memory pointer, scheduled audits,
+  delegation, session search, companion skills) to concrete host tools:
+  - `hosts/hermes.md` — `skill_view`, `memory()`, `cronjob()` (full recipe),
+    `delegate_task`/`tasks`, `session_search`, companion skill table.
+  - `hosts/devin.md` — `read` tool, `AGENTS.md` memory pointer, CI/system-cron
+    audit recipe, `run_subagent` delegation, available-skills list.
+  - `hosts/generic.md` — capability descriptions for any other agent.
+- **SKILL.md**: "How to load skill files in Hermes" → "Host environments
+  (identify yours first)" with host table; **activation prompt now loads the
+  host file as step 2** (before conventions/onboarding); router gains a
+  host-file row; "Complementary Hermes skills" → "Complementary skills"
+  pointing at host files.
+- **README.md**: install instructions for Hermes, Devin (global + project), and
+  any other agent; usage flow notes host-file loading; repo tree includes
+  `references/hosts/`; Contributing now lists host adapters alongside domain
+  packs; status bumped to 0.9.0.
+- **onboarding.md / session-continuity.md**: complementary-skills check, audit
+  cadence, and memory pointer now route through the host file.
+- **conventions.md**: Hermes mentions → host-agnostic wording.
+- **governance.md**: new rule 6 ("host specifics stay in host adapters") and a
+  "Creating a host adapter" section defining the six-capability contract every
+  host file must answer, plus the `host:` commit prefix.
+- **agents/research.md / diagram.md**: `skill_view(...)` calls → "load via the
+  host's skill mechanism (see your host file)".
+- **agents/orchestrator.md**: `delegate_task`/`tasks` specifics moved to
+  `hosts/hermes.md`; generic delegation patterns remain.
+- **agents/audit.md**: Hermes `cronjob(...)` wrapper moved to `hosts/hermes.md`;
+  the **canonical audit prompt now lives here** (in the audit agent's own spec)
+  and all host files reference it rather than duplicating it. Scheduled-audit
+  section states host-independent requirements (workdir, skill load, prompt,
+  delivery, honesty caveats). Conflict-alert delivery no longer assumes Hermes
+  gateways.
+
+Migration note for existing installs: behaviour under Hermes is unchanged —
+Hermes sessions just load `references/hosts/hermes.md` first.
+
 ## 0.8.0 — 2026-07-26
 
 Merged `OVERVIEW.md` into `INDEX.md`: a system now has a single entry file.

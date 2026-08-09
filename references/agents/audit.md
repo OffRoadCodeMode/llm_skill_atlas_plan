@@ -1,7 +1,7 @@
 # Agent: audit
 
 **Verb: Audit.** Integrity + phase-gate + mission-alignment check. Runs when
-**invoked** — manually or by a Hermes cron job. It does not passively self-heal;
+**invoked** — manually or by a scheduled job. It does not passively self-heal;
 a scheduled run is just another invocation. Report findings grouped by severity,
 each with the specific file path and a suggested action.
 
@@ -180,18 +180,19 @@ files changed since the last audit (determined from the incremental git diff).
 
        Number sequentially: `CONFLICT-001`, `CONFLICT-002`.
 
-    2. **Alert via all open gateways.** Use `cronjob(action="run", job_id="<audit-id>")` 
-       if running inside a scheduled audit, or deliver the finding directly. The
+    2. **Alert via all configured delivery channels.** If running inside a
+       scheduled audit job, use that job's delivery mechanism (see your host
+       file); otherwise deliver the finding directly in chat. The
        alert must include:
        - The conflict title and file path
        - Which DRs are in conflict (with paths)
        - A one-line summary of why they conflict
        - A request for the user to review and advise on resolution
 
-       **Delivery targets:** send to *all* gateways the user has configured
-       (Telegram, Discord, etc.). If running inside a cron job, the job's
-       `deliver` setting already handles this — use `"all"` to fan out to every
-       connected gateway.
+       **Delivery targets:** send to *all* channels the user has configured
+       (see your host file for what this host offers). If running inside a
+       scheduled job, the job's delivery setting already handles this — fan out
+       to every connected channel.
 
     3. **Log the audit finding** as a high-severity item in the main audit report.
 
@@ -207,14 +208,14 @@ files changed since the last audit (determined from the incremental git diff).
     On every audit run, re-check open conflicts: if the conflicting DRs are no
     longer both `status: fresh`, auto-resolve the conflict file.
 
-    ### Gateways notice
+    ### Delivery notice
 
-    When conflict alerts are delivered to a gateway (Telegram, Discord, etc.),
-    they appear in the user's normal feed for that platform. The user can reply
-    with instructions. If the gateway supports continuable sessions
-    (`attach_to_session`), the response can be picked up directly; otherwise the
-    agent notes the instruction on the next session start (via the session-continuity
-    conflict check).
+    When conflict alerts are delivered outside a live session (a chat gateway, a
+    notification, a committed report), they appear wherever that channel surfaces
+    — the user may reply with instructions there. If the channel supports
+    continuable sessions (see your host file), the response can be picked up
+    directly; otherwise the agent notes the instruction on the next session start
+    (via the session-continuity conflict check).
 
 ## Tiered execution (efficiency)
 
@@ -294,52 +295,46 @@ improve the project. When in doubt, report, do not rewrite.
 
 ## When to run
 
-- On the Hermes cron schedule (see below) — tier 1 always; tiers 2-3 if
-  relevant files changed.
+- On the recurring schedule, if one was set up (see below) — tier 1 always;
+  tiers 2-3 if relevant files changed.
 - Before ending a work session — full pass (all tiers).
 - At every phase transition — full pass (all tiers).
 - On demand ("audit the wiki") — full pass (all tiers).
 
-## Scheduled audit (Hermes cron)
+## Scheduled audit (recurring job)
 
-During onboarding, offer to create a recurring, skill-backed job via Hermes's
-`cronjob` tool:
+If the host supports scheduled/recurring jobs, offer during onboarding to set up
+a recurring `atlas-audit` job. The concrete recipe is host-specific — see your
+host file (`references/hosts/<host>.md`): Hermes uses its `cronjob` tool with
+gateway delivery; Devin uses CI schedules or system cron; other hosts may not
+support it at all (manual audits are always fine).
+
+Whatever the scheduler, the requirements are the same:
+
+- **Working directory** — scheduled jobs run detached; the job must run in the
+  planning repo so file tools and `AGENTS.md` resolve correctly.
+- **Load this skill** so the job has the audit spec available.
+- **The audit prompt** — use the canonical text below verbatim.
+- **Delivery** — send results somewhere the user will see them (chat gateway,
+  notification, or a committed report under `sessions/`). Ask the user during
+  onboarding.
+
+### Canonical audit prompt (for scheduled jobs)
 
 ```
-cronjob(
-  action="create",
-  name="atlas-audit",
-  schedule="every 1h",
-  workdir="<absolute-path-to-planning-repo>",   # REQUIRED — cron runs detached
-  skills=["atlas"],
-  prompt="Run the Atlas audit: FIRST verify the repo is conflict-free (halt and
-          alert if not). Then run the incremental git diff to determine which
-          tiers to execute (see references/agents/audit.md 'Tiered execution').
-          Tier 1 (checks 1-6, 9, 13-14) always runs. Tier 2 (checks 7-8, 10-12,
-          15, 17-18) runs only if system INDEX files, system-map, research docs,
-          workstream files, or files with frontmatter changed. Tier 3 (check 16) runs only
-          if DRs changed (system design/decisions/ or workstream decisions/).
-          Auto-fix only mechanical issues (broken links, missing INDEX/dashboard
-          rows, stale updated: dates). Everything else is report-only: do NOT
-          refactor, restructure, rewrite, or delete content. Deliver a short
-          summary of findings, which tiers ran, and any fixes applied.",
-  deliver="telegram",          # adjust to user's configured gateway — see below
-)
+Run the Atlas audit: FIRST verify the repo is conflict-free (halt and
+alert if not). Then run the incremental git diff to determine which
+tiers to execute (see references/agents/audit.md 'Tiered execution').
+Tier 1 (checks 1-6, 9, 13-14) always runs. Tier 2 (checks 7-8, 10-12,
+15, 17-18) runs only if system INDEX files, system-map, research docs,
+workstream files, or files with frontmatter changed. Tier 3 (check 16) runs only
+if DRs changed (system design/decisions/ or workstream decisions/).
+Auto-fix only mechanical issues (broken links, missing INDEX/dashboard
+rows, stale updated: dates). Everything else is report-only: do NOT
+refactor, restructure, rewrite, or delete content. Deliver a short
+summary of findings, which tiers ran, and any fixes applied.
 ```
-
-- **`workdir` is required** — cron runs detached; set it to the planning repo so
-  file tools and `AGENTS.md` resolve correctly.
-- **Pin provider/model** for unattended runs (an unpinned job fails closed on
-  default change), or use `hermes setup --portal`. The gateway must be running.
-- **Delivery target** — set `deliver` to a gateway the user has configured
-  (e.g. `"telegram"`, `"discord"`, `"all"`). On CLI-only sessions there is no
-  live delivery channel — use `deliver="local"` to save results viewable via
-  `cronjob action='list'`, or omit `deliver` to save silently. Ask the user
-  which gateway they want during onboarding.
-- **Conversational audits** — if the user may want to follow up on audit findings
-  conversationally, set `attach_to_session=true` so the delivery is continuable
-  (the user can reply and the agent has the audit brief in context).
 - **Honesty:** this is interval polling, not real-time watching; it's still
   "audit on demand", just schedule-invoked. The incremental git-diff and
-  conflict pre-flight assume shell/git access — verify against the Hermes tool
-  schema; the full-pass fallback covers the case where it's unavailable.
+  conflict pre-flight assume shell/git access — verify the scheduled environment
+  actually has it; the full-pass fallback covers the case where it's unavailable.

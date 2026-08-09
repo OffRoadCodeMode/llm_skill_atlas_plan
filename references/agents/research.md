@@ -33,14 +33,15 @@ If unsure, ask: "does this finding apply to one system, a specific process
 
 ### When to delegate vs do inline
 
-- **Inline** (use `web_search` + `web_extract` directly): quick lookups, single
+- **Inline** (use your search/fetch tools directly): quick lookups, single
   questions, when the answer is likely 1-2 searches away.
-- **Delegate** (use `delegate_task`): multi-source research, comparative analyses,
-  anything requiring 5+ searches, or when the intermediate results would flood
-  the main context. Pass prior research file paths and project context in the
-  `context` field so the subagent doesn't duplicate work.
-- **Parallel batch** (use `delegate_task` with `tasks`): when 2-3 independent
-  research streams can run simultaneously.
+- **Delegate** (use the host's sub-agent mechanism — see your host file):
+  multi-source research, comparative analyses, anything requiring 5+ searches,
+  or when the intermediate results would flood the main context. Pass prior
+  research file paths and project context in the delegation prompt so the
+  subagent doesn't duplicate work.
+- **Parallel batch** (if the host supports parallel sub-agents): when 2-3
+  independent research streams can run simultaneously.
 
 ### Search strategy
 
@@ -55,9 +56,10 @@ If unsure, ask: "does this finding apply to one system, a specific process
 5. **YouTube as a research source.** For practical/build domains (van conversions,
    construction, electronics, DIY), YouTube is often the richest source — build
    tutorials, product reviews, owner walkthroughs, failure reports. Use the
-   `youtube-content` skill (`skill_view(name='youtube-content')`) to fetch
-   transcripts and summarise them into cited research-doc material. Cite as
-   `[YouTube: <channel name>, <video title>, <URL>]` in the Sources section.
+   `youtube-content` companion skill if available (see your host file for how to
+   load it) to fetch transcripts and summarise them into cited research-doc
+   material. Cite as `[YouTube: <channel name>, <video title>, <URL>]` in the
+   Sources section.
    Video sources are particularly valuable for:
    - Step-by-step installation guides (what the process actually looks like)
    - Known issues and failure modes (owner experience > spec sheets)

@@ -93,30 +93,23 @@ rush to scaffold systems just to have a place for research. Systems become
 worth scaffolding once a research stream has enough focus to own its own
 decisions, design, and tasks.
 
-## Check complementary skills (Hermes)
+## Check complementary skills
 
-Atlas works standalone, but these Hermes skills enhance it when available (see
-the "Complementary Hermes skills" table in `SKILL.md`):
+Atlas works standalone, but companion skills enhance it when available in the
+host environment (see the "Complementary skills" table in `SKILL.md`, and your
+host file `references/hosts/<host>.md` for what this host supports and how to
+check what's installed). For any that are missing, briefly explain what it does
+and ask if the user wants to install it. Do not block onboarding if they
+decline; the skills are optional enhancements, not dependencies. Record which
+complementary skills are available in the root `AGENTS.md` so future sessions
+know.
 
-| Skill | What it adds |
-|-------|-------------|
-| **obsidian** | Read, search, and edit notes directly in an Obsidian vault |
-| **xlsx** | Living cost spreadsheet with formulas alongside `costs.md` |
-| **youtube-content** | Turn YouTube tutorials/reviews into cited research docs |
-| **excalidraw** | Spatial diagrams (floor plans, layouts, schematics) |
-| **pdf** | Create/fill PDFs for certification forms, permits, insurance docs |
+## Set up the audit cadence
 
-Check which are installed (`skill_view(name='<skill>')` or ask the user). For
-any that are missing, briefly explain what it does and ask if the user wants to
-install it. Do not block onboarding if they decline; the skills are optional
-enhancements, not dependencies. Record which complementary skills are available
-in the root `AGENTS.md` so future sessions know.
-
-## Set up the audit cadence (Hermes)
-
-Offer to create the recurring `atlas-audit` cron job (see
-`references/agents/audit.md` → "Scheduled audit"). It's optional; manual `audit`
-works everywhere.
+If the host supports scheduled/recurring jobs, offer to set up a recurring
+`atlas-audit` job (see `references/agents/audit.md` → "Scheduled audit", and
+your host file for the concrete recipe). It's optional; manual `audit` works
+everywhere.
 
 ## Finish
 
@@ -124,13 +117,10 @@ Summarise: mission in a sentence, chosen domain, what was generated, and the
 recommended next step. Append a session-log entry
 (`references/agents/session-log.md`).
 
-**Save a Hermes memory pointer** so future sessions know this project exists
-even without the Atlas skill loaded (see `references/session-continuity.md` →
-"Hermes memory pointer"):
+**Save a memory pointer** so future sessions know this project exists even
+without the Atlas skill loaded (see `references/session-continuity.md` →
+"Memory pointer", and your host file for where to store it — persistent memory
+if the host has it, otherwise the root `AGENTS.md`):
 ```
-memory(
-  action="add",
-  target="memory",
-  content="Atlas project '<name>' at <abs-path>. Phase: plan. Key focus: <one line>."
-)
+Atlas project '<name>' at <abs-path>. Phase: plan. Key focus: <one line>.
 ```

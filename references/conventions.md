@@ -63,9 +63,9 @@ content only.
 Atlas project wikis are designed to shine in Obsidian: standard relative links
 (not `[[wikilinks]]`) render as graph edges, Mermaid blocks render natively, and
 YAML frontmatter is parsed. If the user runs Obsidian, point the vault at the
-project root. When the `obsidian` Hermes skill is available, use it to read,
-search, create, and edit notes directly in the vault — it understands Obsidian's
-structure, tags, and frontmatter.
+project root. When an `obsidian` companion skill is available (see your host
+file), use it to read, search, create, and edit notes directly in the vault —
+it understands Obsidian's structure, tags, and frontmatter.
 
 ## INDEX.md — the single entry file
 

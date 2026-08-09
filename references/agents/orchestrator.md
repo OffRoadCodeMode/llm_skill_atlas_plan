@@ -1,7 +1,8 @@
 # Agent: orchestrator
 
 The orchestrator is the wiki maintainer and delegator. Its *behaviour* is identical
-across interfaces; only the trigger differs (Hermes natural language, IDE commands).
+across interfaces; only the trigger differs (natural language in a chat agent,
+slash commands in an IDE).
 
 ## Responsibilities
 
@@ -38,27 +39,29 @@ clean. Spawn sub-agents for research, diagramming, auditing, decision capture, e
 and collect their outputs. The orchestrator coordinates; it does not do everything
 itself.
 
-### Hermes delegate_task patterns
+### Delegation patterns
 
-Use `delegate_task` for any work that would flood the main context with
-intermediate data (research, multi-file audits, code inspection) or that can run
-in parallel. Key patterns:
+Use the host's sub-agent/task-delegation mechanism (see your host file —
+`references/hosts/<host>.md` → "Delegation patterns") for any work that would
+flood the main context with intermediate data (research, multi-file audits, code
+inspection) or that can run in parallel. Key patterns:
 
 - **Research delegation** — dispatch a subagent with a specific research goal,
   relevant context (file paths, prior findings, constraints), and a request for
   a structured output. The subagent's summary re-enters the main context cleanly.
-- **Parallel research** — use `tasks` (batch mode) to dispatch 2-3 independent
-  research streams simultaneously (e.g. "research electrics cert", "research
-  solar panel options", "research insulation materials" in one batch).
+- **Parallel research** — where the host supports parallel sub-agents, dispatch
+  2-3 independent research streams simultaneously (e.g. "research electrics
+  cert", "research solar panel options", "research insulation materials").
 - **Audit delegation** — the audit checklist can be dispatched to a subagent if
   the project is large, keeping the audit's intermediate reads out of context.
 
 **When NOT to delegate:** single tool calls, tasks needing user interaction
-(subagents cannot use `clarify`), or quick lookups. Delegation has overhead —
-use it when the context savings or parallelism justify it.
+(subagents typically cannot ask the user clarifying questions), or quick
+lookups. Delegation has overhead — use it when the context savings or
+parallelism justify it.
 
 Pass all relevant context (file paths, error messages, project structure,
-constraints) in the `context` field — subagents have no memory of your
+constraints) in the delegation prompt — subagents have no memory of your
 conversation. If the user works in a non-English language, note it in context so
 subagents respond in the right language.
 
@@ -71,12 +74,13 @@ design changed — regenerate its diagrams?", "the financing workstream complete
 
 ## Does NOT watch the filesystem
 
-The orchestrator runs only when invoked — manually or by a Hermes cron job. A
-schedule-triggered run is still an invocation, not passive self-healing.
+The orchestrator runs only when invoked — manually or by a scheduled job (if the
+host supports them). A schedule-triggered run is still an invocation, not
+passive self-healing.
 
 ## Invocation bindings
 
-- **Hermes (primary)** — reachable through the skill in natural language ("audit
-  the wiki", "what systems should we create?"). No special syntax.
+- **Chat agent (primary)** — reachable through the skill in natural language
+  ("audit the wiki", "what systems should we create?"). No special syntax.
 - **IDE (secondary)** — optional commands like `/orchestrator:audit`,
   `/orchestrator:sync`. Thin wrappers over the same behaviour.
