@@ -1,10 +1,13 @@
 ---
 name: atlas
-description: Use when the user asks to plan, manage, or work on any project.
-  Activates the Atlas planning framework: onboards projects, manages systems,
-  logs sessions, captures decisions, and maintains a structured project wiki.
-  Works for any domain (software, business, research, personal builds).
-version: 1.0.0
+description: Project planning framework. Onboards any project (software,
+  business, research, personal builds) into a mission-anchored planning wiki
+  with systems, phases, decisions, and session continuity. Use when the user
+  asks to plan a project, create a project roadmap, organize project research,
+  track decisions or ADRs, manage phases or workstreams, plan a build, spike
+  an idea, or pick up a project after a break. Do not use for one-off drafts
+  or general Q&A.
+version: 1.1.0
 tags: [planning, project-management, wiki, framework]
 ---
 
@@ -33,6 +36,11 @@ session search, companion skills) to your host's concrete tools:
 
 | Host | Read |
 |------|------|
+| Claude Code | `references/hosts/claude-code.md` |
+| Cursor | `references/hosts/cursor.md` |
+| Codex CLI | `references/hosts/codex-cli.md` |
+| Gemini CLI | `references/hosts/gemini-cli.md` |
+| OpenClaw | `references/hosts/openclaw.md` |
 | Hermes | `references/hosts/hermes.md` |
 | Devin CLI / Windsurf | `references/hosts/devin.md` |
 | Anything else / unsure | `references/hosts/generic.md` |
@@ -186,6 +194,6 @@ Domain packs may recommend additional skills specific to the domain.
 ## Version
 
 This skill's version is in the `version:` field of this file's frontmatter
-(`1.0.0`). On onboarding, stamp it into the project (root `AGENTS.md` and
-`project/DASHBOARD.md` footer, e.g. `atlas: 1.0.0`).
+(`1.1.0`). On onboarding, stamp it into the project (root `AGENTS.md` and
+`project/DASHBOARD.md` footer, e.g. `atlas: 1.1.0`).
 See `references/governance.md` for versioning and maintenance rules.

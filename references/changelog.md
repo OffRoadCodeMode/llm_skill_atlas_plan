@@ -4,6 +4,36 @@ All notable changes to the Atlas framework itself. Format: reverse chronological
 Bump the `version:` field in `SKILL.md` frontmatter (semver) for convention changes;
 a major bump signals breaking convention changes.
 
+## 1.1.0 — 2026-10-26
+
+Marketplace-readiness release (prepared for sale on Agensi). No framework
+conventions changed — additive packaging, licensing, and host coverage.
+
+- **License:** replaced MIT with the **Atlas Personal License** — use in
+  unlimited projects with any agent; no redistribution, resale, or public
+  sharing. Paid distribution requires it.
+- **SKILL.md frontmatter:** description retuned for reliable triggering —
+  explicit trigger phrases buyers actually say ("plan a project", "project
+  roadmap", "track decisions/ADRs", "pick up a project after a break") plus a
+  negative trigger ("Do not use for one-off drafts or general Q&A").
+- **New: `examples/example-project/`** — a small, internally consistent
+  example planning repo ('nightowl', an RSS digest CLI) showing the v1.0.0
+  conventions in practice: dashboard scoreboard, one system in design phase
+  with a DR and a concluded spike (spec + results), one workstream, the
+  overview roll-ups mirrored, a conception research doc, and session files.
+  Shows buyers what Atlas output looks like before they run it.
+- **New host adapters** (six-capability contract, from vendor docs):
+  `hosts/claude-code.md`, `hosts/cursor.md`, `hosts/codex-cli.md`,
+  `hosts/gemini-cli.md`, `hosts/openclaw.md` — covering the mainstream
+  marketplace agents. OpenClaw gets a first-class scheduled-audit recipe via
+  its built-in Automations. SKILL.md host table updated accordingly.
+- **Packaging:** `.gitattributes` added (`export-ignore` for dotfiles);
+  README documents the release recipe —
+  `git archive --format=zip --prefix=atlas/ HEAD -o atlas-<version>.zip`.
+
+Projects onboarded under 1.0.0 need no changes; new adapters and the example
+are available going forward.
+
 ## 1.0.0 — 2026-10-26
 
 **Breaking.** `project/shared/` replaced by `overview/` + `conception/`;

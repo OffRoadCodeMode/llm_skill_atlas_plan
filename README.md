@@ -156,7 +156,21 @@ references/           All support files (guides, agents, domain packs, changelog
   agents/             Generic agents (orchestrator, session-log, decision-record, audit, ...)
   domains/            Pluggable domain packs (software, general)
 templates/            Generic document + system-folder templates
+examples/             A small filled-in example planning repo (what Atlas output looks like)
 ```
+
+## Packaging a release
+
+The distributable zip is built from git — one command, always reproducible.
+It produces the required single-top-level-folder layout (`atlas/…`), with no
+git metadata; `.gitattributes` keeps dotfiles out via `export-ignore`:
+
+```bash
+git archive --format=zip --prefix=atlas/ HEAD -o atlas-<version>.zip
+```
+
+Upload that zip to the marketplace of choice (e.g. Agensi — validated for its
+security scan: no secrets, no binaries, text-only).
 
 ## Status
 
@@ -178,4 +192,5 @@ both processes.
 
 ## License
 
-MIT. See [LICENSE](LICENSE).
+Atlas Personal License — use in unlimited projects with any agent; no
+redistribution, resale, or public sharing. See [LICENSE](LICENSE).
