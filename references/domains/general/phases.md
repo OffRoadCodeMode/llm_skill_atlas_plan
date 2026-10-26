@@ -31,7 +31,7 @@ plan -> research -> design -> execute -> review sequence. Expect iteration:
 The gate still matters — a system shouldn't advance to `execute` until its
 `design` is substantively complete — but don't treat phase transitions as
 one-way doors. If new information invalidates a design, move the system back to
-`research` or `design` and note the regression in its `CHANGELOG.md`.
+`research` or `design` and note the regression in the session's daily log.
 
 ## Gates need evidence
 

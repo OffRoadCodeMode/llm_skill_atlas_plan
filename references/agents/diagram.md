@@ -11,7 +11,7 @@ Suggest creating a diagram when any of these triggers occur:
    (e.g. workshop post layout, van floor plan, interior cabinet arrangement,
    shelter dimensions with working clearances).
 
-2. **System relationships** — the system map (`project/shared/system-map.md`)
+2. **System relationships** — the system map (`project/overview/system-map.md`)
    reaches 3+ systems with defined edges. A visual graph helps more than a
    text table.
 
@@ -63,7 +63,7 @@ priority order:
   diagram — want me to sketch it in Excalidraw?"
 - Create the diagram using the selected tool's format.
 - Save it under the relevant system's `design/diagrams/` folder, or
-  `project/shared/diagrams/` for cross-system diagrams.
+  `project/overview/diagrams/` for cross-system diagrams.
 - Link the diagram from the relevant artifact (DR, design doc, system INDEX.md).
 - If the user says no, don't insist. Note it and move on.
 - One diagram per file, with a short caption and links back to the artifact it

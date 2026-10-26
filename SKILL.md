@@ -4,7 +4,7 @@ description: Use when the user asks to plan, manage, or work on any project.
   Activates the Atlas planning framework: onboards projects, manages systems,
   logs sessions, captures decisions, and maintains a structured project wiki.
   Works for any domain (software, business, research, personal builds).
-version: 0.9.0
+version: 1.0.0
 tags: [planning, project-management, wiki, framework]
 ---
 
@@ -18,7 +18,7 @@ into a **goal-directed planning wiki**: mission-anchored, organised by
 **Systems** are things you build (with phases, design, artifacts). **Workstreams**
 are processes you complete (with tasks, research, decisions, notes — no phase
 gates). Workstreams can be project-level or nested inside a system. Research
-lives in a workstream, a system, or `shared/research/`. See
+lives in a workstream, a system, or `conception/research/`. See
 `references/workstreams.md`.
 
 This file is the **router**. It tells you (the agent) what to read and when. Load
@@ -97,14 +97,17 @@ requirements -> design -> build, never the product.
 | Use host-specific tools (memory, cron, delegation, session search) | `references/hosts/<host>.md` (loaded at session start) |
 | Start a new project / no `project/` exists | `references/onboarding.md` |
 | Resume after any gap | `references/session-continuity.md`, then `project/DASHBOARD.md`, `sessions/CURRENT_STATE.md`, `project/mission.md` |
-| Understand file/naming/link/git rules | `references/conventions.md` |
+| Understand file/naming/link/git rules + the inline roll-up rule | `references/conventions.md` |
 | Create, evolve, split, or retire a system (or sub-system) | `references/system-lifecycle.md` |
 | Create, advance, or complete a workstream | `references/workstreams.md` |
-| Track how systems relate (APIs, streams, power, adjacency) | `references/system-lifecycle.md` (section "Relating systems"); `project/shared/system-map.md` |
+| See all work across the project (the global task roll-up) | `project/overview/TASKS.md` (mirror it on every local task change — same action) |
+| Browse all decisions / scan for same-topic DRs before deciding | `project/overview/DECISIONS.md` (add a row at every DR capture) |
+| Track how systems relate (APIs, streams, power, adjacency) | `references/system-lifecycle.md` (section "Relating systems"); `project/overview/system-map.md` |
 | Know the phases + exit gates for this project | `references/domains/<active-domain>/phases.md` |
 | Log what happened this session | `references/agents/session-log.md` |
-| Capture a significant decision | `references/agents/decision-record.md` |
+| Capture a significant decision | `references/agents/decision-record.md` (+ row in `overview/DECISIONS.md`) |
 | Create a diagram (layout, schematic, plan, system map) | `references/agents/diagram.md` |
+| Run / conclude a technical spike (de-risk a component) | `references/domains/<active-domain>/spikes.md` (software pack) |
 | Check integrity / advance a phase / reconcile drift | `references/agents/audit.md` |
 | Maintain indexes, suggest new systems, delegate | `references/agents/orchestrator.md` |
 | Modify Atlas itself | `references/governance.md` |
@@ -128,12 +131,17 @@ active domain is chosen during onboarding and recorded in `project/DASHBOARD.md`
    `references/workstreams.md`.
 3. **Gates need evidence.** A system advances a phase only when every exit
    criterion is satisfied by a named artifact (see `references/domains/<domain>/phases.md`).
-4. **Audit on demand, honestly.** Atlas does not passively self-heal; it checks
-   and repairs when invoked (manually or by cron).
-5. **Portable markdown.** Standard relative links (not `[[wikilinks]]`), Mermaid
+4. **Roll-ups are maintained inline.** `overview/` files, dashboard rows, and
+   INDEX contents mirror their sources — the roll-up is updated *in the same
+   action* as the source change, never deferred. See
+   `references/conventions.md` → "Overview roll-ups — maintained inline".
+5. **Audit verifies, it doesn't repair.** Atlas does not passively self-heal.
+   Audit runs when invoked (manually or by cron), *verifies* that inline
+   discipline held, and reports — it never rewrites project content.
+6. **Portable markdown.** Standard relative links (not `[[wikilinks]]`), Mermaid
    fenced blocks, YAML frontmatter. Render well everywhere, shine in Obsidian.
-6. **Single active writer.** Git is the reconciliation backstop.
-7. **Delegate to sub-agents** to keep the main context clean.
+7. **Single active writer.** Git is the reconciliation backstop.
+8. **Delegate to sub-agents** to keep the main context clean.
 
 ## Staying on-rails (preventing drift in long sessions)
 
@@ -178,6 +186,6 @@ Domain packs may recommend additional skills specific to the domain.
 ## Version
 
 This skill's version is in the `version:` field of this file's frontmatter
-(`0.9.0`). On onboarding, stamp it into the project (root `AGENTS.md` and
-`project/DASHBOARD.md` footer, e.g. `atlas: 0.9.0`).
+(`1.0.0`). On onboarding, stamp it into the project (root `AGENTS.md` and
+`project/DASHBOARD.md` footer, e.g. `atlas: 1.0.0`).
 See `references/governance.md` for versioning and maintenance rules.

@@ -3,6 +3,9 @@
 Optional — only if the system has tracked tasks. `estimate` is optional and never
 blocks a task from being actionable — use `—` when unknown.
 
+**Mirror every change here into `project/overview/TASKS.md` in the same action**
+(add, tick, block, edit — the roll-up never lags). `audit` flags drift.
+
 - [ ] TASK-001: Description | priority: high | estimate: — | status: todo
 - [ ] TASK-002: Description | priority: medium | estimate: — | status: todo
 - [x] TASK-003: Description | priority: low | estimate: — | status: done

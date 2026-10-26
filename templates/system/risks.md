@@ -6,9 +6,9 @@ closed. Every active risk should name an Owner and a Mitigation (audit flags
 high-severity risks missing either).
 
 High-severity or blocking risks should also be linked in
-`project/shared/risks.md` (the per-system index) so they are visible at the
-project level. `audit` (check 13) reconciles the shared index against the
-per-system files.
+`project/overview/risks.md` (the per-system index) **in the same action**, so
+they are visible at the project level. `audit` (check 13) verifies the overview
+index against the per-system files.
 
 ## Active
 | ID | Risk | Likelihood | Impact | Severity | Owner | Mitigation | Status |

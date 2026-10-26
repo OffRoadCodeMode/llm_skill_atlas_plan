@@ -11,7 +11,7 @@ project-level phase.
 | **research** | Investigating approaches, competitors, technology | Research docs exist for all identified streams, each reviewed, open questions logged |
 | **requirements** | Defining what the system must do | Functional + non-functional requirements written, each has an ID (REQ-XXX), reviewed against mission |
 | **architecture** | Designing system structure | Architecture diagrams created, DRs for key decisions, component decomposition done, data flow mapped |
-| **design** | Detailed design | API contracts defined, data models designed, wireframes for user-facing parts, spike prototypes for risky components |
+| **design** | Detailed design | API contracts defined, data models designed, wireframes for user-facing parts, spike prototypes for risky components — concluded `spikes/<name>/spec.md` + `results.md` per spike (see `spikes.md`) |
 | **implementation** | Building the system | Code repo created, plan↔code links established, CI/CD running, iterative delivery |
 | **deployed** | In production | System deployed, monitoring in place, runbook written |
 

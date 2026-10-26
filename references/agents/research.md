@@ -13,9 +13,10 @@ Research is a folder that can live in three places:
   `van-research` workstream). See `references/workstreams.md`.
 - **System-specific research** (`project/systems/<name>/research/`): deep dives
   into one system's options, constraints, architecture, or technology choices.
-- **General / cross-cutting research** (`project/shared/research/`): early
-  project context, technology surveys, domain background, market analysis that
-  doesn't belong to any single system or workstream.
+- **Pre-system / whole-project research** (`project/conception/research/`): early
+  exploration, technology surveys, domain background, market analysis that
+  exists before — or outside of — any system or workstream. Expect docs to
+  migrate into an owner's `research/` as the project takes shape.
 
 If unsure, ask: "does this finding apply to one system, a specific process
 (workstream), or the whole project?"
@@ -96,7 +97,7 @@ gather pricing data as a first-class output:
   spreadsheet can separate capital outlay from ongoing commitments.
 - Flag prices that are indicative vs confirmed quotes.
 - Record in the research doc and also in the system's `costs.md` (or
-  `project/shared/costs.md` if cross-system).
+  `project/overview/costs.md` if cross-system) — in the same action.
 - Set `confidence: low` on estimates from single sources or non-local pricing
   (e.g. US prices for an Irish project).
 
@@ -110,7 +111,7 @@ in sync via the audit:
    audit rolls up into the dashboard. It's version-controlled, diffable, and
    always readable in any editor.
 
-2. **`project/shared/budget.xlsx`** — the living spreadsheet. When the `xlsx`
+2. **`project/overview/budget.xlsx`** — the living spreadsheet. When the `xlsx`
    skill is available, maintain a spreadsheet with formulas for running totals,
    contingency calculations, per-system breakdowns, and "what-if" scenarios.
    The spreadsheet is the working tool; the markdown is the canonical record.

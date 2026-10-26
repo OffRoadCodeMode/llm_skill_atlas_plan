@@ -63,26 +63,22 @@ never a copy of Atlas.
 
 ## What it outputs
 
-Atlas writes plain markdown into your planning repo. A software project a little
-way into planning might look like this (systems **emerge** over time, so early on
-you will have fewer):
+Atlas writes plain markdown into your planning repo — and keeps it **sparse**:
+day one is ~7 files, everything else emerges on demand. A software project a
+little way into planning might look like this:
 
 ```
 my-project-planning/
-├── INDEX.md                      # Master map of content
 ├── AGENTS.md                     # Root rules (records the Atlas version used)
 ├── project/
-│   ├── DASHBOARD.md              # Quick-scan status: phase per system, risks, costs, next steps
+│   ├── DASHBOARD.md              # Scoreboard: phase per system, workstreams, next milestones
 │   ├── mission.md                # The anchor: everything traces back here
 │   ├── systems/
-│   │   ├── INDEX.md
 │   │   ├── your-system-1/
 │   │   │   ├── INDEX.md           # System entry file: identity (type, purpose, phase) + contents
-│   │   │   ├── AGENTS.md
-│   │   │   ├── CHANGELOG.md
-│   │   │   ├── open-questions.md
-│   │   │   ├── risks.md           # Optional register (rolls up to the dashboard)
-│   │   │   ├── costs.md           # Optional register (rolls up to the dashboard)
+│   │   │   ├── open-questions.md  # Optional register, created on demand
+│   │   │   ├── risks.md           # Optional register, created on demand
+│   │   │   ├── costs.md           # Optional register, created on demand
 │   │   │   ├── research/
 │   │   │   │   └── orchestration-patterns.md
 │   │   │   ├── design/
@@ -97,24 +93,24 @@ my-project-planning/
 │   │   │           └── TASKS.md
 │   │   └── your-system-2/         # A second system, lighter so far
 │   │       ├── INDEX.md
-│   │       ├── AGENTS.md
-│   │       ├── open-questions.md
 │   │       └── research/
 │   │           └── approach-options.md
 │   ├── workstreams/               # Project-level workstreams (processes to complete)
-│   │   ├── INDEX.md
 │   │   └── financing/
 │   │       ├── INDEX.md
 │   │       ├── TASKS.md
 │   │       └── decisions/
 │   │           └── DR-001.md
-│   └── shared/                    # Cross-system content
-│       ├── glossary.md
-│       ├── research/              # General / cross-cutting research
-│       ├── open-questions.md      # Cross-system questions + index of per-system OQs
-│       ├── risks.md               # Project-wide risks + index of per-system risks
-│       ├── costs.md               # Project-wide cost register / budget (rolls up per-system)
-│       └── system-map.md          # How systems relate: Mermaid graph + register
+│   ├── overview/                  # Cross-project roll-ups — maintained inline, verified by audit
+│   │   ├── TASKS.md               # Global task roll-up: full mirror of every system/workstream TASKS.md
+│   │   ├── DECISIONS.md           # Index of every Decision Record (+ pre-DR conflict scan)
+│   │   ├── open-questions.md      #   …created on demand: cross-system questions + per-system index
+│   │   ├── risks.md               #   …created on demand: project-wide risks + per-system index
+│   │   ├── costs.md               #   …created on demand: project-wide cost register / budget
+│   │   ├── glossary.md            #   …created on demand: shared terminology
+│   │   └── system-map.md          #   …created on demand: Mermaid graph + relationship register
+│   └── conception/                # Pre-system space
+│       └── research/              # Early / whole-project exploration, before systems exist
 └── sessions/
     ├── CURRENT_STATE.md           # Rolling "where are we now" for cold starts
     ├── conflicts/                 # Auto-generated decision conflict reports (CONFLICT-XXX.md)
@@ -124,15 +120,24 @@ my-project-planning/
 
 Notes on the output:
 
+- **Day one is ~7 files** (`AGENTS.md`, `DASHBOARD.md`, `mission.md`,
+  `overview/TASKS.md`, `overview/DECISIONS.md`, `CURRENT_STATE.md`, one session
+  log). There are **no placeholder files** — no empty register templates, no
+  map-of-content indexes; container folders appear with their first content.
 - **Systems are folders that emerge**, each tracking its own phase and decisions.
   A non-software project would have different systems (e.g. `electrical`,
   `plumbing` for a van conversion) driven by its **domain pack**.
 - **Only what's needed exists.** Subfolders like `research/`, `design/`, and
-  registers like `risks.md`/`costs.md` appear when a system actually needs them.
-- **Systems can relate.** `shared/system-map.md` holds a Mermaid graph + register
-  of how systems connect (APIs, event streams, shared data; or power, physical
-  adjacency for a physical build), and each system mirrors its own edges. So you
-  can answer "if I change X, what's affected?"
+  registers like `risks.md`/`costs.md` appear when a system actually needs them;
+  overview registers appear with the first term, question, risk, cost, or edge.
+- **Systems can relate.** `overview/system-map.md` holds a Mermaid graph +
+  register of how systems connect (APIs, event streams, shared data; or power,
+  physical adjacency for a physical build), and each system mirrors its own
+  edges. So you can answer "if I change X, what's affected?"
+- **Roll-ups are maintained inline, not regenerated.** Any change to a local
+  register (task tick, risk, decision, cost) is mirrored into its `overview/`
+  roll-up in the same action — so the whole-project picture is always current.
+  `audit` verifies the mirrors and reports drift; it never rewrites content.
 - **Everything cross-links** with standard relative markdown links, so it browses
   cleanly in GitHub, VS Code, Obsidian, or any markdown viewer.
 
@@ -155,7 +160,7 @@ templates/            Generic document + system-folder templates
 
 ## Status
 
-`v0.9.0`. Built minimal-but-complete (principle: *prove before scaling*). The
+`v1.0.0`. Built minimal-but-complete (principle: *prove before scaling*). The
 critical agents (`session-log`, `decision-record`, `audit`, `diagram`) are fully
 specified; others are lighter and grow as pain is felt.
 

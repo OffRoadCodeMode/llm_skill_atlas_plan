@@ -5,20 +5,25 @@
 > atlas: <version>
 
 <!--
-Partly derived, partly owned:
-- Systems table rows: REGENERATED from each system's INDEX.md frontmatter (system_type, parent, status, phase) by audit. Never hand-author rows.
-  Sub-systems are listed under their parent (Parent column names the parent; blank = top-level).
-- Workstreams table rows: REGENERATED from each workstream's INDEX.md and TASKS.md by audit.
-  Task counts derived from TASKS.md checkboxes. Owner column: "project" or system name (from INDEX.md `system:` frontmatter).
-- Top Risks + Costs: ROLLED UP from the risk/cost registers by audit.
-- Next Milestones + Recent Decisions: dashboard-owned, maintained directly.
+Scoreboard only — the one-page "where is everything". Maintained INLINE,
+verified by audit:
+- Systems rows: updated INLINE whenever a system's INDEX.md frontmatter changes
+  (system_type, parent, status, phase). Never hand-author rows.
+  Sub-systems listed under their parent (blank Parent = top-level).
+  Tasks (open) = todo + in-progress + blocked, from overview/TASKS.md.
+- Workstreams rows: updated INLINE when a workstream's INDEX.md or TASKS.md
+  changes. Task counts from TASKS.md checkboxes. Owner: "project" or system
+  name (from INDEX.md `system:` frontmatter).
+- Next Milestones: hand-maintained planning lines.
+Roll-ups (tasks, decisions, questions, risks, costs, system map) live in
+project/overview/ — link to them, never copy them here.
 -->
 
 ## Systems
 
-| System | Parent | Type | Phase | Status | External Links |
-|--------|--------|------|-------|--------|----------------|
-| | | | | | |
+| System | Parent | Type | Phase | Status | Tasks (open) | External Links |
+|--------|--------|------|-------|--------|--------------|----------------|
+| | | | | | | |
 
 ## Workstreams
 
@@ -26,20 +31,11 @@ Partly derived, partly owned:
 |------------|-------|--------|---------------------|-------------|-------|
 | | | | | | |
 
-## Top Risks
-> Rolled up from risk registers (project/shared/risks.md + per-system).
-1. R-001 [risk] | severity: high | owner: [who] | status: [open/mitigating]
-
-## Costs
-> Rolled up from cost registers (project/shared/costs.md + per-system).
-- Budget: [amount / range] · Committed: [x] · Confidence: [low/med/high]
-- Top drivers: [item] ~[$], [item] ~[$]
-
-## System Map
-> How systems connect (graph + register): see [shared/system-map.md](shared/system-map.md).
-
 ## Next Milestones
 - [Milestone] | target: [date] | system: [which]
 
-## Recent Decisions
-- DR-XXX: [decision] (YYYY-MM-DD)
+## Roll-ups — see overview/
+- [Global task list](overview/TASKS.md) · [Decisions](overview/DECISIONS.md)
+<!-- Link ONLY overview files that exist. The other registers (open-questions,
+risks, costs, glossary, system-map) are created on demand — add their links
+here when the file appears, never before (audit flags broken links). -->

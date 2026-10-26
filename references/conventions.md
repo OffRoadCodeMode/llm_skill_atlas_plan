@@ -6,21 +6,18 @@ How Atlas structures files. Read this before generating or editing project conte
 
 ```
 my-project-planning/
-├── INDEX.md                  # Master index — root of the project tree
 ├── AGENTS.md                 # Root rules; references Atlas; records skill version used
 ├── project/
-│   ├── INDEX.md
-│   ├── DASHBOARD.md          # Quick-scan status: phase per system, risks, costs, next steps
+│   ├── DASHBOARD.md          # Scoreboard: phase per system, workstreams, next milestones
 │   ├── mission.md            # Mission, vision, value prop, principles, constraints
 │   ├── systems/
-│   │   ├── INDEX.md
 │   │   └── (system folders emerge over time)
 │   │       └── <parent-system>/          # A system may contain sub-systems
-│   │           ├── INDEX.md              # System entry file: identity + contents (parent: none)
-│   │           ├── AGENTS.md
-│   │           ├── CHANGELOG.md
+│   │           ├── INDEX.md              # System entry file: identity + contents
 │   │           ├── research/
-│   │           ├── design/
+│   │           ├── design/               # decisions/, diagrams/
+│   │           ├── TASKS.md              # Phase-aligned tasks (optional)
+│   │           ├── AGENTS.md             # ONLY if the system has custom conventions
 │   │           ├── workstreams/          # Optional: nested workstreams owned by this system
 │   │           │   └── <workstream>/     # Same structure as project-level workstreams
 │   │           └── systems/              # Sub-systems (same structure)
@@ -28,27 +25,23 @@ my-project-planning/
 │   │                   ├── INDEX.md      # System entry file (parent: <parent-system>)
 │   │                   └── ...
 │   ├── workstreams/
-│   │   ├── INDEX.md
 │   │   └── (workstream folders emerge over time)
 │   │       └── <workstream>/
-│   │           ├── INDEX.md              # Lightweight index
+│   │           ├── INDEX.md              # Purpose + links
 │   │           ├── TASKS.md              # Simple checklist (Open / In Progress / Done)
 │   │           ├── NOTES.md              # Running narrative
 │   │           ├── decisions/            # DR-XXX.md (same format as system DRs)
 │   │           ├── research/             # Research docs specific to this workstream
-│   │           ├── open-questions.md     # Optional
-│   │           └── risks.md              # Optional
-│   └── shared/
-│       ├── INDEX.md
-│       ├── glossary.md
-│       ├── research/           # General / cross-cutting research
-│       ├── open-questions.md  # Cross-system/workstream questions + index
-│       ├── risks.md           # Project-wide risk register
-│       ├── costs.md           # Project-wide cost register / budget
-│       ├── budget.xlsx        # Living cost spreadsheet (optional, if xlsx skill available)
-│       └── system-map.md      # Inter-system relationship map (graph + register)
+│   │           └── (open-questions.md / risks.md — created on demand)
+│   ├── overview/
+│   │   ├── TASKS.md           # Global task roll-up — full mirror, maintained inline
+│   │   ├── DECISIONS.md       # Index of every Decision Record, maintained inline
+│   │   └── (glossary.md, open-questions.md, risks.md, costs.md, system-map.md,
+│   │       budget.xlsx — created on demand: first term, question, risk,
+│   │       cost, or relationship edge)
+│   └── conception/
+│       └── (research/ appears with the first pre-system research doc)
 ├── sessions/
-│   ├── INDEX.md
 │   ├── CURRENT_STATE.md
 │   ├── conflicts/              # Auto-generated decision conflict reports (CONFLICT-XXX.md)
 │   └── week-01/
@@ -57,6 +50,45 @@ my-project-planning/
 
 The framework itself (this skill) is **not** copied in. Projects hold generated
 content only.
+
+## Overview roll-ups — maintained inline (core rule)
+
+`project/overview/` holds the whole-project picture one level deeper than the
+dashboard. Roll-up files are **mirrors, not separate documents** — their content
+derives from local registers and system frontmatter.
+
+**The rule: a roll-up is updated in the same action as its source change.** When
+you tick a task, log a risk, raise a question, capture a decision, change a cost,
+change a system's phase, or relate two systems — update the local file *and* its
+roll-up before moving on. Never defer roll-up maintenance to "later" or
+end-of-session; deferred maintenance is where drift is born.
+
+Local registers and system files are the **source of truth**; roll-ups are
+redundant views. `audit` verifies roll-ups against their sources and flags
+drift; it may offer to regenerate a badly drifted roll-up (with the user's
+approval) as a repair. The same rule applies to `INDEX.md` files: add the link
+when you add the artifact; `orchestrator` can regenerate any INDEX on request.
+
+| Roll-up | Mirrors |
+|---------|---------|
+| `overview/TASKS.md` | every system and workstream `TASKS.md` (full mirror) |
+| `overview/DECISIONS.md` | every Decision Record across systems and workstreams |
+| `overview/open-questions.md` | cross-system questions + index of significant per-owner OQs |
+| `overview/risks.md` | project-wide risks + index of high-severity per-owner risks |
+| `overview/costs.md` | project-wide cost register / budget (rolls up per-system registers) |
+| `overview/system-map.md` | top-level system relationships (edges from all systems) |
+| `DASHBOARD.md` rows | system/workstream `INDEX.md` frontmatter |
+
+`project/conception/` is the **pre-system space**: exploration that exists
+before any system or workstream owns it. Research here is expected to migrate
+into a system's (or workstream's) `research/` as the project takes shape — an
+empty conception folder later in the project is a sign of health, not neglect.
+
+Only `overview/TASKS.md` and `overview/DECISIONS.md` exist from day one. The
+other overview registers are **created on demand** — first shared term
+(glossary), first cross-cutting question, first risk, first cost, first
+relationship edge (system-map). Empty registers are noise, and noise is what
+makes a planning repo unreadable.
 
 ## Obsidian
 
@@ -67,33 +99,37 @@ project root. When an `obsidian` companion skill is available (see your host
 file), use it to read, search, create, and edit notes directly in the vault —
 it understands Obsidian's structure, tags, and frontmatter.
 
-## INDEX.md — the single entry file
+## INDEX.md — the entry file for systems and workstreams
 
-Every folder at **system level and above** gets an `INDEX.md`. There is no
-separate `OVERVIEW.md`: a folder's `INDEX.md` is its one entry file. Three
-flavours:
-
-- **Container folders** (`project/`, `systems/`, `workstreams/`, `shared/`,
-  `sessions/`, root): a pure Map of Content (MOC) — a short intro plus relative
-  links to the folder's key artifacts and children. Fully regenerated by
-  `audit`/`orchestrator`.
+Only **system folders** and **workstream folders** get an `INDEX.md`:
 - **System folders**: the system's identity **and** contents in one file.
   Authored frontmatter (`type: system`, `system_type`, `parent`, `status`,
   `phase`) and authored sections (Purpose, Boundaries, Origin, Sub-systems,
-  Relationships, External Links), plus a **Contents** section at the end that
-  `audit`/`orchestrator` regenerate (links to artifacts, subfolders, children).
-  The dashboard's system rows derive from this frontmatter.
+  Relationships, External Links), plus a **Contents** section at the end
+  (links to artifacts, subfolders, children) — maintained inline as artifacts
+  are added, verified by `audit`. The dashboard's system rows derive from this
+  frontmatter (updated inline when it changes).
 - **Workstream folders**: a lighter entry file (purpose line + task/research/
   decision links). No AGENTS, no phase gates. See `references/workstreams.md`.
 
+**Container folders have no index file** (`project/`, `systems/`, `workstreams/`,
+`overview/`, `conception/`, `sessions/`, root): the folder is its own index, and
+orientation comes from `DASHBOARD.md` and the root `AGENTS.md`. Do not create
+Map-of-Content index files in containers — a bullet list of links to files that
+are already visible in the folder listing is permanent maintenance cost for zero
+information.
+
 Sub-parts (research files, individual DRs) do not get their own INDEX. When
-regenerating a system's INDEX, only the **Contents** section is rewritten — the
-authored frontmatter and metadata sections are left intact.
+maintaining or regenerating a system's INDEX, only the **Contents** section is
+rewritten — the authored frontmatter and metadata sections are left intact.
 
 ## AGENTS.md
 
-Only **root + system level** get an `AGENTS.md`; subfolders inherit the nearest
-parent's. Keep it small (<20 lines). Template:
+The **root** always gets an `AGENTS.md` (house rules + the `atlas: <version>`
+stamp + memory pointer). A **system** gets one **only when it has conventions
+that genuinely differ from house rules** — don't seed boilerplate copies that
+just repeat the core conventions. Subfolders inherit the nearest parent's.
+Keep it small (<20 lines). Template:
 
 ```markdown
 # AGENTS.md — [Folder]
@@ -192,8 +228,7 @@ phase: <current phase>               # domain-pack-defined
 **Workstream `INDEX.md`** carries `type: workstream`, `status`, and optional
 `system:` (for nested workstreams).
 
-Container-folder `INDEX.md` files (pure MOCs) and session logs don't need
-frontmatter.
+Session logs don't need frontmatter.
 
 ## Cross-linking — standard relative markdown links, no orphans
 
@@ -215,14 +250,16 @@ frontmatter.
   sub-systems: `van/electrical/DR-001`; project-level workstreams:
   `financing/DR-001`; nested workstreams: `van/cad-design/DR-001`.
 - Requirements: `REQ-XXX`. Open questions: `OQ-XXX`. Tasks: `TASK-XXX`.
-  Risks: `R-XXX`. All numbered per register/system/workstream.
+  Risks: `R-XXX`. All numbered per register/system/workstream; qualify across
+  owners when referenced from a roll-up (e.g. `electrical/TASK-002`,
+  `financing/TASK-001`).
 - Superseded artifacts move to an `_archive/` subfolder; keep the link, mark
   `status: superseded`.
 
-## Open Questions — per-system, per-workstream, and shared index
+## Open Questions — per-system, per-workstream, and overview index
 
 Each system or workstream may have its own `open-questions.md` for questions
-within that scope. The shared `project/shared/open-questions.md` serves two roles:
+within that scope. The `project/overview/open-questions.md` serves two roles:
 
 1. **Cross-system/workstream questions** that don't belong to any single system
    or workstream.
@@ -231,16 +268,17 @@ within that scope. The shared `project/shared/open-questions.md` serves two role
    `open-questions.md`, so the full project picture is visible in one place.
 
 When a new question is raised in a system or workstream, log it in that
-system's/workstream's `open-questions.md`. If it is blocking or significant,
-also add a link line to the shared index. When a question is resolved, tick it
-in the per-system/workstream file and remove it from the shared index (or move
-to Resolved with a link). `audit` (check 6) reconciles the shared index against
-the per-system and per-workstream files.
+system's/workstream's `open-questions.md` — and **in the same action**, if it
+is blocking or significant, add a link line to the overview index. When a
+question is resolved, tick it in the per-system/workstream file and remove it
+from the overview index (or move to Resolved with a link), again in the same
+action. `audit` (check 6) verifies the overview index against the per-system
+and per-workstream files.
 
-## Risks — per-system, per-workstream, and shared index
+## Risks — per-system, per-workstream, and overview index
 
 Each system or workstream may have its own `risks.md` for risks within that
-scope. The shared `project/shared/risks.md` serves two roles:
+scope. The `project/overview/risks.md` serves two roles:
 
 1. **Project-wide risks** that don't belong to any single system or workstream.
 2. **Index of per-system and per-workstream risks** — links to high-severity or
@@ -249,17 +287,48 @@ scope. The shared `project/shared/risks.md` serves two roles:
    up from both.
 
 When a new risk is identified in a system or workstream, log it in that
-system's/workstream's `risks.md`. If it is high-severity or blocking, also add
-a link line to the shared index. When a risk is closed, update the
-per-system/workstream file and remove it from the shared index (or move to
-Closed with a link). `audit` (check 13) reconciles the shared index against
-the per-system and per-workstream files.
+system's/workstream's `risks.md` — and **in the same action**, if it is
+high-severity or blocking, add a link line to the overview index. When a risk is
+closed, update the per-system/workstream file and remove it from the overview
+index (or move to Closed with a link). `audit` (check 13) verifies the overview
+index against the per-system and per-workstream files.
+
+## Tasks — local registers, global roll-up
+
+Tasks live in local `TASKS.md` files: phase-aligned for systems (template
+`templates/system/TASKS.md`), simple checklists for workstreams
+(`templates/workstream/TASKS.md`). Local files are the source of truth.
+
+`project/overview/TASKS.md` is a **full mirror** of all of them — every owner
+(systems, project-level and nested workstreams), every status — plus a per-owner
+summary table. Like every roll-up it is **maintained inline**: ticking a task
+locally without mirroring the tick in the same action is a convention violation
+`audit` will flag. See `templates/overview/TASKS.md`.
+
+## Decisions — per-owner files, global index
+
+Every decision is a DR file in its owner's decisions folder (see
+`references/agents/decision-record.md`). `project/overview/DECISIONS.md` is the
+**index of every DR** — Active and Superseded tables, updated inline at capture
+time and on any status change (see `templates/overview/DECISIONS.md`). It serves
+two jobs: a single browsable decision history, and the **pre-DR conflict scan** —
+before writing a new DR, check the Active table for a decision on the same
+topic. If the new DR disagrees, either supersede the old one explicitly or stop
+and flag the conflict to the user (`audit` check 16 is the backstop, not the
+primary detector).
+
+## Costs — per-system registers, project-wide register
+
+Costs live in local `costs.md` registers (optional per system). The
+`project/overview/costs.md` is the project-wide register / budget, rolling up
+per-system registers and feeding the dashboard's Costs section. Updated inline
+when any register changes; `audit` (check 14) verifies.
 
 ## System maps — hierarchical
 
 System maps show how systems relate. They follow a hierarchical structure:
 
-- **Top-level** (`project/shared/system-map.md`): shows all top-level systems as
+- **Top-level** (`project/overview/system-map.md`): shows all top-level systems as
   nodes. Related systems have edges; unrelated neighbours appear as disconnected
   nodes (their presence is informational). Systems with sub-systems are marked
   with `(has sub-systems)` or a subgraph cluster.
@@ -268,11 +337,13 @@ System maps show how systems relate. They follow a hierarchical structure:
   only systems with sub-systems or enough internal relationships to warrant a
   map.
 
-Each system's `INDEX.md` Relationships table remains the local view.
-`audit` (check 15) reconciles across all levels: top-level map, per-system maps,
-and per-system INDEX relationships. When a new sub-system is created, add it to
-the parent's `system-map.md` (if one exists) and to the top-level map as a child
-of its parent.
+Each system's `INDEX.md` Relationships table remains the local view. Map and
+relationship changes are made **inline**: when two systems relate, record the
+edge in the map(s) and both systems' INDEX Relationship tables in the same
+action. `audit` (check 15) verifies consistency across all levels: top-level
+map, per-system maps, and per-system INDEX relationships. When a new sub-system
+is created, add it to the parent's `system-map.md` (if one exists) and to the
+top-level map as a child of its parent.
 
 ## Research — three homes
 
@@ -282,11 +353,12 @@ Research is a folder that can live in three places:
   process you're completing.
 - **System research** (`<system>/research/`): research for a specific system's
   design, architecture, or technology choices.
-- **General / cross-cutting research** (`project/shared/research/`): early
-  project context, technology surveys, domain background that doesn't belong to
-  any single system or workstream.
+- **Pre-system / whole-project research** (`project/conception/research/`): early
+  exploration, technology surveys, domain background that exists before — or
+  outside of — any system or workstream. Expect docs to migrate to a system or
+  workstream as the project takes shape.
 
-`audit` (check 17) governs placement so `shared/research/` doesn't become a
+`audit` (check 17) governs placement so `conception/research/` doesn't become a
 dumping ground — it flags docs that would be better placed in a specific system
 or workstream. See `references/agents/research.md` for the full research agent
 spec.

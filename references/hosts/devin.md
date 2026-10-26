@@ -63,9 +63,11 @@ atlas-audit:
   entry readable; an inline string works too.
 - **`--respect-workspace-trust false` is required** in scripts/CI — `--print`
   mode cannot show the workspace trust prompt and will otherwise fail.
-- **`--permission-mode`** — unattended runs need edits approved without a human;
-  `accept-edits` is the least-privilege option that still lets the audit apply
-  mechanical fixes. Use the default `normal` mode if you want report-only runs.
+- **`--permission-mode`** — the audit is read-only except for its own records
+  (conflict reports in `sessions/conflicts/`, the `.atlas-audit-state` file).
+  Unattended runs therefore need minimal write access: `accept-edits` is the
+  least-privilege option that still lets it write those; use the default
+  `normal` mode (report-only) if you prefer to review conflict files manually.
 - **Delivery:** have the job write its report to `sessions/audits/<date>.md`
   and commit it; the user sees it next session. If the CI supports chat
   notifications, wire those in too — ask the user what they prefer during

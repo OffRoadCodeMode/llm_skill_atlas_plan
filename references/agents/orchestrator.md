@@ -7,9 +7,12 @@ slash commands in an IDE).
 ## Responsibilities
 
 - **Wiki integrity** — when invoked, detect broken links, stale docs, missing
-  INDEX/AGENTS files (delegates the full check to `audit`).
-- **Index maintenance** — regenerate `INDEX.md` files when invoked, including
-  workstream INDEX files.
+  system/workstream INDEX files (delegates the full check to `audit`).
+- **Index maintenance** — system and workstream `INDEX.md` files are maintained
+  inline by whoever adds an artifact; the orchestrator **regenerates** one only
+  as an explicit, user-approved repair (typically after `audit` reports drift).
+  Same for badly-drifted overview roll-ups (e.g. rebuilding `overview/TASKS.md`
+  from the local TASKS.md files).
 - **System suggestions** — review project context and **recommend** new systems
   or sub-systems (the user confirms); hand off to
   `references/system-lifecycle.md` to scaffold. A component of an existing system
@@ -83,4 +86,5 @@ passive self-healing.
 - **Chat agent (primary)** — reachable through the skill in natural language
   ("audit the wiki", "what systems should we create?"). No special syntax.
 - **IDE (secondary)** — optional commands like `/orchestrator:audit`,
-  `/orchestrator:sync`. Thin wrappers over the same behaviour.
+  `/orchestrator:rebuild` (regenerate a drifted roll-up/INDEX as an approved
+  repair). Thin wrappers over the same behaviour.

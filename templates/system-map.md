@@ -2,7 +2,7 @@
 
 System maps show how systems relate. There are two levels:
 
-- **Top-level** (`project/shared/system-map.md`): shows all top-level systems as
+- **Top-level** (`project/overview/system-map.md`): shows all top-level systems as
   nodes. Related systems have edges. Unrelated neighbours still appear as
   disconnected nodes (their presence is informational). Systems that have
   sub-systems are marked with a note or subgraph label. This is the bird's-eye
@@ -15,8 +15,9 @@ System maps show how systems relate. There are two levels:
   with enough internal relationships to warrant a map).
 
 Each system's `INDEX.md` Relationships table remains the local view for
-that system. `audit` (check 15) reconciles across all levels: top-level map vs
-per-system maps vs per-system INDEX relationships.
+that system. Edges are recorded in the map(s) and both systems' INDEX tables
+in the same action; `audit` (check 15) verifies consistency across all levels:
+top-level map vs per-system maps vs per-system INDEX relationships.
 
 **System maps are Mermaid diagrams** — Mermaid renders natively in Obsidian,
 GitHub, and most markdown viewers, so the map is always visible without extra
@@ -29,7 +30,7 @@ tooling. Use Mermaid's native arrow syntax in the diagram:
 (Excalidraw is for spatial/physical drawings, not system maps — see
 `references/agents/diagram.md`.)
 
-## Top-level map (`project/shared/system-map.md`)
+## Top-level map (`project/overview/system-map.md`)
 
 ```mermaid
 graph LR

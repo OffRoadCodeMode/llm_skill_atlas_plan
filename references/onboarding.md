@@ -34,28 +34,32 @@ yet**. Write `mission.md` and the shared scaffold first.
 
 ## What to generate (both modes)
 
-Create in the **working directory** from the skill's `templates/`:
+Create in the **working directory** from the skill's `templates/` — this is the
+**entire day-one footprint**, deliberately small:
 
 ```
-INDEX.md                      ← templates: master MOC
-AGENTS.md                     ← root rules; record `atlas: <version>`
-project/INDEX.md
-project/DASHBOARD.md          ← templates/dashboard.md (seed headings; Domain: <domain>)
-project/mission.md            ← templates/mission.md (fill from interview)
-project/systems/INDEX.md
-project/workstreams/INDEX.md
-project/shared/INDEX.md
-project/shared/glossary.md
-project/shared/research/           ← (empty folder; general research lands here)
-project/shared/open-questions.md   ← templates/open-questions.md
-project/shared/risks.md            ← templates/risks.md
-project/shared/costs.md            ← templates/costs.md
-project/shared/system-map.md       ← templates/system-map.md (starts empty; fills as systems relate)
-sessions/INDEX.md
-sessions/CURRENT_STATE.md          ← seed with onboarding summary
-sessions/conflicts/                ← (empty; conflict reports land here)
-sessions/week-01/YYYY-MM-DD.md     ← templates/session-log.md; first entry
+AGENTS.md                       ← root rules; record `atlas: <version>`
+project/DASHBOARD.md            ← templates/dashboard.md (seed headings; Domain: <domain>)
+project/mission.md              ← templates/mission.md (fill from interview)
+project/overview/TASKS.md       ← templates/overview/TASKS.md (global roll-up; the inline-mirror target)
+project/overview/DECISIONS.md   ← templates/overview/DECISIONS.md (decisions index; the pre-DR scan target)
+sessions/CURRENT_STATE.md       ← seed with onboarding summary
+sessions/week-01/YYYY-MM-DD.md  ← templates/session-log.md; first entry
 ```
+
+**Everything else emerges** — do NOT create it at onboarding:
+
+- **Container folders** (`project/systems/`, `project/workstreams/`,
+  `project/conception/`, `sessions/conflicts/`) appear with their first
+  content (first system, first workstream, first pre-system research doc,
+  first conflict report). Git doesn't track empty folders anyway — no
+  placeholder files, no MOC indexes (see `references/conventions.md` →
+  "INDEX.md").
+- **Overview registers** (`glossary.md`, `open-questions.md`, `risks.md`,
+  `costs.md`, `system-map.md`, `budget.xlsx`) are created on demand: first
+  shared term, first cross-cutting question, first risk, first cost, first
+  relationship edge. Load the matching template from the skill when that
+  moment comes.
 
 Also create the project's own `.gitignore` (ignore `.obsidian/`, `.DS_Store`).
 
@@ -86,12 +90,12 @@ workstream creation during onboarding — let them emerge naturally, like system
 
 It's normal — and often ideal — to do **general research before any system
 exists**. Early research (vehicle selection, site surveys, technology surveys,
-market analysis) can live in `project/shared/research/` (for general /
-cross-cutting material) or in a **workstream's** `research/` folder if the
-research is part of a defined process (see `references/workstreams.md`). Don't
-rush to scaffold systems just to have a place for research. Systems become
-worth scaffolding once a research stream has enough focus to own its own
-decisions, design, and tasks.
+market analysis) lives in `project/conception/research/` — the pre-system
+exploration space — or in a **workstream's** `research/` folder if the research
+is part of a defined process (see `references/workstreams.md`). Don't rush to
+scaffold systems just to have a place for research. Systems become worth
+scaffolding once a research stream has enough focus to own its own decisions,
+design, and tasks.
 
 ## Check complementary skills
 

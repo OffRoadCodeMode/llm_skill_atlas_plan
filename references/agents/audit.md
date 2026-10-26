@@ -1,11 +1,35 @@
 # Agent: audit
 
-**Verb: Audit.** Integrity + phase-gate + mission-alignment check. Runs when
-**invoked** — manually or by a scheduled job. It does not passively self-heal;
-a scheduled run is just another invocation. Report findings grouped by severity,
-each with the specific file path and a suggested action.
+**Verb: Audit.** Integrity + roll-up-truth + phase-gate + mission-alignment
+**verification**. Atlas's posture: *inline maintenance writes; audit verifies.*
+Roll-ups (dashboard rows, `overview/` files, INDEX Contents sections) are
+maintained at the moment the source changes (see
+`references/conventions.md` → "Overview roll-ups — maintained inline"). Audit's
+job is to catch the cases where that discipline failed — and everything else
+that can silently go wrong.
 
-## Pre-flight (halt condition — runs FIRST, before any check or write)
+Audit runs when **invoked** — manually or by a scheduled job. It does not
+passively self-heal; a scheduled run is just another invocation. Report findings
+grouped by severity, each with the specific file path and a suggested action.
+
+## What audit does NOT do
+
+- **Does not regenerate roll-ups.** Dashboard rows, `overview/TASKS.md`,
+  `overview/DECISIONS.md`, the OQ/risk indexes, `costs.md`, system maps, and
+  system/workstream INDEX Contents sections are reported on, never rewritten.
+  When a roll-up has drifted, the correct fix is made through the inline flow —
+  update the roll-up from its source (or, for a badly drifted file, offer to
+  have `orchestrator` regenerate it — **with explicit user approval** — as a
+  repair).
+- **Does not auto-fix anything.** No link repointing, no `updated:` date
+  corrections, no missing-row insertions. These are reported as findings with a
+  suggested action; the session agent applies them as an inline maintenance
+  correction.
+- **Exception:** decision-conflict reports (check 16) — audit writes and
+  maintains its own `sessions/conflicts/CONFLICT-*.md` report files, including
+  auto-closing stale ones. Those are audit's own records, not project content.
+
+## Pre-flight (halt condition — runs FIRST, before any check)
 
 Confirm the repo is clean and merged:
 
@@ -13,76 +37,74 @@ Confirm the repo is clean and merged:
   file.
 - No unmerged paths (`git status`).
 
-**If any are found: HALT. Write nothing. Alert the user to resolve the conflict
-manually.** This prevents ingesting conflict markers as literal content (which
-corrupts parsing and cascades) or writing on top of a half-merged tree — the key
-risk when "git is the backstop" meets an unattended writer.
+**If any are found: HALT. Run no checks. Alert the user to resolve the conflict
+manually.** This prevents corrupted parsing or reports computed on a half-merged
+tree — the key risk when "git is the backstop" meets an unattended reader.
 
 > If `git status` isn't reachable in the current interface, scan file contents for
 > the marker strings instead.
 
-## Checklist (ordered, severity-grouped)
+## Checklist (ordered, tiered by cost)
 
 Checks are grouped into **tiers** for efficient scheduling (see "Tiered
 execution" below). Tier 1 runs every audit; tiers 2 and 3 run only when relevant
 files changed since the last audit (determined from the incremental git diff).
 
-### Tier 1 — every run (cheap, mechanical)
+### Tier 1 — every run (cheap, mechanical verifications)
 
 1. **Broken links** — relative markdown links pointing to files that don't exist.
    *(highest severity)*
 2. **Orphans** — artifacts with zero inbound links (violates the min-2-links rule).
-3. **Index / dashboard completeness** — every system (including sub-systems)
-   appears in `DASHBOARD.md`; every artifact appears in its folder `INDEX.md`;
-   dashboard system rows are derivable from each system `INDEX.md` frontmatter
-   (`system_type`, `parent`, `status`, `phase`). Sub-systems name their parent
-   in the dashboard `Parent` column. Walk `project/systems/`
-   recursively, descending into any `systems/` subfolder. **Workstreams**: each
-   workstream appears in the dashboard Workstreams table; each workstream
-   artifact appears in its `INDEX.md`; `TASKS.md` and `NOTES.md` exist. Walk
-   `project/workstreams/` for project-level workstreams AND
-   `project/systems/**/workstreams/` recursively for nested workstreams.
-   Dashboard workstream rows include an **Owner** column (project | <system>).
+3. **Dashboard truth & entry-file coverage** — every system (including
+   sub-systems) and workstream appears in `DASHBOARD.md`; dashboard rows match
+   their source (`INDEX.md` frontmatter for systems; `INDEX.md` + `TASKS.md`
+   for workstreams, Owner from `system:` frontmatter or "project"); each
+   system's and workstream's `INDEX.md` Contents/links point at artifacts that
+   exist (no dead entries, no unlisted siblings); workstream `TASKS.md` and
+   `NOTES.md` exist. Walk `project/systems/` recursively (descending into
+   `systems/` subfolders) and both `project/workstreams/` and
+   `project/systems/**/workstreams/`. Verify only — drift is reported with the
+   exact stale row or link.
 4. **Frontmatter validation** — required fields present on claim-bearing artifacts;
-   DRs/requirements have IDs; `confidence` set on research/DRs. **System INDEX**:
-   check `type: system` plus `system_type`, `parent`, `status`, `phase` are
-   present in each system `INDEX.md` (the dashboard derives its rows from these).
-   **Workstream
-   DRs**: check `type: decision` and standard DR fields are present in
-   `workstreams/<name>/decisions/DR-XXX.md` (and nested
-   `systems/<system>/workstreams/<name>/decisions/DR-XXX.md`). **Workstream
-   artifacts**: check `type: workstream` on INDEX, TASKS, NOTES files. For
-   nested workstreams, check optional `system:` field in INDEX.md frontmatter.
+   DRs/requirements have IDs; `confidence` set on research/DRs. System INDEX:
+   `type: system` plus `system_type`, `parent`, `status`, `phase`. Workstream
+   DRs/artifacts: `type: decision`/`type: workstream` fields present; nested
+   workstreams may set `system:`.
 5. **Phase-gate satisfaction** — for each system (including sub-systems), check
    the current phase's exit criteria against real evidence; report gates met /
    unmet / blocked. Sub-system phases are checked independently of their parent.
 6. **Open questions** — unresolved questions tagged as gating a phase (blocking).
-   Also reconcile the shared `project/shared/open-questions.md` per-system and
-   per-workstream index against the actual per-system and per-workstream
-   `open-questions.md` files: flag per-system/workstream OQs that are blocking
-   but missing from the shared index, and index entries pointing to questions
-   that have been resolved or no longer exist (stale index lines).
-9. **Freshness** — artifacts `status: stale`/`superseded`, and content older than a
-   dependency change or phase transition. **Judge freshness from git history
-   (last-commit date), not the frontmatter `updated:` string** — agents forget to
-   bump it. Where they disagree, auto-correct `updated:` from git (low-risk fix).
-13. **Risks** — high-severity risks with no owner or mitigation; risks stuck `open`
-    past a phase gate; `DASHBOARD.md` Top Risks out of sync with the risk registers.
-    Also reconcile the shared `project/shared/risks.md` per-system and per-workstream
-    index against the actual per-system and per-workstream `risks.md` files: flag
-    high-severity/blocking per-system/workstream risks missing from the shared
-    index, and index entries pointing to risks that have been closed or no longer
-    exist (stale index lines).
-14. **Costs** — estimates with `confidence: low` or no assumptions; DASHBOARD
-    budget/drivers out of sync with the cost registers; estimates not refreshed
-    after a related decision changed.
+   Verify the `project/overview/open-questions.md` index against the per-system
+   and per-workstream files: blocking questions missing from the index, and
+   index lines pointing at resolved/nonexistent questions.
+9.  **Freshness** — artifacts `status: stale`/`superseded`, and content older
+    than a dependency change or phase transition. **Judge freshness from git
+    history (last-commit date), not the frontmatter `updated:` string.** Where
+    they disagree, report it (the fix is an inline `updated:` correction, not an
+    audit write).
+13. **Risks** — high-severity risks with no owner or mitigation; risks stuck
+    `open` past a phase gate. Verify the `project/overview/risks.md` index
+    against per-system and per-workstream files (missing high-severity links;
+    stale lines).
+14. **Costs** — estimates with `confidence: low` or no assumptions; the
+    `project/overview/costs.md` register out of sync with per-system registers;
+    estimates not refreshed after a related decision changed. If
+    `project/overview/budget.xlsx` exists, compare its totals against
+    `overview/costs.md` (markdown is canonical) and flag drift.
+19. **Roll-up integrity (tasks & decisions)** — verify the two inline mirrors:
+    - `overview/TASKS.md` — every owner's every task (all statuses) mirrored
+      from the local `TASKS.md` files; summary counts match. Report missing,
+      stale, or extra mirrored tasks.
+    - `overview/DECISIONS.md` — one row per DR on disk; status column matches
+      each DR's status (an `active` row whose DR is superseded, or a recent DR
+      with no row, is drift).
 
-### Tier 2 — when DRs, system INDEX files, system-map, or research docs changed (moderate cost)
+### Tier 2 — when DRs, system INDEX files, system maps, or research docs changed (moderate cost)
 
-7. **Mission alignment** — artifacts with missing `mission_link` or direction that
-   drifted from `mission.md` (hand off to `scope-check`).
-8. **Contradictions** — artifacts marked `contested`/`contradicts`, or same-topic
-   artifacts asserting conflicting claims.
+7. **Mission alignment** — artifacts with missing `mission_link` or direction
+   that drifted from `mission.md` (hand off to `scope-check`).
+8. **Contradictions** — artifacts marked `contested`/`contradicts`, or
+   same-topic artifacts asserting conflicting claims.
 10. **Quality signals** — `confidence: low` artifacts, and single-source claims
     with no confidence set.
 11. **Source drift** — for ingested sources with `sha256`, recompute and flag
@@ -91,69 +113,51 @@ files changed since the last audit (determined from the incremental git diff).
     into a new system or sub-system).
 15. **System relationships** — edges in a system `INDEX.md` Relationships table
     pointing to a non-existent system (dangling); edges in one system not
-    reconciled in the other (asymmetric); `project/shared/system-map.md` out of
-    sync with per-system Relationships; in a multi-system project, a system with
-    no relationships at all (a possible missed link). **Hierarchy consistency**:
-    sub-system `INDEX.md` `parent:` frontmatter must point to a real parent
-    system; parent `INDEX.md` must list all sub-systems in its Sub-systems
-    section. **Hierarchical maps**: walk `project/systems/` recursively for
-    per-system `system-map.md` files; reconcile each per-system map against its
-    parent's INDEX Sub-systems section and against the children's INDEX
-    Relationships. The top-level map must include all top-level systems
-    (including unrelated neighbours as disconnected nodes); per-system maps must
-    include all of that system's sub-systems. Flag maps that are missing
-    sub-systems, have stale sub-systems, or have edges not reflected in the
-    corresponding INDEX Relationships tables.
+    mirrored in the other (asymmetric); `project/overview/system-map.md` out of
+    sync with per-system Relationships; a system with no relationships at all
+    in a multi-system project (a possible missed link). **Hierarchy consistency**:
+    sub-system `INDEX.md` `parent:` must point to a real parent; the parent's
+    INDEX must list all sub-systems; per-system maps must include all of that
+    system's sub-systems; the top-level map must include all top-level systems
+    (including unrelated neighbours as disconnected nodes).
 17. **Research placement** — research docs in the wrong folder. Research lives
     in three homes: `<workstream>/research/`, `<system>/research/`, and
-    `project/shared/research/` (general / cross-cutting). Check:
-    - **Shared research that should be system or workstream research**: a doc in
-      `project/shared/research/` that is linked only from a single system's or
-      workstream's artifacts and covers that scope. Suggest moving to
-      `<system>/research/` or `<workstream>/research/`.
-    - **Workstream research that should be system research**: a doc in a
-      workstream's `research/` folder that is linked only from a single system's
-      artifacts and covers that system's scope. Suggest moving to
-      `<system>/research/`.
-    - **System research that should be workstream research**: a doc in a system's
-      `research/` folder that covers a process topic (procurement, certification,
-      decision-making) rather than a build artifact. Suggest moving to the
-      relevant workstream's `research/` folder.
+    `project/conception/research/` (pre-system / whole-project). Check:
+    - A doc in `conception/research/` linked only from a single system's or
+      workstream's artifacts and covering that scope → suggest moving to
+      `<owner>/research/`.
+    - A workstream research doc linked only from a single system's artifacts and
+      covering that system's scope → suggest `<system>/research/`.
+    - A system research doc covering a process topic (procurement,
+      certification, decision-making) → suggest the relevant workstream.
 
-    Signals: inbound link sources (which systems/workstreams link to it), names
-    mentioned in the doc title/body, and scope of the topic. This is a
+    Signals: inbound link sources, names in title/body, topic scope. This is a
     judgment-based check: report only, suggest the move, do not relocate.
-18. **Workstream → System spawning** — check for completed workstreams
-    (`status: complete`) whose research references building something physical
-    or a software artifact, but no system has been created to hold that build.
-    Report as a recommendation: "workstream X is complete and references building
-    Y — consider creating a system." The user decides; systems are never
-    auto-created.
+18. **Workstream → System spawning** — completed workstreams (`status: complete`)
+    whose research references building something physical or a software
+    artifact, with no system created to hold it. Report as a recommendation;
+    the user decides; systems are never auto-created.
 
-### Tier 3 — when DRs changed (expensive, may write)
+### Tier 3 — when DRs changed (expensive; the only check that writes, and only its own reports)
 
-16. **Decision conflicts** — scan all Decision Records across every system's
-    `design/decisions/` directory AND every workstream's `decisions/` directory
-    for contradictory claims on the same topic. Decisions conflict when two DRs assert mutually incompatible positions with
-    no `supersedes` relationship between them (e.g. "use 12V system" and "use
-    24V system" are both active, or two DRs choose different base vehicles).
-    **This check runs last because it may write a conflict file.**
+16. **Decision conflicts** — scan Decision Records across every system's
+    `design/decisions/` and every workstream's `decisions/` for contradictory
+    claims on the same topic with no `supersedes` relationship between them.
 
-    ### How to detect conflicts
+    **Primary detection happens earlier:** the pre-DR conflict scan in
+    `overview/DECISIONS.md` (see `templates/overview/DECISIONS.md`) runs at
+    capture time. This check is the backstop. It uses the DECISIONS index as
+    the fast path (same-topic active DRs are one table scan) and falls back to
+    a full DR read when the index itself is drifted (check 19).
 
-    For each DR, extract the core claim (the Decision section). Group DRs by
-    subject matter using title keywords, tags, and system proximity. Flag groups
-    where two or more `status: fresh` (not `superseded`) DRs make different
-    choices on the same topic. Do NOT flag:
-    - DRs that explicitly supersede another (the superseding DR replaces the old)
-    - DRs that are about different aspects of the same system (e.g. battery
-      chemistry vs battery voltage are different decisions)
-    - DRs in different systems that affect independent concerns (e.g. electrical
-      system voltage and workshop wall colour)
+    Do NOT flag: DRs that explicitly supersede another; DRs about different
+    aspects of a system; DRs in different systems covering independent concerns.
 
-    ### If a conflict is found
+    **If a conflict is found:**
 
-    1. **Create a conflict file** at `sessions/conflicts/CONFLICT-XXX.md` with:
+    1. **Write a conflict report** at `sessions/conflicts/CONFLICT-XXX.md`
+       (numbered sequentially) — this is audit's own report file, the one write
+       audit performs:
 
        ```markdown
        ---
@@ -172,50 +176,23 @@ files changed since the last audit (determined from the incremental git diff).
        - **DR-002** — [decision summary]
 
        ## Why they conflict
-       [One sentence/paragraph explaining the incompatibility.]
+       [One paragraph explaining the incompatibility.]
 
        ## Resolution
        *Pending user input.*
        ```
 
-       Number sequentially: `CONFLICT-001`, `CONFLICT-002`.
+    2. **Alert via all configured delivery channels** (see your host file).
+       Include the conflict title and path, the DRs in conflict (with paths),
+       a one-line "why", and a request for the user to review and advise.
 
-    2. **Alert via all configured delivery channels.** If running inside a
-       scheduled audit job, use that job's delivery mechanism (see your host
-       file); otherwise deliver the finding directly in chat. The
-       alert must include:
-       - The conflict title and file path
-       - Which DRs are in conflict (with paths)
-       - A one-line summary of why they conflict
-       - A request for the user to review and advise on resolution
+    3. **Log it** as a high-severity finding in the main audit report.
 
-       **Delivery targets:** send to *all* channels the user has configured
-       (see your host file for what this host offers). If running inside a
-       scheduled job, the job's delivery setting already handles this — fan out
-       to every connected channel.
-
-    3. **Log the audit finding** as a high-severity item in the main audit report.
-
-    ### Conflict lifecycle
-
-    - **Created:** audit detects the conflict, writes the file, alerts the user.
-    - **Resolved:** the user advises which DR to supersede or how to reconcile.
-      The agent updates the relevant DR's `status: superseded` or edits the
-      conflict to `status: resolved` with a resolution note.
-    - **Stale:** an open conflict whose related DRs have all been superseded
-      (auto-closes: `status: resolved` + note "DRs no longer active").
-
-    On every audit run, re-check open conflicts: if the conflicting DRs are no
-    longer both `status: fresh`, auto-resolve the conflict file.
-
-    ### Delivery notice
-
-    When conflict alerts are delivered outside a live session (a chat gateway, a
-    notification, a committed report), they appear wherever that channel surfaces
-    — the user may reply with instructions there. If the channel supports
-    continuable sessions (see your host file), the response can be picked up
-    directly; otherwise the agent notes the instruction on the next session start
-    (via the session-continuity conflict check).
+    **Conflict lifecycle:** created (open) → resolved (user advises which DR to
+    supersede; conflict updated to `status: resolved` with a resolution note) →
+    auto-closed as stale (on every audit run, an open conflict whose related
+    DRs are no longer both `status: fresh` is set to `status: resolved` with
+    the note "DRs no longer active" — maintenance of audit's own report files).
 
 ## Tiered execution (efficiency)
 
@@ -225,73 +202,46 @@ Compute the change set once from the incremental git diff:
 git diff --name-only <last-audit-sha>..HEAD
 ```
 
-One command, no per-file reads — and more correct than file mtimes, which reset
-on clone/cloud-sync. Store the last-audited commit SHA in a small state file
-(`sessions/.atlas-audit-state`). Use the diff for two things:
+Store the last-audited commit SHA in a small state file
+(`sessions/.atlas-audit-state` — audit's own bookkeeping, the only other write
+it performs). Use the diff to select work:
 
-**1. Which tiers to run:**
+- **Tier 1 (always)**: checks 1-6, 9, 13-14, 19. Cheap scans; run even if
+  nothing changed (catches drift from manual edits).
+- **Tier 2 (when relevant files changed)**: checks 7-8, 10-12, 15, 17-18. Run
+  only when the diff includes a system `INDEX.md`, `system-map.md`, research
+  docs, workstream files, or any file with frontmatter. Skip if the diff is
+  empty or only touches session logs.
+- **Tier 3 (when DRs changed)**: check 16. Run when the diff includes files in
+  any `design/decisions/` or workstream `decisions/` directory.
 
-- **Tier 1 (always)**: checks 1-6, 9, 13-14. These are cheap scans and
-  mechanical fixes. Run every audit, even if nothing changed (catches drift,
-  broken links from manual edits, etc.).
-- **Tier 2 (when relevant files changed)**: checks 7-8, 10-12, 15, 17-18. Run these
-  only when the diff includes a system `INDEX.md`, `system-map.md`, research docs,
-  workstream files, or any file with frontmatter. If the diff is empty or only touches session
-  logs, skip tier 2.
-- **Tier 3 (when DRs changed)**: check 16. Run only when the diff includes files
-  in any `design/decisions/` directory or any workstream `decisions/` directory. This is the most expensive check (reads
-  every DR across all systems and workstreams) and the only one that writes conflict files.
+**Full pass**: run all three tiers if the state file is missing or corrupt, on
+explicit user request ("audit the wiki"), before ending a session, or at phase
+transitions. If git/shell isn't available, fall back to a full read-and-compare
+pass (correct, just more tokens).
 
-**2. Which rows/indexes to reconcile:** only re-derive `INDEX.md`/`DASHBOARD.md`
-rows and roll-ups for artifacts that appear in the diff, not the whole tree.
+## Reporting
 
-**Full pass**: if the state file is missing or corrupt, run all three tiers and
-reconcile everything. Also run a full pass on explicit user request ("audit the
-wiki"), before ending a session, or at phase transitions. If git/shell isn't
-available, fall back to a full read-and-compare pass (correct, just more tokens).
-
-This keeps most hourly cron runs lightweight (tier 1 only) while still catching
-the expensive problems when they are relevant.
-
-## Reconcile
-
-After checks, the audit may **regenerate**: the **Contents** section of system
-`INDEX.md` files and pure-MOC `INDEX.md` files (walking `project/systems/`
-recursively, including sub-system folders, and `project/workstreams/` plus
-`project/systems/**/workstreams/` recursively for all workstream folders) — the
-authored frontmatter and metadata sections of a system INDEX are left intact.
-Also the `DASHBOARD.md` system rows (from each system `INDEX.md` frontmatter,
-with each sub-system's `Parent` column set from its `parent:` frontmatter) and
-workstream rows (from workstream `INDEX.md` and `TASKS.md`, with `Owner` set
-from `system:` frontmatter or "project" if absent), and the Top Risks / Costs
-roll-ups (from the risk/cost registers).
-
-## Review before write
-
-- **Low-risk mechanical fixes** (regenerating an INDEX, refreshing a dashboard row,
-  correcting an `updated:` date) may be applied directly.
-- **Unattended runs (cron) OR reconciliations touching 10+ artifacts** must be
-  **staged as proposals and delivered for review**, not silently applied. This
-  keeps the single-writer rule intact.
+- Group findings by severity (broken links and conflicts first), each with the
+  file path and a **suggested action** phrased as an inline-maintenance
+  correction ("tick mirrored in local file but not `overview/TASKS.md` — mirror
+  it now").
+- Offer regeneration for a *badly* drifted roll-up: "`overview/TASKS.md` has 14
+  drifted rows — regenerate it from local TASKS.md files via orchestrator?"
+  Applied only after user approval.
+- Never act on subjective checks: mission alignment (7), freshness (9), quality
+  signals (10), size/structure (12), research placement (17) are report-only.
 
 ## Conservatism guardrails
 
-The audit's job is to **find and fix mechanical problems**, not to refactor or
-improve the project. When in doubt, report, do not rewrite.
+The audit's job is to **find problems**, never to redesign:
 
-- **Never refactor content.** Do not reorganize files, merge/split systems,
-  rewrite prose, or "improve" structure. These are user decisions.
-- **Never delete artifacts.** Flag orphans, stale content, or contradictions;
-  do not remove them. The user decides what to retire.
-- **Auto-fix only mechanical issues:** broken links (repoint to correct path),
-  missing INDEX/dashboard rows (regenerate), stale `updated:` dates (correct
-  from git). Everything else is a report item.
-- **Subjective checks are report-only.** Mission alignment (check 7), freshness
-  (check 9), quality signals (check 10), size/structure (check 12), and research
-  placement (check 17) surface findings and suggest actions, but the agent does
-  not act on them autonomously.
-- **One fix per problem.** If a link is broken, fix the link. Do not also
-  restructure the file it lives in.
+- **Never refactor content.** No reorganizing, merging/splitting systems, or
+  prose rewrites — those are user decisions.
+- **Never delete artifacts.** Flag orphans, stale content, contradictions; the
+  user decides what to retire.
+- **One correction per problem.** A reported broken link suggests repointing the
+  link — not restructuring the file it lives in.
 
 ## When to run
 
@@ -303,21 +253,17 @@ improve the project. When in doubt, report, do not rewrite.
 
 ## Scheduled audit (recurring job)
 
-If the host supports scheduled/recurring jobs, offer during onboarding to set up
-a recurring `atlas-audit` job. The concrete recipe is host-specific — see your
-host file (`references/hosts/<host>.md`): Hermes uses its `cronjob` tool with
-gateway delivery; Devin uses CI schedules or system cron; other hosts may not
-support it at all (manual audits are always fine).
+During onboarding, **offer** to set up a recurring `atlas-audit` job if the host
+supports scheduled jobs (see your host file — Hermes, some CI/systems, and
+similar environments do; manual audits are always fine if not). Whatever the
+scheduler, the requirements are the same:
 
-Whatever the scheduler, the requirements are the same:
-
-- **Working directory** — scheduled jobs run detached; the job must run in the
-  planning repo so file tools and `AGENTS.md` resolve correctly.
+- **Working directory** — the job runs detached and must run in the planning
+  repo so file tools and `AGENTS.md` resolve correctly.
 - **Load this skill** so the job has the audit spec available.
 - **The audit prompt** — use the canonical text below verbatim.
 - **Delivery** — send results somewhere the user will see them (chat gateway,
-  notification, or a committed report under `sessions/`). Ask the user during
-  onboarding.
+  notification, or a committed report under `sessions/`). Ask during onboarding.
 
 ### Canonical audit prompt (for scheduled jobs)
 
@@ -325,16 +271,18 @@ Whatever the scheduler, the requirements are the same:
 Run the Atlas audit: FIRST verify the repo is conflict-free (halt and
 alert if not). Then run the incremental git diff to determine which
 tiers to execute (see references/agents/audit.md 'Tiered execution').
-Tier 1 (checks 1-6, 9, 13-14) always runs. Tier 2 (checks 7-8, 10-12,
-15, 17-18) runs only if system INDEX files, system-map, research docs,
-workstream files, or files with frontmatter changed. Tier 3 (check 16) runs only
-if DRs changed (system design/decisions/ or workstream decisions/).
-Auto-fix only mechanical issues (broken links, missing INDEX/dashboard
-rows, stale updated: dates). Everything else is report-only: do NOT
-refactor, restructure, rewrite, or delete content. Deliver a short
-summary of findings, which tiers ran, and any fixes applied.
+Tier 1 (checks 1-6, 9, 13-14, 19) always runs. Tier 2 (checks 7-8,
+10-12, 15, 17-18) runs only if system INDEX files, system maps,
+research docs, workstream files, or files with frontmatter changed.
+Tier 3 (check 16) runs only if DRs changed.
+Audit VERIFIES, it does not write project content: report all findings
+(grouped by severity, with file paths and suggested inline corrections).
+Write nothing except audit's own records: conflict reports in
+sessions/conflicts/ (check 16) and the .atlas-audit-state file.
+Deliver a short summary of findings, which tiers ran, and any conflicts.
 ```
+
 - **Honesty:** this is interval polling, not real-time watching; it's still
-  "audit on demand", just schedule-invoked. The incremental git-diff and
-  conflict pre-flight assume shell/git access — verify the scheduled environment
-  actually has it; the full-pass fallback covers the case where it's unavailable.
+  "audit on demand", just schedule-invoked. The git-diff and conflict pre-flight
+  assume shell/git access — verify the scheduled environment actually has it;
+  the full-pass fallback covers the case where it's unavailable.

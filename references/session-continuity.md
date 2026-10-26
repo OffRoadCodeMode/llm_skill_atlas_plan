@@ -26,11 +26,17 @@ dashboard's Workstreams table provides the quick overview (its Owner column
 shows project vs system ownership); `CURRENT_STATE.md` should reference active
 workstreams and their current focus.
 
-Then **check for outstanding decision conflicts** — scan `sessions/conflicts/` for
-any `CONFLICT-*.md` files. If any exist with `status: open`, summarise them and
-ask the user to resolve before continuing. Conflicts block safe advancement.
+Then **check for outstanding decision conflicts** — if `sessions/conflicts/`
+exists, scan it for any `CONFLICT-*.md` files. If any exist with `status: open`,
+summarise them and ask the user to resolve before continuing. Conflicts block
+safe advancement.
 
-Then read the root `INDEX.md` for structure and the relevant `AGENTS.md`.
+Then skim **`project/overview/TASKS.md`** — the global task roll-up is the
+actionable "what's next": in-progress and blocked items across every system
+and workstream, in one table.
+
+Then read the root `AGENTS.md` for house rules (and any system `AGENTS.md` for
+systems you'll work in — most systems won't have one).
 
 ## Context budget — avoid front-loading history
 
@@ -85,17 +91,21 @@ When wrapping up:
 
 1. Append a final daily-log entry with a "next steps" summary.
 2. Update `CURRENT_STATE.md` if state changed.
-3. Update `DASHBOARD.md` if any system phase/status changed or workstream
-   status changed.
-4. Update INDEX.md files if content was added/changed (including workstream
-   INDEX files).
-5. **Capture any decisions made this session.** Review the conversation for
-   choices that shaped the project direction — if any were made, create a
-   Decision Record in the relevant system's `design/decisions/` folder or the
-   workstream's `decisions/` folder (see `references/agents/decision-record.md`).
-6. **Check for decision conflicts.** If this session created or modified DRs
-   that contradict an existing DR in another system or workstream, flag them —
-   the next audit run will formalise any conflict.
+3. **Verify the roll-ups held.** Under the inline rule, `overview/TASKS.md`,
+   `overview/DECISIONS.md`, the OQ/risk indexes, and dashboard rows should
+   already mirror this session's local changes. Spot-check briefly and correct
+   any drift now — this is a check, not a deferred maintenance pass (a miss
+   here is exactly what the inline rule exists to prevent).
+4. Update system/workstream INDEX.md Contents sections only if content was
+   added/changed without being
+   indexed inline (same spirit as step 3 — a verification pass).
+5. **Capture any decisions not yet captured.** Decision Records are written
+   mid-session at the moment of choice — but review the conversation once more
+   for anything missed. Each DR gets its file *and* its
+   `overview/DECISIONS.md` row (see `references/agents/decision-record.md`).
+6. **Check for decision conflicts.** The pre-DR conflict scan runs at capture
+   time; if this session's DRs contradict an active DR without superseding it,
+   flag now — the next audit will formalise any conflict.
 7. **Save the memory pointer** if phase or focus changed (see "Memory pointer"
    above).
 

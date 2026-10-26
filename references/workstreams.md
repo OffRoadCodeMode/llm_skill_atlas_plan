@@ -62,7 +62,8 @@ no separate workstream templates needed.
 - **No `AGENTS.md`** — workstreams inherit project-level rules.
 - **No phase gates** — workstreams don't have phases. Tasks move from Open to
   Done; that's it.
-- **No `CHANGELOG.md`** — NOTES.md serves the same purpose in a lighter form.
+- **No `CHANGELOG.md`** — no system has one either; the record lives in git
+  history, DRs, and (for workstreams) `NOTES.md`.
 
 ## Decision Records
 
@@ -117,17 +118,24 @@ folder can reference or migrate relevant docs from the workstreams.
 Some workstreams complete with just a decision (e.g. "decide PM tool" → DR-001:
 chose Notion). No system is needed. The workstream is done.
 
-## Relationship to shared/
+## Relationship to overview/
 
-Workstreams participate in the same shared registers as systems:
+Workstreams participate in the same overview roll-ups as systems:
 
 - **Open questions** — workstream OQs are linked to
-  `project/shared/open-questions.md` (the cross-system index), same as system
-  OQs. Blocking or significant workstream questions appear in the shared index.
-  See `references/conventions.md` → "Open Questions".
-- **Risks** — workstream risks are linked to `project/shared/risks.md`, same
+  `project/overview/open-questions.md` (the cross-system index), same as system
+  OQs. Blocking or significant workstream questions appear in the overview
+  index (added in the same action). See `references/conventions.md` →
+  "Open Questions".
+- **Risks** — workstream risks are linked to `project/overview/risks.md`, same
   as system risks. High-severity or blocking workstream risks appear in the
-  shared index. See `references/conventions.md` → "Risks".
+  overview index. See `references/conventions.md` → "Risks".
+- **Tasks** — a workstream's `TASKS.md` (and every change to it) is mirrored
+  into `project/overview/TASKS.md` in the same action. See
+  `references/conventions.md` → "Tasks".
+- **Decisions** — every DR captured in a workstream's `decisions/` folder gets
+  a row in `project/overview/DECISIONS.md` at capture time. See
+  `references/conventions.md` → "Decisions".
 - **Provenance** — when a completed workstream feeds into a new system, record
   the link in that system's `INDEX.md` ("Origin / informed by" section), not
   on the system map. See "Workstream → System transitions" below.
@@ -135,9 +143,9 @@ Workstreams participate in the same shared registers as systems:
 ## Research
 
 Research is a folder that can live in three places: a workstream's
-`research/`, a system's `research/`, or `project/shared/research/` (general /
-cross-cutting). See `references/agents/research.md` for the full guide. Audit
-(check 17) flags misplaced research docs.
+`research/`, a system's `research/`, or `project/conception/research/`
+(pre-system / whole-project exploration). See `references/agents/research.md`
+for the full guide. Audit (check 17) flags misplaced research docs.
 
 ## Workstreams vs systems — quick reference
 
@@ -146,8 +154,7 @@ cross-cutting). See `references/agents/research.md` for the full guide. Audit
 | **Nature** | Things you build | Processes you complete |
 | **Phase gates** | Yes | No |
 | **INDEX.md** | Rich (identity + metadata + contents) | Light (purpose + links) |
-| **AGENTS.md** | Yes | No |
-| **CHANGELOG.md** | Yes | No |
+| **AGENTS.md** | Only if custom conventions | No |
 | **NOTES.md** | No | Yes |
 | **DRs** | `design/decisions/` | `decisions/` |
 | **Research** | `research/` | `research/` |

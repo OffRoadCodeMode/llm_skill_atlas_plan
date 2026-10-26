@@ -5,6 +5,7 @@ updated: YYYY-MM-DD
 type: decision
 status: fresh
 confidence: high | medium | low
+supersedes:            # optional: <owner>/DR-XXX this DR replaces
 mission_link: <how this serves mission.md>
 ---
 

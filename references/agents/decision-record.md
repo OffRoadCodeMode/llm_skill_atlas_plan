@@ -63,11 +63,26 @@ Proposed | Accepted | Superseded by [DR-YYY](DR-YYY.md)
 - Belongs to: [system]
 ```
 
+## Conflict scan — BEFORE writing the DR
+
+Scan `project/overview/DECISIONS.md` (the Active table) for a decision on the
+same topic. If one is active:
+
+- **The new DR replaces it** → mark the old DR `status: superseded` and note
+  `supersedes: <owner>/DR-XXX` in the new one; update both rows in DECISIONS.md,
+  in the same action as creating the DR.
+- **The new DR disagrees without replacing** → STOP. This is a decision
+  conflict: flag it to the user before writing (see
+  `references/agents/audit.md` → check 16 for how conflicts are formalised).
+
 ## After capturing
 
+- **Add the DR's row to `project/overview/DECISIONS.md` in the same action** —
+  the decisions index never lags (see `templates/overview/DECISIONS.md`).
 - Link the DR (min 2 links): to the requirement/mission it serves and its system
   or workstream.
-- Add a line to the system `CHANGELOG.md` (systems only — workstreams don't have
-  a CHANGELOG; note it in NOTES.md instead).
-- If it resolves an open question, tick it in `open-questions.md` and link back.
+- If the DR belongs to a workstream, note it in the workstream's `NOTES.md`
+  (systems rely on git history + DRs for their record — no CHANGELOG).
+- If it resolves an open question, tick it in `open-questions.md` and link back —
+  removing it from the overview OQ index if it was listed there.
 - Commit individually: `dr: DR-XXX <short title>`.

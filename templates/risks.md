@@ -6,12 +6,13 @@ active risk should name an Owner and a Mitigation (audit flags high-severity
 risks missing either). Risks that block a phase gate cross-link to the relevant
 open-questions.md / phase.
 
-The shared file holds:
+The overview file — the single risk view for the project — holds (maintained
+inline — mirror changes in the same action as the register change):
 
 1. **Project-wide risks** that don't belong to any single system.
 2. **Index of per-system risks** — links to high-severity or blocking risks from
    each system's `risks.md`, so the full project risk picture is visible in one
-   place. The dashboard's Top Risks are rolled up from both.
+   place.
 
 ```
 ## Active
@@ -29,6 +30,6 @@ The shared file holds:
 - R-000: [risk] -> resolved YYYY-MM-DD ([how / link to DR])
 ```
 
-When a per-system risk is closed, remove its line from the shared index (or move
-to Closed with a link). `audit` (check 13) reconciles the index against the
-per-system files.
+When a per-system risk is closed, remove its line from the overview index (or
+move to Closed with a link) in the same action. `audit` (check 13) verifies the
+index against the per-system files.

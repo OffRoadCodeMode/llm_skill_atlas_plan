@@ -12,6 +12,9 @@ target_date: YYYY-MM-DD
 Simple checklist. No phase gates — workstreams are processes you complete, not
 things you build. `estimate` is optional; use `—` when unknown.
 
+**Mirror every change here into `project/overview/TASKS.md` in the same action**
+(the roll-up never lags). `audit` flags drift.
+
 ## Open
 - [ ] TASK-001: Description | priority: high | estimate: —
 - [ ] TASK-002: Description | priority: medium | estimate: —

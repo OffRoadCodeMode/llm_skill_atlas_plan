@@ -17,9 +17,9 @@ belong to a single system's scope.
 - [x] OQ-000: [question] → Resolved YYYY-MM-DD: [answer] (see DR-XXX)
 ```
 
-## Shared file (`project/shared/open-questions.md`)
+## Overview file (`project/overview/open-questions.md`)
 
-The shared file is a **cross-system index**. It holds:
+The overview file is a **cross-system index**, maintained inline. It holds:
 
 1. **Cross-system questions** that don't belong to any single system.
 2. **Links to per-system open questions** that are blocking or significant, so
@@ -39,6 +39,6 @@ The shared file is a **cross-system index**. It holds:
 - [x] OQ-000: [question] → Resolved YYYY-MM-DD: [answer] (see DR-XXX)
 ```
 
-When a per-system question is resolved, remove its line from the shared index
-(or move it to Resolved with a link). `audit` reconciles the index against the
-per-system files (see check 6).
+When a per-system question is resolved, remove its line from the overview index
+(or move it to Resolved with a link) in the same action — roll-ups are never
+left to lag. `audit` verifies the index against the per-system files (check 6).
