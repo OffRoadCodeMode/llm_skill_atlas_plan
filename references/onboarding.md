@@ -6,31 +6,40 @@ systems.
 
 ## Session-one intro (runs once, before any questions)
 
+**First use only.** Read the projects registry (`~/.atlas/projects.md`; see
+`references/session-continuity.md` → "Projects registry") first. If it exists
+and lists projects, the user has done this before: skip the orientation
+entirely, offer a one-line "welcome back" naming their existing projects, and
+go straight to the interview. Only a registry-free first run gets the
+orientation below. Either way, add the new project to the registry at
+onboarding finish.
+
 The user has never seen Atlas work. Before the first interview question, deliver
 a short orientation so their answers land in the right vocabulary. Keep it to
-one message — roughly four short paragraphs plus one tree — then the interview
+one message: roughly four short paragraphs plus one tree, then the interview
 begins (one question at a time). Adapt the wording; cover these beats:
 
 1. **Welcome + what this is.** *"Welcome to Atlas, the plan-anything framework.
-   We'll start with a few questions to define your project's mission statement —
+   We'll start with a few questions to define your project's mission statement:
    the anchor everything else traces back to."*
 2. **The nouns.** **Mission** (the goal; every file must trace to it).
-   **Systems**: things you build — software, a web platform, a physical product,
-   a room conversion. Each system moves through phases (typically research →
-   design → build/execute, from the project's domain pack) with exit gates that
-   need named evidence. Systems are not declared upfront: some are obvious on
-   day one, others emerge over time — the agent recommends, the user confirms.
-   Systems can nest (a `van` system can spawn `electrical`, `climate`).
-   **Workstreams**: processes you finish rather than build — sourcing, research,
-   certification, choosing a tool — with tasks, notes, and decisions but no
-   phase gates. **Decisions** are captured as Decision Records the moment
-   they're made, indexed, and checked for conflicts with earlier decisions.
-3. **What keeps it alive.** A compact state file + daily logs mean a new session
-   resumes in three file reads. Global roll-ups (`overview/TASKS.md`,
+   **Systems**: things you build, such as software, a web platform, a physical
+   product, a room conversion. Each system moves through phases (typically
+   research → design → build/execute, from the project's domain pack) with exit
+   gates that need named evidence. Systems are not declared upfront: some are
+   obvious on day one, others emerge over time. The agent recommends; the user
+   confirms. Systems can nest (a `van` system can spawn `electrical`,
+   `climate`). **Workstreams**: processes you finish rather than build, such as
+   sourcing, research, certification, choosing a tool. They carry tasks, notes,
+   and decisions but no phase gates. **Decisions** are captured as Decision
+   Records the moment they're made, indexed, and checked for conflicts with
+   earlier decisions.
+3. **What keeps it alive.** A compact state file plus daily logs mean a new
+   session resumes in three file reads. Global roll-ups (`overview/TASKS.md`,
    `overview/DECISIONS.md`) stay current because they're updated in the same
    action as any change. An optional scheduled audit verifies integrity and
-   reports — it never rewrites content without approval.
-4. **What a mature project looks like** — show this generic tree (placeholder
+   reports; it never rewrites content without approval.
+4. **What a mature project looks like.** Show this generic tree (placeholder
    identifiers, nothing project-specific):
 
    ```
@@ -50,7 +59,7 @@ begins (one question at a time). Adapt the wording; cover these beats:
    └── sessions/                  # CURRENT_STATE.md + dated logs
    ```
 
-5. **The ask.** End with the first interview question, e.g. *"So — tell me about
+5. **The ask.** End with the first interview question, e.g. *"So, tell me about
    your project. What's the mission, and who's it for?"*
 
 Frame expectations honestly: the day-one structure is about 7 files and the tree
@@ -210,7 +219,9 @@ Atlas is this response; concrete output is the trust signal. Present:
    context.
 
 Then append a session-log entry
-(`references/agents/session-log.md`).
+(`references/agents/session-log.md`) and **add the project to the registry**
+(`~/.atlas/projects.md`; see `references/session-continuity.md` → "Projects
+registry") with today's date and the one-line state.
 
 **Save a memory pointer** so future sessions know this project exists even
 without the Atlas skill loaded (see `references/session-continuity.md` →

@@ -45,6 +45,38 @@ several days of logs on start — it degrades signal-to-noise and invites drift.
 Only drill into a recent daily log if `CURRENT_STATE.md` is missing a detail you
 actually need.
 
+## Projects registry (cross-project signpost)
+
+Atlas keeps a small registry of the projects it maintains, so any fresh session
+can answer "what projects exist?" and onboarding knows whether the user has ever
+run it (the session-one orientation is skipped for returning users).
+
+**Location:** `~/.atlas/projects.md` on the user's machine by default —
+deliberately *outside* the skill folder. Install directories may be read-only
+or replaced when the skill updates (marketplaces deliver new versions by
+replacing the folder), and the registry must survive that. Host with a better
+persistent store? The host file may override the location.
+
+**Format** — one row per project, kept lean. It's a signpost to projects, never
+a duplicate of any project's `CURRENT_STATE.md`:
+
+```markdown
+# Atlas projects
+
+| Project | Path | Domain | Last worked | State (one line) |
+|---------|------|--------|-------------|------------------|
+| <name> | <abs-path> | <domain> | YYYY-MM-DD | <e.g. "plan; first research, no systems yet"> |
+```
+
+**Maintenance:**
+- **Add a row** at onboarding finish (with the onboarding date and state).
+- **Update `Last worked` + State** at session end when the shift is meaningful
+  (same cadence as the memory pointer — not on every session's trivia).
+- **Never delete rows.** If a project's folder disappears, mark the State
+  `missing?` and ask the user.
+- The registry is user-level state, not project content: don't commit it to
+  any planning repo.
+
 ## Memory pointer
 
 In addition to the project wiki, save a **compact pointer** so the agent knows

@@ -4,6 +4,22 @@ All notable changes to the Atlas framework itself. Format: reverse chronological
 Bump the `version:` field in `SKILL.md` frontmatter (semver) for convention changes;
 a major bump signals breaking convention changes.
 
+## 1.4.0 — 2026-11-02
+
+- **Projects registry** (new, `references/session-continuity.md`): Atlas keeps a
+  lean per-user registry of the projects it maintains — name, path, domain,
+  last-worked date, one-line state — at `~/.atlas/projects.md` by default.
+  Deliberately outside the skill folder: install directories may be read-only
+  or replaced wholesale on marketplace updates, and the registry must survive
+  that. Host adapters may override the location (governance capability table
+  updated). Rows are added at onboarding finish and refreshed at meaningful
+  session ends; rows for vanished folders are marked `missing?`, never deleted.
+- **Session-one orientation now runs on genuine first use only.** Onboarding
+  reads the registry first; returning users get a one-line welcome-back (naming
+  their existing projects) and go straight to the interview.
+- **Orientation script de-hyphenated**: the buyer-visible onboarding text no
+  longer uses em-dashes (plain punctuation throughout the script beats).
+
 ## 1.3.0 — 2026-11-02
 
 - **Onboarding confirms location & git before generating anything.** Two real

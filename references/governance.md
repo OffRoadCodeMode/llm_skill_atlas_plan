@@ -100,7 +100,7 @@ core files can point at them reliably:
 | Capability | What the adapter must answer |
 |---|---|
 | Loading skill files | Which tool reads `references/...` / `templates/...`, and what paths are relative to |
-| Memory pointer | Where the cross-session project signpost is stored |
+| Memory pointer | Where the cross-session project signpost is stored; may also override the projects-registry location (default `~/.atlas/projects.md`) |
 | Scheduled audits | How (or whether) a recurring job can run; delivery target |
 | Delegation / sub-agents | How to spawn sub-agents; whether parallel is supported |
 | Session search | Whether past conversations are searchable |
