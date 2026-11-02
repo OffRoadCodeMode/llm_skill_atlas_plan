@@ -4,6 +4,13 @@ All notable changes to the Atlas framework itself. Format: reverse chronological
 Bump the `version:` field in `SKILL.md` frontmatter (semver) for convention changes;
 a major bump signals breaking convention changes.
 
+## 1.4.1 — 2026-11-02
+
+- **Registry location is now user-confirmed, not assumed.** First onboarding
+  asks where the projects registry should live, suggesting the default
+  `~/.atlas/projects.md`. A custom path is recorded in the memory pointer so
+  future sessions can find it.
+
 ## 1.4.0 — 2026-11-02
 
 - **Projects registry** (new, `references/session-continuity.md`): Atlas keeps a

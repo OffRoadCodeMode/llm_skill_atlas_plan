@@ -85,6 +85,14 @@ as a single question during the interview:
    none` in the root AGENTS.md so future sessions know; note that audits fall
    back to full read-and-compare passes and freshness is tracked via the
    frontmatter `updated:` field instead of git history.
+3. **Projects registry (first use only).** If `~/.atlas/projects.md` doesn't
+   exist yet, ask where Atlas should keep it — the cross-project registry it
+   uses to remember what it maintains. Suggest the default
+   `~/.atlas/projects.md`; most users should accept it. If the user picks a
+   custom path, record that path in the **memory pointer** (host memory if the
+   host has it, otherwise every planning repo's root AGENTS.md) so future
+   sessions can find the registry without the default file. See
+   `references/session-continuity.md` → "Projects registry".
 
 Only then generate the structure. The location is then fixed for the project's
 life; the memory pointer and (if scheduled) the audit job record the path.

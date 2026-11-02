@@ -51,11 +51,13 @@ Atlas keeps a small registry of the projects it maintains, so any fresh session
 can answer "what projects exist?" and onboarding knows whether the user has ever
 run it (the session-one orientation is skipped for returning users).
 
-**Location:** `~/.atlas/projects.md` on the user's machine by default —
-deliberately *outside* the skill folder. Install directories may be read-only
-or replaced when the skill updates (marketplaces deliver new versions by
-replacing the folder), and the registry must survive that. Host with a better
-persistent store? The host file may override the location.
+**Location:** asked on first onboarding, with `~/.atlas/projects.md` suggested
+as the default — deliberately *outside* the skill folder. Install directories
+may be read-only or replaced when the skill updates (marketplaces deliver new
+versions by replacing the folder), and the registry must survive that. Host
+with a better persistent store? The host file may override the location. If
+the user chose a custom path, the memory pointer records it (otherwise future
+sessions can't find a non-default registry).
 
 **Format** — one row per project, kept lean. It's a signpost to projects, never
 a duplicate of any project's `CURRENT_STATE.md`:
