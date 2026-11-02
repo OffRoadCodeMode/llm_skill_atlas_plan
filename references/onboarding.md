@@ -4,6 +4,58 @@ Runs when the working directory has **no `project/` folder**. Goal: establish th
 mission and generate the initial structure, *without* prematurely declaring
 systems.
 
+## Session-one intro (runs once, before any questions)
+
+The user has never seen Atlas work. Before the first interview question, deliver
+a short orientation so their answers land in the right vocabulary. Keep it to
+one message — roughly four short paragraphs plus one tree — then the interview
+begins (one question at a time). Adapt the wording; cover these beats:
+
+1. **Welcome + what this is.** *"Welcome to Atlas, the plan-anything framework.
+   We'll start with a few questions to define your project's mission statement —
+   the anchor everything else traces back to."*
+2. **The nouns.** **Mission** (the goal; every file must trace to it).
+   **Systems**: things you build — software, a web platform, a physical product,
+   a room conversion. Each system moves through phases (typically research →
+   design → build/execute, from the project's domain pack) with exit gates that
+   need named evidence. Systems are not declared upfront: some are obvious on
+   day one, others emerge over time — the agent recommends, the user confirms.
+   Systems can nest (a `van` system can spawn `electrical`, `climate`).
+   **Workstreams**: processes you finish rather than build — sourcing, research,
+   certification, choosing a tool — with tasks, notes, and decisions but no
+   phase gates. **Decisions** are captured as Decision Records the moment
+   they're made, indexed, and checked for conflicts with earlier decisions.
+3. **What keeps it alive.** A compact state file + daily logs mean a new session
+   resumes in three file reads. Global roll-ups (`overview/TASKS.md`,
+   `overview/DECISIONS.md`) stay current because they're updated in the same
+   action as any change. An optional scheduled audit verifies integrity and
+   reports — it never rewrites content without approval.
+4. **What a mature project looks like** — show this generic tree (placeholder
+   identifiers, nothing project-specific):
+
+   ```
+   planning/
+   ├── AGENTS.md                  # house rules for the agent
+   ├── project/
+   │   ├── mission.md             # the anchor; confirmed on day one
+   │   ├── DASHBOARD.md           # scoreboard: phase/status per system, milestones
+   │   ├── systems/
+   │   │   ├── system-a/          # in design: research/, design/decisions/, TASKS.md
+   │   │   └── system-b/          # still in research; lighter so far
+   │   ├── workstreams/
+   │   │   └── workstream-a/      # a process being completed: tasks, decisions, notes
+   │   ├── overview/              # always-current roll-ups: all tasks, all decisions,
+   │   │                          # open questions, costs, risks
+   │   └── conception/research/   # exploration that predates any system
+   └── sessions/                  # CURRENT_STATE.md + dated logs
+   ```
+
+5. **The ask.** End with the first interview question, e.g. *"So — tell me about
+   your project. What's the mission, and who's it for?"*
+
+Frame expectations honestly: the day-one structure is about 7 files and the tree
+above is what it *grows into*; nothing is created before it's real.
+
 ## Two modes
 
 Ask the user which fits, or infer from scope.

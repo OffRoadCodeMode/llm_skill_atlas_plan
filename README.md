@@ -55,7 +55,8 @@ Skill file paths in `SKILL.md` are relative to the skill's install directory.
    tools this environment offers, then reads `SKILL.md` →
    `references/conventions.md` → `references/onboarding.md`, and **onboards**
    (no `project/` yet) or **resumes** (reads `DASHBOARD.md`, `CURRENT_STATE.md`,
-   `mission.md`).
+   `mission.md`). First run opens with a short orientation — what missions,
+   systems, workstreams, decisions, and roll-ups are — before the interview.
 
 Atlas **generates** the `project/` and `sessions/` structure at runtime from the
 templates in this skill. Your planning repo contains only that generated content,

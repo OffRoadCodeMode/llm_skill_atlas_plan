@@ -4,6 +4,20 @@ All notable changes to the Atlas framework itself. Format: reverse chronological
 Bump the `version:` field in `SKILL.md` frontmatter (semver) for convention changes;
 a major bump signals breaking convention changes.
 
+## 1.2.0 — 2026-11-02
+
+- **Onboarding now opens with a session-one orientation** (new section in
+  `onboarding.md`): a short scripted intro that defines the vocabulary before
+  the first question — mission as anchor, systems (things you build, phases
+  per domain pack, emerge over time with agent recommend / user confirm),
+  workstreams (processes you finish, no gates), decision records, roll-ups,
+  session continuity, and the audit's verify-only posture. Includes a generic
+  mature-project tree with placeholder identifiers so buyers see what the
+  structure grows into. Interview flow unchanged (one question at a time);
+  the intro is a single message, not a wall. SKILL.md "Presentation" updated.
+  (Motivated by first-run role-play: vocabulary was being explained reactively
+  mid-interview instead of introduced up front.)
+
 ## 1.1.1 — 2026-11-02
 
 - **Onboarding "Finish" now requires showing the result**, not just confirming
