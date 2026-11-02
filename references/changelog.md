@@ -4,6 +4,16 @@ All notable changes to the Atlas framework itself. Format: reverse chronological
 Bump the `version:` field in `SKILL.md` frontmatter (semver) for convention changes;
 a major bump signals breaking convention changes.
 
+## 1.4.2 — 2026-11-02
+
+- **Orientation tightened to one screen.** The session-one intro script is now
+  five short blocks instead of long paragraphs: first-use framing ("As this
+  appears to be your first time using Atlas..."), the registry's role, the
+  mission anchor, systems/workstreams/decisions in three lines, continuity in
+  three, then the 7-file promise and the generic tree. The ask step now handles
+  users who answer before being asked (capture the description, move straight
+  to placement questions).
+
 ## 1.4.1 — 2026-11-02
 
 - **Registry location is now user-confirmed, not assumed.** First onboarding

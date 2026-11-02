@@ -15,32 +15,29 @@ orientation below. Either way, add the new project to the registry at
 onboarding finish.
 
 The user has never seen Atlas work. Before the first interview question, deliver
-a short orientation so their answers land in the right vocabulary. Keep it to
-one message: roughly four short paragraphs plus one tree, then the interview
-begins (one question at a time). Adapt the wording; cover these beats:
+a short orientation so their answers land in the right vocabulary. **Keep it
+tight: one screen, five short blocks plus one tree.** Then the interview begins
+(one question at a time). Adapt the wording; cover these beats:
 
-1. **Welcome + what this is.** *"Welcome to Atlas, the plan-anything framework.
-   We'll start with a few questions to define your project's mission statement:
-   the anchor everything else traces back to."*
-2. **The nouns.** **Mission** (the goal; every file must trace to it).
-   **Systems**: things you build, such as software, a web platform, a physical
-   product, a room conversion. Each system moves through phases (typically
-   research → design → build/execute, from the project's domain pack) with exit
-   gates that need named evidence. Systems are not declared upfront: some are
-   obvious on day one, others emerge over time. The agent recommends; the user
-   confirms. Systems can nest (a `van` system can spawn `electrical`,
-   `climate`). **Workstreams**: processes you finish rather than build, such as
-   sourcing, research, certification, choosing a tool. They carry tasks, notes,
-   and decisions but no phase gates. **Decisions** are captured as Decision
-   Records the moment they're made, indexed, and checked for conflicts with
-   earlier decisions.
-3. **What keeps it alive.** A compact state file plus daily logs mean a new
-   session resumes in three file reads. Global roll-ups (`overview/TASKS.md`,
-   `overview/DECISIONS.md`) stay current because they're updated in the same
-   action as any change. An optional scheduled audit verifies integrity and
-   reports; it never rewrites content without approval.
-4. **What a mature project looks like.** Show this generic tree (placeholder
-   identifiers, nothing project-specific):
+1. **First-use framing + registry.** *"As this appears to be your first time
+   using Atlas, here is a quick run down of how it works. Welcome to Atlas, the
+   plan-anything framework. I keep a registry of the projects I maintain, so
+   once this one exists I can resume it, or any of them, in future sessions."*
+2. **The anchor.** Everything traces to one file: the mission. The user
+   confirms it today.
+3. **The two nouns.** **Systems**: things you build (software, a product line,
+   a room conversion). Each moves through phases, typically research → design →
+   build, advancing only on named evidence. Systems emerge as the work is
+   understood: the agent recommends, the user confirms. **Workstreams**:
+   processes you finish (sourcing, research, choosing a supplier), with tasks,
+   notes, and decisions but no phase gates. Decisions become short Decision
+   Records the moment they're made.
+4. **What keeps it alive.** A state file means any new session resumes in three
+   file reads. Two roll-ups (all tasks, all decisions) update at the moment of
+   change. An optional scheduled audit verifies integrity and reports only,
+   never rewriting content.
+5. **Day one is about 7 files.** Nothing exists until it's real. Then show what
+   a project grows into (generic tree, placeholder identifiers):
 
    ```
    planning/
@@ -62,8 +59,9 @@ begins (one question at a time). Adapt the wording; cover these beats:
 5. **The ask.** End with the first interview question, e.g. *"So, tell me about
    your project. What's the mission, and who's it for?"*
 
-Frame expectations honestly: the day-one structure is about 7 files and the tree
-above is what it *grows into*; nothing is created before it's real.
+End with the ask, e.g. *"So, tell me about your project. What's the mission,
+and who's it for?"* — unless the user already gave it, in which case capture the
+description and move to the placement questions (location / git / registry).
 
 ## Location & version control (confirm *before* generating anything)
 
