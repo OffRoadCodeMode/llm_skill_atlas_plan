@@ -7,7 +7,7 @@ description: Project planning framework. Onboards any project (software,
   track decisions or ADRs, manage phases or workstreams, plan a build, spike
   an idea, or pick up a project after a break. Do not use for one-off drafts
   or general Q&A.
-version: 1.1.0
+version: 1.1.1
 tags: [planning, project-management, wiki, framework]
 ---
 
@@ -173,6 +173,9 @@ attention as the context window fills. To prevent drift:
 - For status/dashboard queries, return a formatted summary.
 - For audits, report what was found and what was fixed/proposed.
 - Onboard conversationally: one question at a time.
+- **On onboarding completion, show the concrete output** — the generated file
+  tree and the mission file — and ask the user to confirm the mission before
+  building anything on it. See `references/onboarding.md` → "Finish".
 
 ## Complementary skills
 
@@ -194,6 +197,6 @@ Domain packs may recommend additional skills specific to the domain.
 ## Version
 
 This skill's version is in the `version:` field of this file's frontmatter
-(`1.1.0`). On onboarding, stamp it into the project (root `AGENTS.md` and
-`project/DASHBOARD.md` footer, e.g. `atlas: 1.1.0`).
+(`1.1.1`). On onboarding, stamp it into the project (root `AGENTS.md` and
+`project/DASHBOARD.md` footer, e.g. `atlas: 1.1.1`).
 See `references/governance.md` for versioning and maintenance rules.

@@ -117,8 +117,22 @@ everywhere.
 
 ## Finish
 
-Summarise: mission in a sentence, chosen domain, what was generated, and the
-recommended next step. Append a session-log entry
+**Show the result — don't just say it happened.** The user's first impression of
+Atlas is this response; concrete output is the trust signal. Present:
+
+1. **The generated structure as a tree**, with a one-line purpose per
+   file/folder (the day-one footprint from "What to generate").
+2. **The mission file content** (in full if short, else the key sections) —
+   mission.md is the anchor; ask the user to confirm or adjust it before
+   anything else is built on top.
+3. **What was deliberately NOT created**: no empty registers, no system folders
+   yet — state that systems and registers emerge as the project develops, so
+   the repo never fills with placeholder files.
+4. **The recommended next step**: typically early research (into
+   `conception/research/`) or proposing the first system from the interview
+   context.
+
+Then append a session-log entry
 (`references/agents/session-log.md`).
 
 **Save a memory pointer** so future sessions know this project exists even

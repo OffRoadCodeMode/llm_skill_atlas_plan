@@ -4,6 +4,14 @@ All notable changes to the Atlas framework itself. Format: reverse chronological
 Bump the `version:` field in `SKILL.md` frontmatter (semver) for convention changes;
 a major bump signals breaking convention changes.
 
+## 1.1.1 — 2026-11-02
+
+- **Onboarding "Finish" now requires showing the result**, not just confirming
+  it happened: the generated file tree (with one-line purposes), the mission
+  file content for user confirmation, what was deliberately not created, and
+  the recommended next step. SKILL.md "Presentation" section reinforces it.
+  (The first-run response is the user's trust signal; a bare "done" isn't.)
+
 ## 1.1.0 — 2026-10-26
 
 Marketplace-readiness release (prepared for sale on Agensi). No framework
