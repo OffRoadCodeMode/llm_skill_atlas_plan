@@ -7,7 +7,7 @@ description: Project planning framework. Onboards any project (software,
   track decisions or ADRs, manage phases or workstreams, plan a build, spike
   an idea, or pick up a project after a break. Do not use for one-off drafts
   or general Q&A.
-version: 1.2.0
+version: 1.3.0
 tags: [planning, project-management, wiki, framework]
 ---
 
@@ -199,6 +199,6 @@ Domain packs may recommend additional skills specific to the domain.
 ## Version
 
 This skill's version is in the `version:` field of this file's frontmatter
-(`1.2.0`). On onboarding, stamp it into the project (root `AGENTS.md` and
-`project/DASHBOARD.md` footer, e.g. `atlas: 1.2.0`).
+(`1.3.0`). On onboarding, stamp it into the project (root `AGENTS.md` and
+`project/DASHBOARD.md` footer, e.g. `atlas: 1.3.0`).
 See `references/governance.md` for versioning and maintenance rules.

@@ -56,6 +56,30 @@ begins (one question at a time). Adapt the wording; cover these beats:
 Frame expectations honestly: the day-one structure is about 7 files and the tree
 above is what it *grows into*; nothing is created before it's real.
 
+## Location & version control (confirm *before* generating anything)
+
+Never write into a folder without confirming placement and git first. Ask both
+as a single question during the interview:
+
+1. **Where the planning repo lives.** Default: the working directory. Offer
+   alternatives — a new subfolder (e.g. `planning/`) or another absolute path.
+   **If the chosen folder already contains a code project or an unrelated git
+   repo, recommend a separate planning folder** — the planning repo is the
+   project's map, not its source tree — unless the user explicitly wants them
+   together. (Plan↔code crossing references come later; see the domain pack.)
+2. **Git.** Recommended: it's the reconciliation backstop ("single active
+   writer"), powers the audit's incremental diff, and is the real source of
+   freshness truth. If yes and the folder isn't a repo: `git init` and make the
+   onboarding commit. If the folder is already inside a git repo: reuse it,
+   don't re-init, follow the commit-prefix conventions. If the user declines
+   git (e.g. a plain Obsidian vault): that works — record `version control:
+   none` in the root AGENTS.md so future sessions know; note that audits fall
+   back to full read-and-compare passes and freshness is tracked via the
+   frontmatter `updated:` field instead of git history.
+
+Only then generate the structure. The location is then fixed for the project's
+life; the memory pointer and (if scheduled) the audit job record the path.
+
 ## Two modes
 
 Ask the user which fits, or infer from scope.
@@ -64,9 +88,10 @@ Ask the user which fits, or infer from scope.
 
 1. Ask for **project name** + **one-paragraph description**.
 2. Ask the **domain** (default `general` if unclear).
-3. Generate the minimal structure (below) and **one** starter system folder.
-4. Write a first-pass `mission.md` from the description; confirm with the user.
-5. Can expand into full onboarding later.
+3. Confirm **location & git** (see above).
+4. Generate the minimal structure (below) and **one** starter system folder.
+5. Write a first-pass `mission.md` from the description; confirm with the user.
+6. Can expand into full onboarding later.
 
 ### Full onboarding (complex projects)
 

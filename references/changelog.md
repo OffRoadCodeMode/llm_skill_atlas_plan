@@ -4,6 +4,19 @@ All notable changes to the Atlas framework itself. Format: reverse chronological
 Bump the `version:` field in `SKILL.md` frontmatter (semver) for convention changes;
 a major bump signals breaking convention changes.
 
+## 1.3.0 — 2026-11-02
+
+- **Onboarding confirms location & git before generating anything.** Two real
+  recipient scenarios were previously unhandled: running Atlas inside an
+  existing (code) repo — planning files would have littered the source tree —
+  and wanting a gitless vault. New `onboarding.md` section: confirm the
+  planning-repo location (default cwd; subfolder or other path offered; warn
+  when the target already contains an unrelated repo), then confirm git use.
+  `git init` + onboarding commit when wanted, reuse an enclosing repo when
+  present, and a documented no-git path (`version control: none` in AGENTS.md;
+  audits fall back to full passes, freshness via frontmatter `updated:`).
+  Quick-start mode updated to match.
+
 ## 1.2.0 — 2026-11-02
 
 - **Onboarding now opens with a session-one orientation** (new section in
