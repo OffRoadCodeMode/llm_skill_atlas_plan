@@ -147,7 +147,7 @@ Notes on the output:
 ```
 SKILL.md              Machine entry point (router + activation prompt)
 references/           All support files (guides, agents, domain packs, changelog)
-  hosts/              Host adapters (hermes, devin, generic) — tool mappings per environment
+  hosts/              Host adapters (one per agent environment) — tool mappings per environment
   conventions.md      INDEX/AGENTS/frontmatter/links/git rules
   onboarding.md       Quick-start and full onboarding flows
   system-lifecycle.md How systems are created, evolved, split, retired
@@ -175,7 +175,8 @@ security scan: no secrets, no binaries, text-only).
 
 ## Status
 
-`v1.0.0`. Built minimal-but-complete (principle: *prove before scaling*). The
+Current version: see the `version:` field in `SKILL.md` frontmatter; history in
+`references/changelog.md`. Built minimal-but-complete (principle: *prove before scaling*). The
 critical agents (`session-log`, `decision-record`, `audit`, `diagram`) are fully
 specified; others are lighter and grow as pain is felt.
 

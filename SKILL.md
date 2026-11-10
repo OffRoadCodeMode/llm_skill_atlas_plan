@@ -7,7 +7,7 @@ description: Project planning framework. Onboards any project (software,
   track decisions or ADRs, manage phases or workstreams, plan a build, spike
   an idea, or pick up a project after a break. Do not use for one-off drafts
   or general Q&A.
-version: 1.4.2
+version: 1.4.3
 tags: [planning, project-management, wiki, framework]
 ---
 
@@ -62,7 +62,7 @@ You are operating under the Atlas planning framework (installed skill).
 Read these skill files in order before doing anything else:
   1. SKILL.md                        (this file: what Atlas is + router)
   2. references/hosts/<host>.md      (your environment's tool mappings;
-                                      hermes | devin | generic)
+                                      see the host table above)
   3. references/conventions.md       (how files are structured)
   4. references/onboarding.md        (how to onboard this project)
 Then check the working directory for an existing project/ folder:
@@ -199,6 +199,7 @@ Domain packs may recommend additional skills specific to the domain.
 ## Version
 
 This skill's version is in the `version:` field of this file's frontmatter
-(`1.4.2`). On onboarding, stamp it into the project (root `AGENTS.md` and
-`project/DASHBOARD.md` footer, e.g. `atlas: 1.4.2`).
+(the single source of truth; don't repeat the number elsewhere). On
+onboarding, stamp it into the project (root `AGENTS.md` and
+`project/DASHBOARD.md` footer, e.g. `atlas: <version>`).
 See `references/governance.md` for versioning and maintenance rules.

@@ -56,11 +56,8 @@ tight: one screen, five short blocks plus one tree.** Then the interview begins
    └── sessions/                  # CURRENT_STATE.md + dated logs
    ```
 
-5. **The ask.** End with the first interview question, e.g. *"So, tell me about
-   your project. What's the mission, and who's it for?"*
-
-End with the ask, e.g. *"So, tell me about your project. What's the mission,
-and who's it for?"* — unless the user already gave it, in which case capture the
+**The ask.** End with the first interview question, e.g. *"So, tell me about
+your project. What's the mission, and who's it for?"* — unless the user already gave it, in which case capture the
 description and move to the placement questions (location / git / registry).
 
 ## Location & version control (confirm *before* generating anything)

@@ -4,6 +4,15 @@ All notable changes to the Atlas framework itself. Format: reverse chronological
 Bump the `version:` field in `SKILL.md` frontmatter (semver) for convention changes;
 a major bump signals breaking convention changes.
 
+## 1.4.3 — 2026-11-10
+
+- **Doc fixes (no convention changes).** Session-one intro: removed the
+  duplicate `5.` "ask" beat and its repeated paragraph, so the script matches
+  "five short blocks plus one tree". Replaced stale host enumerations in the
+  `SKILL.md` activation prompt and `README.md` with references to the host
+  table. `README.md` status and `SKILL.md` "Version" section no longer repeat
+  the version number; the `SKILL.md` frontmatter is the single source.
+
 ## 1.4.2 — 2026-11-02
 
 - **Orientation tightened to one screen.** The session-one intro script is now
