@@ -4,6 +4,15 @@ All notable changes to the Atlas framework itself. Format: reverse chronological
 Bump the `version:` field in `SKILL.md` frontmatter (semver) for convention changes;
 a major bump signals breaking convention changes.
 
+## 1.4.4 — 2026-11-10
+
+- **Doc fix (no convention change).** `system-lifecycle.md` → "Scaffolding a
+  system" still told agents to add new systems to `project/systems/INDEX.md`,
+  a container index removed in an earlier release and forbidden by
+  `conventions.md`. It now says: add the DASHBOARD row, list nested systems in
+  the parent's Sub-systems section, and add a system-map node if the map
+  exists.
+
 ## 1.4.3 — 2026-11-10
 
 - **Doc fixes (no convention changes).** Session-one intro: removed the

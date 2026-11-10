@@ -7,7 +7,7 @@ description: Project planning framework. Onboards any project (software,
   track decisions or ADRs, manage phases or workstreams, plan a build, spike
   an idea, or pick up a project after a break. Do not use for one-off drafts
   or general Q&A.
-version: 1.4.3
+version: 1.4.4
 tags: [planning, project-management, wiki, framework]
 ---
 

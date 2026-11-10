@@ -43,10 +43,13 @@ rules** (see `references/conventions.md` → "AGENTS.md"). Add `research/`,
 Fill the system's `INDEX.md` (frontmatter: `system_type`, `status`, `phase`;
 sections: purpose, boundaries, relationships). Set the initial `phase` to the
 domain pack's first phase. If this is a sub-system, set the `parent:` field in
-`INDEX.md` frontmatter to the parent system name. Add the system to
-`project/systems/INDEX.md` (or the parent system's `INDEX.md` if nested) and add
-its `DASHBOARD.md` row (from the system `INDEX.md` frontmatter) in the same
-action — roll-ups never lag. Commit: `system: scaffold <name> system`.
+`INDEX.md` frontmatter to the parent system name. Add its `DASHBOARD.md` row
+(from the system `INDEX.md` frontmatter) and, if nested, list it in the parent
+system's `INDEX.md` Sub-systems section — in the same action; roll-ups never
+lag. There is no `project/systems/INDEX.md`: container folders have no index
+file (see `references/conventions.md` → "INDEX.md"). If
+`project/overview/system-map.md` exists, add the system as a node there too.
+Commit: `system: scaffold <name> system`.
 
 ## Relating systems (the system map)
 
